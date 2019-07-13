@@ -9,7 +9,6 @@
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 #nav {
@@ -72,8 +71,12 @@ time, mark, audio, video {
 	border: 0;
 	font: inherit;
 	vertical-align: baseline;
+  box-sizing:border-box;
 }
 a{
   text-decoration: none;
+}
+ul{
+  list-style: none;
 }
 </style>

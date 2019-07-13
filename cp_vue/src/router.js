@@ -7,6 +7,7 @@ import Home from './components/Home.vue'
 import Login from './components/me/login.vue'
 import Register from './components/me/register.vue'
 import classify from './components/tuijian/classify.vue'
+import DetailsList from './components/tuijian/cp_details_list.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -17,6 +18,7 @@ export default new Router({
     { path: '/login', name: 'login' ,component: Login},
     { path: '/register', name: 'login', component: Register },
     { path: '/classify', name: 'login', component: classify },
+    { path: '/detailslist', name: 'login', component: DetailsList },
     // {path:'/CookTop',component:CookTop},
     // {path:'/CookList',component:CookList}
   ]
