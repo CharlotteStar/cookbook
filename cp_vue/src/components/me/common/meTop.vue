@@ -1,6 +1,6 @@
 <template>
   <div class="me-top">
-    <div to="" class="return" @click="fanhui">返回</div>
+    <div  class="return" @click="fanhui">返回</div>
     <h2 class="me-title" v-text="meTitle"></h2>
     <router-link :to="meTopRightTo" class="register">{{meTopRight}}</router-link>
   </div>

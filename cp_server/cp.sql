@@ -4,21 +4,6 @@ CREATE DATABASE cp CHARSET=UTF8;
 USE cp;
 
 
-/**菜谱种类**/
-CREATE TABLE cp_category(
-  zid INT PRIMARY KEY AUTO_INCREMENT,
-  zname VARCHAR(32)       #菜谱种类名称
-  -- icon VARCHAR(64)         #菜谱种类图片
-);
-INSERT INTO cp_category VALUES
-(NULL,'实用分类'),
-(NULL,'每日三餐'),
-(NULL,'主食'),
-(NULL,'家常菜谱'),
-(NULL,'中华菜系'),
-(NULL,'各地小吃'),
-(NULL,'外国菜谱'),
-(NULL,'烘焙');
 
 /*推荐页三餐推荐*/
 CREATE TABLE cp_tj_sancan(    
