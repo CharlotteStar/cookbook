@@ -13,7 +13,7 @@
             :centerImg="require('../assets/icon/center_title_icon.png')"
             :rightImg="require('../assets/icon/right_title_icon.png')"
             ></cooktop>
-              推荐
+              <recommend></recommend>
           </mt-tab-container-item>
           <mt-tab-container-item id="find" >
               发现
@@ -69,6 +69,8 @@
   import CookTop from './cook/CookTop.vue'
   // 引入底部四个按钮
   import TabBarIcon from './cook/TabBarIcon.vue'
+  // 引入首页推荐面板
+  import Recommend from './tuijian/Recommend.vue'
   export default {
     data(){
       return {
@@ -96,7 +98,8 @@
     },
     components:{
       "cooktop":CookTop,
-      "tabbaricon":TabBarIcon
+      "tabbaricon":TabBarIcon,
+      "recommend":Recommend
     }
   }
 </script>
