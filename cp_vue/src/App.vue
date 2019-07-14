@@ -70,23 +70,14 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-<<<<<<< HEAD
 	font: inherit;
 	vertical-align: baseline;
   box-sizing:border-box;
-=======
-  font:inherit
->>>>>>> a776a3b8815992eccdddd376af1029ff75f9df5b
 }
 a{
   text-decoration: none;
 }
-<<<<<<< HEAD
 ul{
   list-style: none;
-=======
-html{
-  min-width:100% !important
->>>>>>> a776a3b8815992eccdddd376af1029ff75f9df5b
 }
 </style>
