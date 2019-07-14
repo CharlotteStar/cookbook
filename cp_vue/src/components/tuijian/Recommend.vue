@@ -59,7 +59,7 @@
                    <img src="../../assets/tj_sancan/394c75088907de693fba10b7bedbc8cd.jpg" alt="">
                    <h3>部队火锅</h3>
                    <h6>家常菜|天涯海角最想念的味道</h6>
-                   <div>
+                   <div class="user_">
                        <img src="" alt="">
                        <span>菜菜美食记</span>
                        <span><i></i> 1w+</span>

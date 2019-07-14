@@ -8,6 +8,7 @@ import Login from './components/me/login.vue'
 import Register from './components/me/register.vue'
 import classify from './components/tuijian/classify.vue'
 import Recommend from './components/tuijian/Recommend'
+import menu01 from './components/Menu-steps/menu01.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -21,5 +22,6 @@ export default new Router({
     {path:'/Recommend',name:'Recommend',component:Recommend},
     // {path:'/CookTop',component:CookTop},
     // {path:'/CookList',component:CookList}
+    {path:'/menu01',component:menu01},
   ]
 })
