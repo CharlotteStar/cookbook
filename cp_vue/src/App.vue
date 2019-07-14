@@ -10,6 +10,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  margin-top:30px;
 }
 #nav {
   padding: 30px;
@@ -79,5 +80,8 @@ a{
 }
 ul{
   list-style: none;
+}
+img{
+  vertical-align: middle;
 }
 </style>
