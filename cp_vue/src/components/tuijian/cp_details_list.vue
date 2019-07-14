@@ -9,25 +9,21 @@
       <router-link to="" class="to_cp_all">菜谱大全</router-link>
     </div>
     <div class="details_list">
-      <h1 class="list_title">快手菜</h1>
-      <h3 class="list_subtitle"><span>快手菜</span>精品菜谱</h3>
-      <div class="list_item">
-        <div class="cp_image">
-          <img src="@/assets/cp_details_img/c59815c5787e583bdcf1096d4726e794.jpg">
-        </div>
-        <div class="cp_info">
-          <h3>鸡蛋炒虾仁</h3>
-          <div class="cp_score">
-            <img src="@/assets/icon/20180831142237_413.png">
-            <img src="@/assets/icon/20180831142237_413.png">
-            <img src="@/assets/icon/20180831142237_413.png">
-            <img src="@/assets/icon/20180831142237_310.png">
-            <img src="@/assets/icon/20180831142237_552.png">
+      <h1 class="list_title" v-text="tname"></h1>
+      <h3 class="list_subtitle"><span v-text="tname"></span>精品菜谱</h3>
+      <div class="cp_list_container">
+        <router-link :to="'/menu01/'+item.did" class="list_item" v-for="(item,index) of cp_data" :key="index">
+          <div class="cp_image">
+            <img :src="item.pic">
           </div>
-          <div class="view-count">
-            <span>312123收藏</span>&nbsp;&nbsp;&nbsp;<span>132132浏览</span>
+          <div class="cp_info">
+            <h3 v-text="item.title"></h3>
+            <div class="cp_score">
+              <img :src="require(item.score>=i ? '@/assets/icon/20180831142237_413.png' : '@/assets/icon/20180831142237_552.png')" v-for="i in 5" :key="i">
+            </div>
+            <div class="view-count" v-text="`${item.shoucang}收藏  ${item.browse}浏览`"></div>
           </div>
-        </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -35,10 +31,22 @@
 
 <script>
 export default {
+  props:['tid'],
   data(){
     return {
-
+      cp_data:[],
+      tname:""
     }
+  },
+  created(){
+    this.axios.get(
+      "/caipu/cp_list",
+      {params:{tid:this.tid}}
+    ).then(res=>{
+      var data=res.data
+      this.cp_data=data.cp_data;
+      this.tname=data.tname;
+    });
   },
   methods:{
     fanhui(){
@@ -78,7 +86,8 @@ export default {
   display: inline-block;
   outline: none;
   border:1px solid #aaa;
-  background:url("../../assets/icon/center_title_icon.png") 10px 7px/15px 15px no-repeat;
+  border-radius:5px 0 0 5px;
+  background:url("../../assets/icon/center_title_icon.png") 10px 8px/15px 15px no-repeat;
 }
 .search:focus{
   border:1px solid rgb(247, 191, 5);
@@ -93,8 +102,8 @@ export default {
   width: 28%;
   height: 32px;
   line-height: 32px;
-  border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
   cursor: pointer;
 }
 .to_cp_all{
@@ -113,6 +122,7 @@ export default {
   font-weight: 700;
   color: #333;
   line-height: 38px;
+  margin-top:10px
 }
 .list_subtitle{
   font-size: 18px;
@@ -128,19 +138,53 @@ export default {
 }
 .list_item{
   display:flex; 
+  align-items: center;
+  padding:10px 0;
+  
+}
+.list_item+.list_item{
+  border-top:0.01rem solid #ccc;
 }
 .cp_image{
-  width:120px;height:120px;
+  width:120px;height:90px;
   border-radius:5px;
   overflow: hidden;
 }
 .cp_image img{
   width:100%;
+  margin-top:50%;
+  transform: translateY(-50%);
 }
 .cp_info{
   padding-left:15px;
+ 
+}
+.cp_info h3{
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  line-height: 24px;
+  height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+.cp_score{
+  display: block;
+  font-size: 0px;
+  padding: 4px 0px 6px;
 }
 .cp_score img{
   width:16px;
+}
+.view-count{
+  font-size: 12px;
+  color: #999;
+  line-height: 20px;
+}
+
+.cp_list_container{
+  border-bottom:1px solid #ccc;
 }
 </style>

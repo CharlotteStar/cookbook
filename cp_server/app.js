@@ -5,6 +5,7 @@ const cors = require("cors");
 const session = require("express-session");
 const userRouter = require("./routes/user.js");
 const tjRouter = require("./routes/tuijian.js");
+const cpRouter = require("./routes/caipu.js");
 
 //创建express对象
 var server = express();
@@ -29,15 +30,14 @@ server.use(session({
   saveUninitialized:true
 }));//将服务器的session，放在req.session中
 
-server.get("/", (req, res) => {
-  console.log(123456789)
-})
 
 //托管静态文件夹
 server.use(express.static("public"))
 
+//过载的路由器
 server.use("/user", userRouter);
-server.use("/tj", tjRouter)
+server.use("/tj", tjRouter);
+server.use("/caipu", cpRouter)
 
 
 // //首先引入https和querystring模块

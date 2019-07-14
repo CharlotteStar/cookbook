@@ -14,14 +14,14 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {path: '/',redirect:'/home'},
-    {path: '/home',name: 'home',component: Home},
+    {path: '/home',component: Home},
     { path: '/about', name: 'about' },
-    { path: '/login', name: 'login' ,component: Login},
-    { path: '/register', name: 'login', component: Register },
-    { path: '/classify', name: 'login', component: classify },
-    { path: '/detailslist', name: 'login', component: DetailsList },
+    { path: '/login' ,component: Login},
+    { path: '/register', component: Register },
+    { path: '/classify', component: classify },
+    { path: '/detailslist/:tid', component: DetailsList, props: true },
+    { path: '/menu01/:did', component: menu01, props: true },
     // {path:'/CookTop',component:CookTop},
     // {path:'/CookList',component:CookList}
-    {path:'/menu01',component:menu01},
   ]
 })
