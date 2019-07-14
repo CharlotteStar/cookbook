@@ -9,6 +9,7 @@ import Register from './components/me/register.vue'
 import classify from './components/tuijian/classify.vue'
 import menu01 from './components/Menu-steps/menu01.vue'
 Vue.use(Router)
+import menu01_item from './components/Menu-steps/menu01_item.vue'
 
 export default new Router({
   routes: [
@@ -21,5 +22,6 @@ export default new Router({
     // {path:'/CookTop',component:CookTop},
     // {path:'/CookList',component:CookList}
     {path:'/menu01',component:menu01},
+    {path:'/menu01_item',component:menu01_item},
   ]
 })
