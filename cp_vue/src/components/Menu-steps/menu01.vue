@@ -105,13 +105,11 @@ export default {
       '/caipu/details',
       {params:{did:this.did}}
     ).then(res=>{
-      console.log(res.data.cp_details);
       this.cp_details=res.data.cp_details;
       for(var item of res.data.cp_step){
         item.step>0 ? this.cp_step.push(item) : this.cp_complete.push(item)
       }
       this.benefit=this.cp_details.benefit.split(' ')
-      console.log(this.cp_step,this.cp_complete);
     })
   }
 };
@@ -130,7 +128,6 @@ export default {
 }
 .effect {
   width: 100%;
-  height: 200px;
   background-color: bisque;
 }
 .view {
