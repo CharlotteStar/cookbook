@@ -1,15 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './components/Home.vue'
-//1.引入头部子组件
-// import CookTop from './components/cook/CookTop.vue'
-// import CookList from './components/cook/CookList.vue'
-import Login from './components/me/login.vue'
-import Register from './components/me/register.vue'
-import classify from './components/tuijian/classify.vue'
-import DetailsList from './components/tuijian/cp_details_list.vue'
-import menu01 from './components/Menu-steps/menu01.vue'
+import Home from './components/Home.vue'            //首页
+import Login from './components/me/login.vue'         //登录页面
+import Register from './components/me/register.vue'     //注册页面
+import classify from './components/tuijian/classify.vue'  //分类页面
+import Recommend from './components/tuijian/Recommend'    //首页推荐
+import DetailsList from './components/tuijian/cp_details_list.vue'  //详情列表页
+import menu01 from './components/Menu-steps/menu01.vue'   //详情页
 Vue.use(Router)
+import menu01_item from './components/Menu-steps/menu01_item.vue'
 
 export default new Router({
   routes: [
@@ -21,7 +20,7 @@ export default new Router({
     { path: '/classify', component: classify },
     { path: '/detailslist/:tid', component: DetailsList, props: true },
     { path: '/menu01/:did', component: menu01, props: true },
-    // {path:'/CookTop',component:CookTop},
-    // {path:'/CookList',component:CookList}
+    {path:'/Recommend',component:Recommend},
+    {path:'/menu01_item',component:menu01_item},
   ]
 })

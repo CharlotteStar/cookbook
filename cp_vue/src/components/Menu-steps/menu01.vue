@@ -3,6 +3,10 @@
     <div class="sign-food">
       <img :src="cp_details.pic">
     </div>
+    <div class="top">
+	    <router-link to="javascript" class="btn1">&lt; 美食杰</router-link>
+	    <router-link to="javascript" class="btn2">菜谱分类 &gt;</router-link>
+    </div>
     <div class="effect">
       <table></table>
       <h3 style="margin-top:25px;margin-left:25px;" v-text="cp_details.title"></h3>
@@ -13,7 +17,7 @@
       </div>
     </div>
     <div class="w-message">
-      <a href class="weibou">
+      <router-link to="/menu01_item" class="weibou">
         <img
           src="https://s1.st.meishij.net/r/106/232/3995606/s3995606_156172491177683.jpg"
           alt
@@ -24,7 +28,7 @@
           <br />
           <span>发布1130篇菜谱</span>
         </span>
-      </a>
+      </router-link>
       <a href class="focus">关注</a>
     </div>
     <div class="comment">
@@ -112,7 +116,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 /* .first{display:flex} */
 .sign-food {
   height: 15rem;
@@ -190,12 +194,12 @@ export default {
 }
 .love {
   position: absolute;
+  right:20px;
   width: 50px;
   height: 68px;
   background-image: url("../../assets/icon/wap2017icons1.png");
   background-size: 353px;
   background-position: 0px 333px;
-  margin-left: 105px;
 }
 .pingfeng {
   margin-right: 10px;
@@ -231,12 +235,13 @@ em {
   margin-top: 30px;
   width: 100%;
   height: 84px;
+  white-space:nowrap;  
   text-align: center;
 }
 .imgw {
   display: inline-block;
   margin-right: 16px;
-  width: 80px;
+  width: 20%;
 }
 .imgw > img {
   width: 100%;
@@ -256,4 +261,41 @@ em {
   margin:0 5px;
   vertical-align: middle;
 }
+.top {
+    height: 45px;
+    width: 100%;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+    }
+.btn1 {
+    display: inline-block;
+    vertical-align: top;
+    height: 30px;
+    padding: 0px 12px;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 15px;
+    line-height: 30px;
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    left: 15px;
+    top: 15px;
+}
+.btn2 {
+    display: inline-block;
+    vertical-align: top;
+    height: 30px;
+    padding: 0px 12px;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 15px;
+    line-height: 30px;
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    }
+
 </style>
