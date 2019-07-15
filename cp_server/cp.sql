@@ -28,34 +28,35 @@ INSERT INTO cp_tj_sancan VALUES
 
 /**用户信息**/
 CREATE TABLE cp_user(
-uid INT PRIMARY KEY AUTO_INCREMENT,
-uname VARCHAR(32),
-upwd VARCHAR(32),
-phone BIGINT,
-email VARCHAR(256)
+  uid INT PRIMARY KEY AUTO_INCREMENT,
+  uname VARCHAR(32),
+  upwd VARCHAR(32),
+  phone BIGINT,
+  email VARCHAR(256),
+  avatar VARCHAR(128)
 );
 INSERT INTO cp_user VALUES
-(NULL,"美食小编","123456",13579246810,"13579246810@qq.com"),
-(NULL,"唐莎","123456",15324652145,"tangsha@qq.com"),
-(NULL,"小珍","123456",15348235468,"xiaozhen@qq.com"),
-(NULL,"宗良","123456",13478549543,"zongliang@qq.com"),
-(NULL,"靓仔","123456",13729412134,"liangzai@qq.com");
+(NULL,"美食小编","123456",13579246810,"13579246810@qq.com","http://127.0.0.1:9999/user_avatar/20120902160411_ik2UH.jpg"),
+(NULL,"唐莎","123456",15324652145,"tangsha@qq.com","http://127.0.0.1:9999/user_avatar/fc86fbe322952f4babdb29857b36fc8.png"),
+(NULL,"小珍","123456",15348235468,"xiaozhen@qq.com","http://127.0.0.1:9999/user_avatar/u=527690908,841994411&fm=26&gp=0.jpg"),
+(NULL,"宗良","123456",13478549543,"zongliang@qq.com","http://127.0.0.1:9999/user_avatar/u=1471800268,3373504429&fm=26&gp=0.jpg"),
+(NULL,"靓仔","123456",13729412134,"liangzai@qq.com","http://127.0.0.1:9999/user_avatar/u=2136146216,1955357192&fm=26&gp=0.jpg");
 
 
 /*菜谱详情*/
 CREATE TABLE cp_details(
-did INT PRIMARY KEY AUTO_INCREMENT,
-title VARCHAR(32),
-benefit VARCHAR(128), #益处
-user_id SMALLINT, #用户的id
-score INT, #评分
-primary_cl VARCHAR(128), #主料
-secondary_cl VARCHAR(128), #辅料
-type_id VARCHAR(32), #菜谱类型
-pic VARCHAR(128), #图片路径
-user_log VARCHAR(1024), #用户日志
-browse BIGINT, #浏览量
-shoucang BIGINT #收藏次数
+  did INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(32),
+  benefit VARCHAR(128), #益处
+  user_id SMALLINT, #用户的id
+  score INT, #评分
+  primary_cl VARCHAR(128), #主料
+  secondary_cl VARCHAR(128), #辅料
+  type_id VARCHAR(32), #菜谱类型
+  pic VARCHAR(128), #图片路径
+  user_log VARCHAR(1024), #用户日志
+  browse BIGINT, #浏览量
+  shoucang BIGINT #收藏次数
 );
 INSERT INTO cp_details VALUES
 (1,"嫩滑鸡蛋糕","健脑益智 保肝 动脉硬化 防癌 延年益寿 美容护肤",1,3,"鸡蛋2个、纯净水适量","盐1小勺、料酒1勺、生抽1勺、香醋1勺、香油适量、枸杞子适量",8,"http://127.0.0.1:9999/cp_details_img/s6030800_156172755562147.jpg","早上不知道吃啥，就蒸一碗香浓嫩滑的鸡蛋糕吧！嫩嫩的，滑滑的，非常好吃，一勺入口，顺喉而下，香嫩爽滑，入口即化。",0,0),

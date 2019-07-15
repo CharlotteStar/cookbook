@@ -9,7 +9,7 @@
     </div>
     <div class="effect">
       <table></table>
-      <h3 style="margin-top:25px;margin-left:25px;" v-text="cp_details.title"></h3>
+      <h3 class="title" v-text="cp_details.title"></h3>
       <span class="view" v-text="cp_details.shoucang+'人收藏'"></span>
       <span class="view" v-text="cp_details.browse+'人浏览'"></span>
       <div class="xiaoguo">
@@ -32,16 +32,13 @@
       <a href class="focus">关注</a>
     </div>
     <div class="comment">
-      <p class="comment-p">家人就馋这菜，乱炖一锅出，好吃到撑，每次端上桌，汤汁都不剩。这菜也是东北经典名菜，各大小饭店都有，他有个很好听的名字，叫...</p>
+      <p class="comment-p" v-text="cp_details.user_log"></p>
       <div class="pinfen-container">
         <strong class="pingfeng">评分</strong>
         <img class="cp_score" :src="require(cp_details.score>=i ? '@/assets/icon/20180831142237_413.png' : '@/assets/icon/20180831142237_552.png')" v-for="i in 5" :key="i">
       </div>
       <div class="sc_miniw">
-        <strong>
-          主料
-          <!-- <em>4人份</em> -->
-        </strong>
+        <span>主料</span>
         <p v-text="cp_details.primary_cl">
           <!-- <a class="red">排骨</a>300克、
           <a class="red">胡萝卜</a>1根、
@@ -50,7 +47,7 @@
           <a class="red" href>土豆</a>1个 -->
         </p>
         <br />
-        <strong>辅料</strong>
+        <span>辅料</span>
         <p class="peiliao" v-text="cp_details.secondary_cl">
           <!-- <a href>油</a>适量、
           <a href>盐</a>适量、
@@ -73,14 +70,14 @@
     </div>
 
     <div class="fineshed">
-      <strong class="step_title" style="font-size:20px;">东北大丰收成品图</strong>
+      <strong class="step_title" style="font-size:20px;" v-text="cp_details.title+'成品图'"></strong>
       <div class="fineshed-item">
          <img src="https://s1.st.meishij.net/rs/106/232/3995606/n3995606_156172709464504.jpg" class="fineshed-img">
       </div>
     </div>
     <div class="doneimg_preview">
       <div class="imgw current" v-for="(item,index) of cp_complete" :key="index">
-        <img :src="item.step_img" />
+        <img :src="item.step_img"/>
       </div>
     </div>
     <div class="skill">
@@ -129,19 +126,31 @@ export default {
 .effect {
   width: 100%;
   background-color: bisque;
+  padding:25px 20px;
+}
+.effect .title{
+  font-size:20px;
+  font-weight: 700;
+  margin-bottom:10px;
 }
 .view {
   font-size: 15px;
-  margin-left: 25px;
 }
-.xiaoguo {
-  height: 62px;
-  margin-left: 20px;
-  margin-top: 30px;
+.view+.view{
+  margin-left:10px;
+}
+.xiaoguo{
+  margin-top:10px;
+}
+.sc_miniw span{
+  display:inline-block;
+  font-size:1.1rem;
+  font-weight: 700;
+  margin-bottom:5px;
 }
 .list {
   font-size: 15px;
-  color: coral;
+  color:#ec8638;
   margin-right: 10px;
 }
 .w-name {
@@ -179,6 +188,7 @@ export default {
 }
 .comment-p {
   margin-bottom: 20px;
+  font-size:0.95rem;
 }
 .star {
   display: inline-block;
@@ -209,7 +219,7 @@ em {
   color: slategrey;
 }
 .red {
-  color: red;
+  color:red
 }
 .peiliao,
 .peiliao > a {
@@ -244,7 +254,14 @@ em {
   width: 100%;
 }
 .skill {
-  margin-top: 30px;
+  margin: 10px 0;
+  padding:15px;
+}
+.skill strong{
+  font-weight: 700;
+  font-size:1.1rem;
+  display:block;
+  margin-bottom:5px;
 }
 .pinfen-container {
   margin-bottom: 50px;
@@ -254,45 +271,45 @@ em {
 .fineshed-img{width:100%;}
 
 .cp_score{
-  width:30px;
+  width:25px;
   margin:0 5px;
   vertical-align: middle;
 }
 .top {
-    height: 45px;
-    width: 100%;
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    z-index: 1;
-    }
+  height: 45px;
+  width: 100%;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+}
 .btn1 {
-    display: inline-block;
-    vertical-align: top;
-    height: 30px;
-    padding: 0px 12px;
-    font-size: 14px;
-    color: #fff;
-    border-radius: 15px;
-    line-height: 30px;
-    background: rgba(0,0,0,0.5);
-    position: absolute;
-    left: 15px;
-    top: 15px;
+  display: inline-block;
+  vertical-align: top;
+  height: 30px;
+  padding: 0px 12px;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 15px;
+  line-height: 30px;
+  background: rgba(0,0,0,0.5);
+  position: absolute;
+  left: 15px;
+  top: 15px;
 }
 .btn2 {
-    display: inline-block;
-    vertical-align: top;
-    height: 30px;
-    padding: 0px 12px;
-    font-size: 14px;
-    color: #fff;
-    border-radius: 15px;
-    line-height: 30px;
-    background: rgba(0,0,0,0.5);
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    }
+  display: inline-block;
+  vertical-align: top;
+  height: 30px;
+  padding: 0px 12px;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 15px;
+  line-height: 30px;
+  background: rgba(0,0,0,0.5);
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
 
 </style>
