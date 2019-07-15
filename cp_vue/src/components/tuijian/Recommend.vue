@@ -13,17 +13,16 @@
                 <span class="m m5">夜宵</span>
             </div>
         </div>
-        <div class="sancan_item">
-            <span class="img_txt" >
-                <img src="../../assets/tj_sancan/1d26834b699639fa05aaa1eb21da28a1.jpg" class="img">
-                <div class="txt_title">东北乱炖</div>
-                <div class="txt_content">富含维生素，补肾强身</div>
-            </span>
-            <span class="img_txt">
-                <img src="../../assets/tj_sancan/1d26834b699639fa05aaa1eb21da28a1.jpg" class="img">
-                <div class="txt_title">东北乱炖</div>
-                <div class="txt_content">富含维生素，补肾强身</div>
-            </span>
+        <div class="sancan_view" @touchstart="huandong_s" @touchmove="huandong_m">
+            <div class="sancan_list" >
+                <div class="sancan_item" v-for="(item,i) of list" :key="i">
+                    <div class="img_txt" >
+                        <img :src="item.pic" class="img" width="367px">
+                        <div class="txt_title">{{item.title}}</div>
+                         <div class="txt_content">{{item.benefit}}</div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="FourPlates">
             <span>
@@ -31,22 +30,22 @@
                     <div>每日福利</div>
                     <div>好货推荐</div>
                 </div>
-                <img src="../../assets/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg" >
+                <img src="http://127.0.0.1:9999/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg" >
             </span>
             <span>
                 <div>本周流行</div>
                 <div>最佳菜肴</div>
-                 <img src="../../assets/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg" >
+                 <img src="http://127.0.0.1:9999/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg" >
             </span>
             <span>
                 <div>智能组菜</div>
                 <div>选菜神器</div>
-                 <img src="../../assets/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg" >
+                 <img src="http://127.0.0.1:9999/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg" >
             </span>
             <span>
                 <div>菜谱分类</div>
                 <div>美味分类</div>
-                 <img src="../../assets/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg" >
+                 <img src="http://127.0.0.1:9999/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg" >
             </span>
         </div>
         <!-- 推荐导航栏 -->
@@ -60,45 +59,74 @@
         <!-- 推荐用户展示 -->
            <div class="index_img_text">
                <div class="img_txt img_text_content">
-                   <img src="../../assets/tj_sancan/394c75088907de693fba10b7bedbc8cd.jpg" class="img">
+                   <img src="http://127.0.0.1:9999/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg" class="img">
                    <h3>部队火锅</h3>
                    <h6>家常菜|天涯海角最想念的味道</h6>
                    <div class="user_index">
                        <div class="user_img_name">
-                           <img src="../../assets/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg" class="user_img">
+                           <img src="http://127.0.0.1:9999/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg" class="user_img">
                        <span class="user_name">菜菜美食记</span>
                        </div>
                        <span class="watch_time"><img src="../../assets/icon/watch_time.png"> 1w+</span>
                    </div>
                </div>
                <div class="img_txt  img_text_content">
-                   <img src="../../assets/tj_sancan/394c75088907de693fba10b7bedbc8cd.jpg" class="img">
+                   <img src="http://127.0.0.1:9999/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg" class="img">
                    <h3>部队火锅</h3>
                    <h6>家常菜|天涯海角最想念的味道</h6>
                    <div class="user_index">
                        <div class="user_img_name">
-                           <img src="../../assets/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg" class="user_img">
+                           <img src="http://127.0.0.1:9999/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg" class="user_img">
                        <span class="user_name">菜菜美食记</span>
                        </div>
                        <span class="watch_time"><img src="../../assets/icon/watch_time.png"> 1w+</span>
                    </div>
                </div>
-           </div>
-           
+           </div>  
     </div>    
 </template>
 <script>
 export default {
     data() {
         return {
-            selected:""
+            list:[],
+            i:0,
+            n:0
         }
+    },
+    methods: {
+        huandong_s(e){
+            var sancan_list=document.getElementsByClassName("sancan_list")[0];
+            console.log(e.targetTouches);
+            console.log(e.changedTouches);
+            console.log(e.touches);
+            // this.i=e.targetTouches[0].screenX;
+            this.i=e.targetTouches[0].screenX;
+        },
+        huandong_m(e){
+            var sancan_list=document.getElementsByClassName("sancan_list")[0];
+            console.log(e.targetTouches[0].screenX);
+            var X=e.targetTouches[0].screenX;
+            if(this.i>=X){
+                this.n-=this.i-X
+                sancan_list.style.marginLeft=`${this.n}px`;
+            }else{
+                this.n+=X-this.i;
+                sancan_list.style.marginLeft=`${this.n}px`;
+            }
+            this.i=X;
+        }
+    },
+    created() {
+        this.axios.get("/tj/sancan").then(result=>{
+           this.list=result.data.data
+           
+        })
     },
 }
 </script>
 <style>
 .container{
-    margin: 0 10px;
     justify-content: space-between;
     padding-bottom: 50px;
 }
@@ -121,18 +149,24 @@ export default {
     color: #666;
     font-size: 14px;
 }
-.sancan_item{
-    display: flex;
-    justify-content: space-between;
+.sancan_view{
+    overflow: hidden;
 }
-.sancan_item .img_txt{
-    padding-right: 10px;
+.sancan_list{
+    display:flex;
+    flex-wrap: nowrap;
+    width:500%;
+}
+.sancan_item{
+    width:50%;
+    padding:0 10px;
 }
 .img_txt .img{
     width: 100%;
     border-radius: 7px;
     box-shadow: 0 3px 6px rgba(0,0,0,.5);
     background-color: #666;
+    width: 100%;
 }
 /* 标题文字 */
 .txt_title{

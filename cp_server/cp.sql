@@ -22,7 +22,7 @@ INSERT INTO cp_tj_sancan VALUES
 (NULL,"香肠芝士吐司卷","补充蛋白质，增强体质","下午茶","http://127.0.0.1:9999/tj_sancan/faae44219ddac422228ef5cb2cc60179.jpg"),
 (NULL,"凉拌腐竹","含钙量高，促进生长发育","晚餐","http://127.0.0.1:9999/tj_sancan/90cc20606daa58f3c44501fafbfff133.jpg"),
 (NULL,"三鲜饺子","富含维生素，增进食欲","晚餐","http://127.0.0.1:9999/tj_sancan/f0d866209cf4668308c0404e40e3fa73.jpg"),
-(NULL,"酸辣粉","富含膳食纤维，多吃减肥","夜宵","@/tj_sancan/7ed07b2d470630fadf1f1bb7ed027697.jpg"),
+(NULL,"酸辣粉","富含膳食纤维，多吃减肥","夜宵","http://127.0.0.1:9999/tj_sancan/7ed07b2d470630fadf1f1bb7ed027697.jpg"),
 (NULL,"自制红油辣子","富含维C，增进食欲","夜宵","http://127.0.0.1:9999/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg");
 
 
