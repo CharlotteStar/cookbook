@@ -1,27 +1,19 @@
 <template>
   <div>
+    <div class="sign-food">
+      <img :src="cp_details.pic">
+    </div>
     <div class="top">
 	    <router-link to="javascript" class="btn1">&lt; 美食杰</router-link>
 	    <router-link to="javascript" class="btn2">菜谱分类 &gt;</router-link>
     </div>
-    <div class="sign-food"></div>
     <div class="effect">
       <table></table>
-      <h3 style="margin-top:25px;margin-left:25px;">东北大丰收</h3>
-      <span class="view">63人收藏</span>
-      <span class="view">16524人浏览</span>
+      <h3 class="title" v-text="cp_details.title"></h3>
+      <span class="view" v-text="cp_details.shoucang+'人收藏'"></span>
+      <span class="view" v-text="cp_details.browse+'人浏览'"></span>
       <div class="xiaoguo">
-        <a href="javascript" class="list">补肾</a>
-        <a href="javascript" class="list">降糖</a>
-        <a href="javascript" class="list">减肥减脂</a>
-        <a href="javascript" class="list">降血压</a>
-        <a href="javascript" class="list">润肠通便</a>
-        <a href="javascript" class="list">健脑</a>
-        <a href="javascript" class="list">抗衰老</a>
-        <a href="javascript" class="list">美容瘦身</a>
-        <a href="javascript" class="list">美容养颜</a>
-        <a href="javascript" class="list">益智安神</a>
-        <a href="javascript" class="list">延缓衰老</a>
+        <router-link to="" class="list" v-for="(item,index) of benefit" :key="index" v-text="item"></router-link>
       </div>
     </div>
     <div class="w-message">
@@ -40,106 +32,52 @@
       <a href class="focus">关注</a>
     </div>
     <div class="comment">
-      <p class="comment-p">家人就馋这菜，乱炖一锅出，好吃到撑，每次端上桌，汤汁都不剩。这菜也是东北经典名菜，各大小饭店都有，他有个很好听的名字，叫...</p>
+      <p class="comment-p" v-text="cp_details.user_log"></p>
       <div class="pinfen-container">
         <strong class="pingfeng">评分</strong>
-        <span class="star"></span>
-        <span class="star"></span>
-        <span class="star"></span>
-        <span class="star"></span>
-        <span class="star"></span>
-        <span class="love"></span>
+        <img class="cp_score" :src="require(cp_details.score>=i ? '@/assets/icon/20180831142237_413.png' : '@/assets/icon/20180831142237_552.png')" v-for="i in 5" :key="i">
       </div>
       <div class="sc_miniw">
-        <strong>
-          主料
-          <em>4人份</em>
-        </strong>
-        <p>
-          <a class="red">排骨</a>300克、
+        <span>主料</span>
+        <p v-text="cp_details.primary_cl">
+          <!-- <a class="red">排骨</a>300克、
           <a class="red">胡萝卜</a>1根、
           <a class="red">玉米</a>1只、
           <a class="red" href>豆角</a>适量、
-          <a class="red" href>土豆</a>1个
+          <a class="red" href>土豆</a>1个 -->
         </p>
         <br />
-        <strong>辅料</strong>
-        <p class="peiliao">
-          <a href>油</a>适量、
+        <span>辅料</span>
+        <p class="peiliao" v-text="cp_details.secondary_cl">
+          <!-- <a href>油</a>适量、
           <a href>盐</a>适量、
           <a href>自制辣椒酱</a>适量、
           <a href>料酒</a>适量、
           <a href>花椒大料</a>适量、
           <a href>香叶</a>1片、
           <a href>葱</a>适量、
-          <a href>姜</a>适量
+          <a href>姜</a>适量 -->
         </p>
       </div>
     </div>
 
-    <div class="stepitem1">
-      <strong class="step_title" id="step_num1">东北大丰收步骤1</strong>
-      <img
-        alt="东北大丰收的做法大全"
-        src="https://s1.st.meishij.net/rs/106/232/3995606/n3995606_156172497465971.jpg"
-        class="stepimg"
-      />
+    <div class="stepitem1" v-for="(item,index) of cp_step" :key="index">
+      <strong class="step_title" id="step_num1">步骤{{item.step}}</strong>
+      <img alt="东北大丰收的做法大全" :src="item.step_img" class="stepimg"/>
       <div class="stepc comment">
-        <p class="stepdes">备齐食材，土豆去皮洗净，胡萝卜去皮洗净，玉米是冻灾冰箱里的熟玉米</p>
-      </div>
-    </div>
-    <div class="stepitem1">
-      <strong class="step_title" id="step_num1">东北大丰收步骤2</strong>
-      <img
-        alt="东北大丰收的做法大全"
-        src="https://s1.st.meishij.net/rs/106/232/3995606/n3995606_156172497465971.jpg"
-        class="stepimg"
-      />
-      <div class="stepc comment">
-        <p class="stepdes">备齐食材，土豆去皮洗净，胡萝卜去皮洗净，玉米是冻灾冰箱里的熟玉米</p>
-      </div>
-    </div>
-    <div class="stepitem1">
-      <strong class="step_title" id="step_num1">东北大丰收步骤2</strong>
-      <img
-        alt="东北大丰收的做法大全"
-        src="https://s1.st.meishij.net/rs/106/232/3995606/n3995606_156172497465971.jpg"
-        class="stepimg"
-      />
-      <div class="stepc comment">
-        <p class="stepdes">备齐食材，土豆去皮洗净，胡萝卜去皮洗净，玉米是冻灾冰箱里的熟玉米</p>
-      </div>
-    </div>
-    <div class="stepitem1">
-      <strong class="step_title" id="step_num1">东北大丰收步骤4</strong>
-      <img
-        alt="东北大丰收的做法大全"
-        src="https://s1.st.meishij.net/rs/106/232/3995606/n3995606_156172497465971.jpg"
-        class="stepimg"
-      />
-      <div class="stepc comment">
-        <p class="stepdes">备齐食材，土豆去皮洗净，胡萝卜去皮洗净，玉米是冻灾冰箱里的熟玉米</p>
+        <p class="stepdes" v-text="item.content"></p>
       </div>
     </div>
 
     <div class="fineshed">
-      <strong class="step_title" style="font-size:20px;">东北大丰收成品图</strong>
+      <strong class="step_title" style="font-size:20px;" v-text="cp_details.title+'成品图'"></strong>
       <div class="fineshed-item">
          <img src="https://s1.st.meishij.net/rs/106/232/3995606/n3995606_156172709464504.jpg" class="fineshed-img">
       </div>
-      </div>
+    </div>
     <div class="doneimg_preview">
-      <div class="imgw current">
-        <img src="https://s1.st.meishij.net/rs/106/232/3995606/n3995606_156172709464504.jpg" />
-      </div>
-      <div class="imgw">
-        <img src="https://s1.st.meishij.net/rs/106/232/3995606/n3995606_156172709513590.jpg" />
-      </div>
-      <div class="imgw">
-        <img src="https://s1.st.meishij.net/rs/106/232/3995606/n3995606_156172709642778.jpg" />
-      </div>
-      <div class="imgw">
-        <img src="https://s1.st.meishij.net/rs/106/232/3995606/n3995606_156172709642778.jpg" />
+      <div class="imgw current" v-for="(item,index) of cp_complete" :key="index">
+        <img :src="item.step_img"/>
       </div>
     </div>
     <div class="skill">
@@ -150,37 +88,69 @@
 </template>
 <script>
 export default {
+  props:['did'],
   data() {
-    return {};
+    return {
+      cp_details:{},
+      cp_step:[],
+      benefit:[],
+      cp_complete:[]
+    };
+  },
+  created(){
+    this.axios.get(
+      '/caipu/details',
+      {params:{did:this.did}}
+    ).then(res=>{
+      this.cp_details=res.data.cp_details;
+      for(var item of res.data.cp_step){
+        item.step>0 ? this.cp_step.push(item) : this.cp_complete.push(item)
+      }
+      this.benefit=this.cp_details.benefit.split(' ')
+    })
   }
 };
 </script>
 <style scoped>
 /* .first{display:flex} */
 .sign-food {
-  background: url(https://s1.st.meishij.net/r/106/232/3995606/s3995606_156172491177683.jpg)
-    center / cover no-repeat;
-  background-size: cover;
-  height: 250px;
+  height: 15rem;
   overflow: hidden;
+}
+.sign-food img{
+  width:100%;
+  object-fit: cover;
+  margin-top:50%;
+  transform: translateY(-50%);
 }
 .effect {
   width: 100%;
-  height: 200px;
   background-color: bisque;
+  padding:25px 20px;
+}
+.effect .title{
+  font-size:20px;
+  font-weight: 700;
+  margin-bottom:10px;
 }
 .view {
   font-size: 15px;
-  margin-left: 25px;
 }
-.xiaoguo {
-  height: 62px;
-  margin-left: 20px;
-  margin-top: 30px;
+.view+.view{
+  margin-left:10px;
+}
+.xiaoguo{
+  margin-top:10px;
+}
+.sc_miniw span{
+  display:inline-block;
+  font-size:1.1rem;
+  font-weight: 700;
+  margin-bottom:5px;
 }
 .list {
   font-size: 15px;
-  color: coral;
+  color:#ec8638;
   margin-right: 10px;
 }
 .w-name {
@@ -218,6 +188,7 @@ export default {
 }
 .comment-p {
   margin-bottom: 20px;
+  font-size:0.95rem;
 }
 .star {
   display: inline-block;
@@ -248,7 +219,7 @@ em {
   color: slategrey;
 }
 .red {
-  color: red;
+  color:red
 }
 .peiliao,
 .peiliao > a {
@@ -258,10 +229,11 @@ em {
   margin-top: 70px;
 }
 .step_title {
-  font-size: 30px;
+  font-size:24px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom:8px;
 }
 .stepimg {
   width: 100%;
@@ -282,7 +254,14 @@ em {
   width: 100%;
 }
 .skill {
-  margin-top: 30px;
+  margin: 10px 0;
+  padding:15px;
+}
+.skill strong{
+  font-weight: 700;
+  font-size:1.1rem;
+  display:block;
+  margin-bottom:5px;
 }
 .pinfen-container {
   margin-bottom: 50px;
@@ -290,41 +269,47 @@ em {
 .fineshed{margin-top:50px;}
 .fineshed-item{width:100%;}
 .fineshed-img{width:100%;}
+
+.cp_score{
+  width:25px;
+  margin:0 5px;
+  vertical-align: middle;
+}
 .top {
-    height: 45px;
-    width: 100%;
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    z-index: 1;
-    }
+  height: 45px;
+  width: 100%;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+}
 .btn1 {
-    display: inline-block;
-    vertical-align: top;
-    height: 30px;
-    padding: 0px 12px;
-    font-size: 14px;
-    color: #fff;
-    border-radius: 15px;
-    line-height: 30px;
-    background: rgba(0,0,0,0.5);
-    position: absolute;
-    left: 15px;
-    top: 15px;
+  display: inline-block;
+  vertical-align: top;
+  height: 30px;
+  padding: 0px 12px;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 15px;
+  line-height: 30px;
+  background: rgba(0,0,0,0.5);
+  position: absolute;
+  left: 15px;
+  top: 15px;
 }
 .btn2 {
-    display: inline-block;
-    vertical-align: top;
-    height: 30px;
-    padding: 0px 12px;
-    font-size: 14px;
-    color: #fff;
-    border-radius: 15px;
-    line-height: 30px;
-    background: rgba(0,0,0,0.5);
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    }
+  display: inline-block;
+  vertical-align: top;
+  height: 30px;
+  padding: 0px 12px;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 15px;
+  line-height: 30px;
+  background: rgba(0,0,0,0.5);
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
 
 </style>

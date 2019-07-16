@@ -80,4 +80,7 @@ a{
 ul{
   list-style: none;
 }
+img{
+  vertical-align: middle;
+}
 </style>

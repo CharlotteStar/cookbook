@@ -36,12 +36,14 @@ export default {
     .cook_title{
         display: flex;
         position: fixed;
+        top:0;
         height: 44px;
         z-index: 999;
         width: 100%;
         justify-content: center;
         font-size: 14px;
         line-height: 44px;
+        background-color: #fff;
     }
     .center_title{
         display: flex;

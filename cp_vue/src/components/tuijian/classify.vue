@@ -2,18 +2,18 @@
   <div class="page-classify">
     <div class="classify-top">
       <div class="return" @click="fanhui"></div>
-      <router-link to="" placeholder="搜索任何你想要的" class="search"></router-link>
+      <router-link :to="`/detailslist`" placeholder="搜索任何你想要的" class="search"></router-link>
     </div>
     <div class="classify-container">
       <ul class="classify-list">
-        <li class="classify-item " :class="item.fid==index ? 'selected' : ''" @click="selected(item.fid)"  v-for="(item,i) of classify_data" :key="i">
+        <li class="classify-item" :class="item.fid==index ? 'selected' : ''" @click="selected(item.fid)"  v-for="(item,i) of classify_data" :key="i">
           <img :src="item.icon">
           <div v-text="item.fname"></div>
         </li>
       </ul>
       <div class="type-container">
         <ul class="type-list">
-          <li class="type-item"  v-for="(item,index) of type_data" :key="index" @click="to_details_list">
+          <li class="type-item"  v-for="(item,index) of type_data" :key="index" @click="to_details_list(item.tid)">
             <img :src="item.icon">
             <div v-text="item.tname"></div>
           </li>
@@ -36,14 +36,14 @@ export default {
     selected(id){
       this.index=id;
       this.axios.get(
-        "/tj/type",
+        "/caipu/type",
         {params:{fid:this.index}}
       ).then(res=>{
         this.type_data=res.data.data
       })
     },
-    to_details_list(){
-      location.href="/home";
+    to_details_list(tid){
+      this.$router.push({path:'/detailslist/'+tid})
     },
     fanhui(){
       this.$router.go(-1);
@@ -51,13 +51,13 @@ export default {
   },
   created(){
     this.axios.get(
-      "/tj/classify"
+      "/caipu/classify"
     ).then(res=>{
       var data=res.data.data
       this.classify_data=data;
       this.index=data[0].fid;
       this.axios.get(
-        "/tj/type",
+        "/caipu/type",
         {params:{fid:this.index}}
       ).then(res=>{
         this.type_data=res.data.data
@@ -116,10 +116,9 @@ export default {
 .classify-list .classify-item{
   width:100px;height:100px;
   padding-top:30px;
-}
-.classify-item{
   font-size:14px;
-} 
+  text-align: center;
+}
 .classify-list img{
   width:30px;height:30px;
 }
@@ -131,6 +130,7 @@ export default {
   width:33.333%;
   padding: 10px;
   font-size: 12px;
+  text-align: center;
 }
 .type-item img{
   width:100%;
