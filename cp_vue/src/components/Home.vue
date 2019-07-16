@@ -22,7 +22,7 @@
               食话              
           </mt-tab-container-item>
           <mt-tab-container-item id="me" >
-              我的
+              <login></login>
           </mt-tab-container-item>
         </mt-tab-container>
       </div>
@@ -71,6 +71,8 @@
   import TabBarIcon from './cook/TabBarIcon.vue'
   // 引入首页推荐面板
   import Recommend from './tuijian/Recommend.vue'
+  // 引入登录面板
+  import login from './me/login.vue'
   export default {
     data(){
       return {
@@ -99,7 +101,8 @@
     components:{
       "cooktop":CookTop,
       "tabbaricon":TabBarIcon,
-      "recommend":Recommend
+      "recommend":Recommend,
+      "login":login,
     }
   }
 </script>

@@ -128,12 +128,12 @@ export default {
 <style>
 .container{
     justify-content: space-between;
-    padding-bottom: 50px;
+    /* padding: 50px 0; */
 }
 .classify{
     display: flex;
     width: 100%;
-    padding: 20px 0;
+    padding: 50px 0 20px 0;
 }
  .today ,#slide{
     display: inline-block;

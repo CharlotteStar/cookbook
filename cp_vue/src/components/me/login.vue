@@ -109,7 +109,7 @@ export default {
 <style  scoped>
 .page-login{
   background: #f5f5f5;
-  height:100vh;
+  text-align: center;
 }
 .account,.upwd{
   background:#fff;

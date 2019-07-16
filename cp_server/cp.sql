@@ -127,13 +127,14 @@ fname VARCHAR(16),
 icon VARCHAR(128)
 );
 INSERT INTO cp_fenlei VALUES
-(NULL,"实用类型","http://127.0.0.1:9999/cp_icon/ms_fenlei_2@2x.png"),
-(NULL,"每日三餐","http://127.0.0.1:9999/cp_icon/ms_fenlei_1@2x.png"),
-(NULL,"主食","http://127.0.0.1:9999/cp_icon/ms_fenlei_5@2x.png"),
-(NULL,"家常菜谱","http://127.0.0.1:9999/cp_icon/ms_fenlei_0@2x.png"),
-(NULL,"烘焙","http://127.0.0.1:9999/cp_icon/ms_fenlei_3@2x.png"),
-(NULL,"各地小吃","http://127.0.0.1:9999/cp_icon/ms_fenlei_10@2x.png");
-
+(1,"实用类型","http://127.0.0.1:9999/cp_icon/ms_fenlei_2@2x.png"),
+(2,"每日三餐","http://127.0.0.1:9999/cp_icon/ms_fenlei_1@2x.png"),
+(3,"主食","http://127.0.0.1:9999/cp_icon/ms_fenlei_5@2x.png"),
+(4,"家常菜谱","http://127.0.0.1:9999/cp_icon/ms_fenlei_0@2x.png"),
+(5,"烘焙","http://127.0.0.1:9999/cp_icon/ms_fenlei_3@2x.png"),
+(6,"各地小吃","http://127.0.0.1:9999/cp_icon/sanck.png");
+(7,"口味","http://127.0.0.1:9999/cp_icon/kouwei.png.png");
+(8,"中华菜系","http://127.0.0.1:9999/cp_icon/zhonghuacaixi.png.png")
 /*菜谱类型*/
 CREATE TABLE cp_type(
 tid INT PRIMARY KEY AUTO_INCREMENT,
@@ -185,7 +186,33 @@ INSERT INTO cp_type VALUES
 (41,5,"蛋糕","http://127.0.0.1:9999/cp_icon/fl_hongbei_4.png"),
 (42,5,"面包","http://127.0.0.1:9999/cp_icon/fl_hongbei_5.png"),
 (43,5,"翻糖","http://127.0.0.1:9999/cp_icon/fl_hongbei_6.png");
-
+(44,6,"黑龙江小吃","http://127.0.0.1:9999/cp_icon/hrb.jpg")
+(46,6,"特色小吃","http://127.0.0.1:9999/cp_icon/tese.jpg")
+(47,6,"成都小吃","http://127.0.0.1:9999/cp_icon/cd.jpg")
+(48,6,"北京小吃","http://127.0.0.1:9999/cp_icon/beijing.jpg")
+(49,6,"湖南小吃","http://127.0.0.1:9999/cp_icon/hunan.jpg")
+(50,6,"天津小吃","http://127.0.0.1:9999/cp_icon/tj.jpg")
+(51,6,"上海小吃","http://127.0.0.1:9999/cp_icon/sh.jpg")
+(52,6,"广东小吃","http://127.0.0.1:9999/cp_icon/gz.jpg")
+(53,6,"福建小吃","http://127.0.0.1:9999/cp_icon/fj.jpg")
+(54,6,"陕西小吃","http://127.0.0.1:9999/cp_icon/roujiam.jpg")
+(55,6,"山西小吃","http://127.0.0.1:9999/cp_icon/shanxi.jpg")
+(56,6,"贵州小吃","http://127.0.0.1:9999/cp_icon/guizhou.jpg")
+(57,6,"西藏小吃","http://127.0.0.1:9999/cp_icon/xizang.jpg")
+(58,6,"台湾小吃","http://127.0.0.1:9999/cp_icon/taiwan.jpg")
+(59,6,"河北小吃","http://127.0.0.1:9999/cp_icon/hebei.jpg")
+(60,6,"广西小吃","http://127.0.0.1:9999/cp_icon/guangxi.jpg")
+(61,6,"安徽小吃","http://127.0.0.1:9999/cp_icon/anhui.jpg")
+(62,6,"河南小吃","http://127.0.0.1:9999/cp_icon/henan.jpg")
+(63,6,"海南小吃","http://127.0.0.1:9999/cp_icon/hainan.jpg")
+(64,8,"湘菜","http://127.0.0.1:9999/cp_icon/xiangcai.jpg")
+(65,8,"粤菜","http://127.0.0.1:9999/cp_icon/yuecai.jpg")
+(66,8,"沪菜","http://127.0.0.1:9999/cp_icon/hucai.jpg")
+(67,8,"苏菜","http://127.0.0.1:9999/cp_icon/sucai.jpg")
+(68,8,"鲁菜","http://127.0.0.1:9999/cp_icon/lucai.jpg")
+(69,8,"川菜","http://127.0.0.1:9999/cp_icon/chuancai.jpg")
+(70,8,"浙菜","http://127.0.0.1:9999/cp_icon/zhecai.jpg")
+(71,8,"闽菜","http://127.0.0.1:9999/cp_icon/mincai.jpg")
 
 /*菜谱详情步骤*/
 CREATE TABLE cp_step(

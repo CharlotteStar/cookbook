@@ -141,6 +141,7 @@ export default {
 .page-reg{
   background: #f5f5f5;
   height:100vh;
+  text-align: center
 }
 .reg-mode{
   display:flex;

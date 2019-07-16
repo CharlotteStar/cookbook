@@ -28,7 +28,6 @@ export default {
 
 <style scoped>  .page-login{
   background: #f5f5f5;
-  height:100vh;
 }
 .me-top{
   position:relative;
