@@ -28,34 +28,35 @@ INSERT INTO cp_tj_sancan VALUES
 
 /**用户信息**/
 CREATE TABLE cp_user(
-uid INT PRIMARY KEY AUTO_INCREMENT,
-uname VARCHAR(32),
-upwd VARCHAR(32),
-phone BIGINT,
-email VARCHAR(256)
+  uid INT PRIMARY KEY AUTO_INCREMENT,
+  uname VARCHAR(32),
+  upwd VARCHAR(32),
+  phone BIGINT,
+  email VARCHAR(256),
+  avatar VARCHAR(128)
 );
 INSERT INTO cp_user VALUES
-(NULL,"美食小编","123456",13579246810,"13579246810@qq.com"),
-(NULL,"唐莎","123456",15324652145,"tangsha@qq.com"),
-(NULL,"小珍","123456",15348235468,"xiaozhen@qq.com"),
-(NULL,"宗良","123456",13478549543,"zongliang@qq.com"),
-(NULL,"靓仔","123456",13729412134,"liangzai@qq.com");
+(NULL,"美食小编","123456",13579246810,"13579246810@qq.com","http://127.0.0.1:9999/user_avatar/20120902160411_ik2UH.jpg"),
+(NULL,"唐莎","123456",15324652145,"tangsha@qq.com","http://127.0.0.1:9999/user_avatar/fc86fbe322952f4babdb29857b36fc8.png"),
+(NULL,"小珍","123456",15348235468,"xiaozhen@qq.com","http://127.0.0.1:9999/user_avatar/u=527690908,841994411&fm=26&gp=0.jpg"),
+(NULL,"宗良","123456",13478549543,"zongliang@qq.com","http://127.0.0.1:9999/user_avatar/u=1471800268,3373504429&fm=26&gp=0.jpg"),
+(NULL,"靓仔","123456",13729412134,"liangzai@qq.com","http://127.0.0.1:9999/user_avatar/u=2136146216,1955357192&fm=26&gp=0.jpg");
 
 
 /*菜谱详情*/
 CREATE TABLE cp_details(
-did INT PRIMARY KEY AUTO_INCREMENT,
-title VARCHAR(32),
-benefit VARCHAR(128), #益处
-user_id SMALLINT, #用户的id
-score INT, #评分
-primary_cl VARCHAR(128), #主料
-secondary_cl VARCHAR(128), #辅料
-type_id VARCHAR(32), #菜谱类型
-pic VARCHAR(128), #图片路径
-user_log VARCHAR(1024), #用户日志
-browse BIGINT, #浏览量
-shoucang BIGINT #收藏次数
+  did INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(32),
+  benefit VARCHAR(128), #益处
+  user_id SMALLINT, #用户的id
+  score INT, #评分
+  primary_cl VARCHAR(128), #主料
+  secondary_cl VARCHAR(128), #辅料
+  type_id VARCHAR(32), #菜谱类型
+  pic VARCHAR(128), #图片路径
+  user_log VARCHAR(1024), #用户日志
+  browse BIGINT, #浏览量
+  shoucang BIGINT #收藏次数
 );
 INSERT INTO cp_details VALUES
 (1,"嫩滑鸡蛋糕","健脑益智 保肝 动脉硬化 防癌 延年益寿 美容护肤",1,3,"鸡蛋2个、纯净水适量","盐1小勺、料酒1勺、生抽1勺、香醋1勺、香油适量、枸杞子适量",8,"http://127.0.0.1:9999/cp_details_img/s6030800_156172755562147.jpg","早上不知道吃啥，就蒸一碗香浓嫩滑的鸡蛋糕吧！嫩嫩的，滑滑的，非常好吃，一勺入口，顺喉而下，香嫩爽滑，入口即化。",0,0),
@@ -359,3 +360,106 @@ INSERT INTO cp_step VALUES
 TIPS
 1/ 熬好的辣椒油倒入无水无油，消毒好的玻璃瓶中，冷却后密封保存，可以放一年之久，冰箱冷藏保存辣椒与个用时用无水无油的干净勺子，辣油能存放更久
 2/ 三种辣椒的作用各不同，不那么讲究的话用一种辣椒也可以。自己研磨的辣椒粉更香一些，偷懒的话就买辣椒粉也能做");
+
+
+/*口味*/
+CREATE TABLE cp_kouwei(
+  kid INT PRIMARY KEY AUTO_INCREMENT,
+  kname VARCHAR(16)
+);
+INSERT INTO cp_kouwei VALUES
+(1,"家常味"),
+(2,"香辣味"),
+(3,"咸鲜味"),
+(4,"甜味"),
+(5,"酸甜味"),
+(6,"酸辣味"),
+(7,"麻辣味"),
+(8,"酱香味"),
+(9,"奶香味"),
+(10,"蒜香味"),
+(11,"鱼香味"),
+(12,"葱香味"),
+(13,"五香味"),
+(14,"茄汁味"),
+(15,"酸味"),
+(NULL,"苦香味"),
+(NULL,"姜汁味"),
+(NULL,"芥末味"),
+(NULL,"红油味"),
+(NULL,"豆瓣味"),
+(NULL,"麻酱味"),
+(NULL,"黑椒味"),
+(NULL,"胡辣味"),
+(NULL,"其它"),
+
+
+
+<<<<<<< HEAD
+CREATE TABLE cp_shicai(
+  sid INT PRIMARY KEY AUTO_INCREMENT,
+  sname VARCHAR(16)
+);
+(1,"鸡肉"),
+(2,"鸭肉"),
+(3,"牛肉"),
+(4,"猪肉"),
+(5,"羊肉"),
+(6,"兔肉"),
+(7,"白菜"),
+(8,"娃娃菜"),
+(9,"生菜"),
+(10,"荷兰豆"),
+(11,"土豆"),
+(12,"茄子"),
+(13,"豆角"),
+(14,"西红柿"),
+(15,"苦瓜"),
+(16,"青瓜"),
+(17,"南瓜"),
+(18,"冬瓜"),
+(19,"山药"),
+(20,"胡萝卜"),
+(21,"白萝卜"),
+(22,"空心菜"),
+(23,"菜心"),
+(24,"春菜"),
+(25,"油麦菜"),
+(26,"花生"),
+(27,"黄豆"),
+(28,"黑芝麻"),
+(29,"红豆"),
+(30,"绿豆"),
+(31,"小麦"),
+(32,"小米"),
+(33,"赤豆"),
+(34,"黑豆"),
+(35,"糯米"),
+(36,"地瓜"),
+(37,"西米"),
+(38,"毛豆"),
+(39,"四季豆"),
+(40,"酸豆角"),
+(41,"豆腐"),
+(42,"鱼"),
+(43,"草鱼"),
+(44,"章鱼"),
+(45,"鱿鱼"),
+(46,"小虾米"),
+(47,"虾"),
+(48,"小龙虾"),
+(49,"鸡蛋"),
+(50,"木耳"),
+(51,"银耳"),
+(52,"蘑菇"),
+(53,"金针菇"),
+(54,"韭菜"),
+(55,"韭黄"),
+(56,"紫薯"),
+(57,"红薯"),
+(58,"鱼丸"),
+(59,"牛肉丸"),
+(60,"猪肉丸"),
+=======
+/****/
+>>>>>>> 1e595a9a936b3c65412c9035da2ff1fb9c973ee9

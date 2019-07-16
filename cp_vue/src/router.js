@@ -9,6 +9,8 @@ import DetailsList from './components/tuijian/cp_details_list.vue'  //详情列�
 import menu01 from './components/Menu-steps/menu01.vue'   //详情页
 Vue.use(Router)
 import menu01_item from './components/Menu-steps/menu01_item.vue'
+import SearchFirst from './components/SmartRecipe/SearchFirst.vue'
+import suggest from './components/SmartRecipe/suggest.vue'
 
 export default new Router({
   routes: [
@@ -22,5 +24,7 @@ export default new Router({
     { path: '/menu01/:did', component: menu01, props: true },
     {path:'/Recommend',component:Recommend},
     {path:'/menu01_item',component:menu01_item},
+    {path:'/SearchFirst',component:SearchFirst},
+    {path:'/suggest',component:suggest},
   ]
 })
