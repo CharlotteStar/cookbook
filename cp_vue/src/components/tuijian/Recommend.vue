@@ -95,27 +95,6 @@ export default {
         }
     },
     methods: {
-        huandong_s(e){
-            var sancan_list=document.getElementsByClassName("sancan_list")[0];
-            console.log(e.targetTouches);
-            console.log(e.changedTouches);
-            console.log(e.touches);
-            // this.i=e.targetTouches[0].screenX;
-            this.i=e.targetTouches[0].screenX;
-        },
-        huandong_m(e){
-            var sancan_list=document.getElementsByClassName("sancan_list")[0];
-            console.log(e.targetTouches[0].screenX);
-            var X=e.targetTouches[0].screenX;
-            if(this.i>=X){
-                this.n-=this.i-X
-                sancan_list.style.marginLeft=`${this.n}px`;
-            }else{
-                this.n+=X-this.i;
-                sancan_list.style.marginLeft=`${this.n}px`;
-            }
-            this.i=X;
-        }
     },
     created() {
         this.axios.get("/tj/sancan").then(result=>{
