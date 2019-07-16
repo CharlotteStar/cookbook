@@ -37,6 +37,8 @@ router.get("/cp_list", (req, res) => {
 
 //获取菜谱分类的数据
 router.get("/classify", (req, res) => { 
+  var id =req.query.id
+  var sql='SELECT * FROM cp_details WHERE user_id=?'
   var sql = "SELECT * FROM cp_fenlei";
   pool.query(sql, (err, result) => { 
     if (err) throw err;
@@ -52,5 +54,7 @@ router.get("/type", (req, res) => {
     res.send({ code: 1, msg: "查询成功", data: result });
   })
 })
+
+
 
 module.exports = router;

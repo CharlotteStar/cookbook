@@ -16,7 +16,19 @@
 export default {
   data(){
     return{}
-  }
+  },
+  // methods:{
+  //   get(){
+  //     axios.get("/caipu/type",
+  //       {params:{uid:uid}}
+  //     ).then((res)=>{
+  //       console.log(res);
+  //     })
+  //   }
+  // },
+  // created(){
+    
+  // }
 }
 </script>
 <style>

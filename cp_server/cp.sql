@@ -44,7 +44,7 @@ INSERT INTO cp_user VALUES
 
 
 /*菜谱详情*/
-CREATE TABLE cp_details(
+CREATE TABLE cp_details(  
   did INT PRIMARY KEY AUTO_INCREMENT,
   title VARCHAR(32),
   benefit VARCHAR(128), #益处
@@ -364,15 +364,15 @@ INSERT INTO cp_kouwei VALUES
 (NULL,"麻酱味"),
 (NULL,"黑椒味"),
 (NULL,"胡辣味"),
-(NULL,"其它"),
+(NULL,"其它");
 
 
 
-<<<<<<< HEAD
 CREATE TABLE cp_shicai(
   sid INT PRIMARY KEY AUTO_INCREMENT,
   sname VARCHAR(16)
 );
+INSERT INTO cp_shicai VALUES
 (1,"鸡肉"),
 (2,"鸭肉"),
 (3,"牛肉"),
@@ -432,7 +432,4 @@ CREATE TABLE cp_shicai(
 (57,"红薯"),
 (58,"鱼丸"),
 (59,"牛肉丸"),
-(60,"猪肉丸"),
-=======
-/****/
->>>>>>> 1e595a9a936b3c65412c9035da2ff1fb9c973ee9
+(60,"猪肉丸");
