@@ -12,6 +12,8 @@ import DetailsList from './components/tuijian/cp_details_list.vue'
 import menu01 from './components/Menu-steps/menu01.vue'
 Vue.use(Router)
 import menu01_item from './components/Menu-steps/menu01_item.vue'
+import SearchFirst from './components/SmartRecipe/SearchFirst.vue'
+import suggest from './components/SmartRecipe/suggest.vue'
 
 export default new Router({
   routes: [
@@ -27,5 +29,7 @@ export default new Router({
     // {path:'/CookList',component:CookList}
     {path:'/menu01',component:menu01},
     {path:'/menu01_item',component:menu01_item},
+    {path:'/SearchFirst',component:SearchFirst},
+    {path:'/suggest',component:suggest},
   ]
 })
