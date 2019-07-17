@@ -116,7 +116,8 @@
               <span class="user_name">菜菜美食记</span>
             </div>
             <span class="watch_time">
-              <img src="../../assets/icon/watch_time.png" /> 
+              <img src="../../assets/icon/watch_time.png" />
+              1w+ 
             </span>
           </div>
         </div>

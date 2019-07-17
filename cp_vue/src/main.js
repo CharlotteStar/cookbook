@@ -13,6 +13,7 @@ import "./font_xqweyihcnjm/iconfont.css"
 import axios from "./axios"
 
 
+
 //将mint-ui组件库中组件注册vue实例中
 Vue.use(MintUI);
 
