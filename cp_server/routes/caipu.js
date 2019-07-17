@@ -53,4 +53,14 @@ router.get("/type", (req, res) => {
   })
 })
 
+//菜谱的浏览量
+router.get("/browse", (req, res) => { 
+  var browse = req.query.browse;
+  pool.query("UPDATE cp_details SET browse=?", [browse], (err, result) => { 
+    if (err) throw err;
+    res.send("修改成功");
+  })
+})
+
+
 module.exports = router;
