@@ -3,7 +3,7 @@
     <me-Top meTitle="用户登录" meTopRight="注册" meTopRightTo="/register"></me-Top>
     <div class="login-operation">
       <mt-field placeholder="手机号/邮箱" class="account" v-model="account"></mt-field>
-      <mt-field placeholder="密码" class="upwd" v-model="upwd"></mt-field>
+      <mt-field type="password" placeholder="密码" class="upwd" v-model="upwd"></mt-field>
     </div>
     <div class="login">
       <mt-button class="btn-login" size="large" @click="login">登录</mt-button>
@@ -110,6 +110,7 @@ export default {
 .page-login{
   background: #f5f5f5;
   height:100vh;
+  text-align: center
 }
 .account,.upwd{
   background:#fff;
