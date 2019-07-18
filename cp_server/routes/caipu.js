@@ -2,6 +2,15 @@ const express = require("express");
 const pool = require("../pool.js");
 var router = express.Router();
 
+//获取对应用户的菜谱
+router.get("/user_cp", (req, res) => { 
+  var user_id = req.query.uid;
+  var sql = "SELECT pic,title cname FROM cp_details WHERE user_id=?";
+  pool.query(sql, [user_id], (err, result) => { 
+    if (err) throw err;
+    res.send({ code: 1, msg: "查询成功", data: result });
+  })
+})
 
 //获取菜谱详情的数据
 router.get("/details", (req, res) => { 

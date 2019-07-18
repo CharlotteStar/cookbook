@@ -15,7 +15,9 @@
 <script>
 export default {
   data(){
-    return{}
+    return{
+      cp_shicai:{}
+    }
   },
   // methods:{
   //   get(){

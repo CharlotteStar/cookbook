@@ -32,6 +32,7 @@ export default {
     height:48px;
     color:#000;
     font-size:18px;
+    margin-bottom:30px;
   }
   .page-head>.back{
     color:red;
