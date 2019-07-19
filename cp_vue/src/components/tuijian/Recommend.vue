@@ -94,9 +94,10 @@
               />
               <span class="user_name">菜菜美食记</span>
             </div>
-            <span class="watch_time">
+            <div class="watch_time">
               <img src="../../assets/icon/watch_time.png" /> 
-            </span>
+              <i>1w+</i>
+            </div>
           </div>
         </div>
         <div class="img_txt img_text_content">
@@ -398,7 +399,7 @@ export default {
 /* 标题文字内容 */
 .txt_content {
   color: #333;
-  font-size: 14px;
+  font-size: 12px;
   white-space: nowrap;
   position:relative;
   z-index:10;
@@ -501,38 +502,37 @@ export default {
   justify-content: space-between;
   margin: 18px 5px 12px 12px;
 }
+/* 用户头像姓名及观看 */
 .user_img_name {
   align-items: center;
   line-height: 170%;
 }
 .user_index .user_img {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   border-radius: 17px;
-  vertical-align: top;
 }
 .user_index .user_name {
   color: #333;
   font-size: 12px;
-  padding-left: 5px;
 }
 .user_index .watch_time {
   float: right;
-  margin-right: 5px;
-  padding: 7px;
+  padding: 7px 3px 7px 7px;
   color: #333;
   font-size: 12px;
   justify-content: space-between;
   vertical-align: top;
-  position: relative;
+  /* position: relative; */
 }
 .watch_time img {
   width: 15px;
   height: 15px;
   background-color: #fff;
-  position: absolute;
+  /* position: absolute;
   top: 7px;
-  right: 30px;
+  right: 30px; */
+  margin-right: 0
 }
 </style>
 
