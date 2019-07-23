@@ -1,30 +1,122 @@
 <template>
-  <div >
+  <div class="container">
+    <!-- 随机生成标语 -->
     <div class="title">
        <div class="show_title">有些人温暖了，</div>
        <!-- 背景色设置一个空div  -->
       <div class="bg_color"></div>
     </div>
+    <!-- 导航栏 -->
     <div class="nav_bar" >
-      <div class="slide_bar" v-for="i in 6" :key="i">
+      <div class="slide_bar" v-for="(item,index) in list" :key="item.id" @click="add(index)">
         <div class="img" >
           <img src="./s16210777158.jpg" width="100%"/>
-           <div class="img_title">#热门话题</div>
+           <div class="img_title">{{item.title}}</div>
         </div>
-      </div>
+      </div> 
     </div>
-    <div class="user_item" >
-      <div class="user_nume" v-for="i in 10" :key="i" >
-        <img src="./s16210777158.jpg" />
-        <div class="details">
-          <h3>清爽的拍黄瓜清爽的拍黄瓜清爽的拍黄瓜清爽的拍黄瓜</h3>
-          <div class="category"># &nbsp;早餐</div>
-          <div class="userAndImg">
-            <div class="left_name_img">
-                <img src="../../assets/icon/20180831142237_413.png"  />
-                <div>昵称</div>
+    <div class="user_content">
+      <div class="user_container">
+        <!-- 第一层 -->
+        <div class="user_item" >
+          <div class="user_nume" v-for="i in 10" :key="i" >
+            <img src="./s16210777158.jpg" />
+            <div class="details">
+              <h3>凉拌黄瓜凉拌黄瓜凉拌黄瓜</h3>
+              <div class="category"># &nbsp;早餐</div>
+              <div class="userAndImg">
+                <div class="left_name_img">
+                    <img src="../../assets/icon/20180831142237_413.png"  />
+                    <div>昵称</div>
+                </div>
+                <div class="right_time">2月18日</div>
+              </div>
             </div>
-             <div class="right_time">2月18日</div>
+          </div>
+        </div>
+        <!-- 第二层 -->
+        <div class="user_item" >
+          <div class="user_nume" v-for="i in 10" :key="i" >
+            <img src="./s16210777158.jpg" />
+            <div class="details">
+              <h3>清爽的拍黄瓜清爽的拍黄瓜清爽的拍黄瓜清爽的拍黄瓜</h3>
+              <div class="category"># &nbsp;早餐</div>
+              <div class="userAndImg">
+                <div class="left_name_img">
+                    <img src="../../assets/icon/20180831142237_413.png"  />
+                    <div>昵称</div>
+                </div>
+                <div class="right_time">2月18日</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 第三层 -->
+        <div class="user_item" >
+          <div class="user_nume" v-for="i in 10" :key="i" >
+            <img src="./s16210777158.jpg" />
+            <div class="details">
+              <h3>酸辣小黄瓜酸辣小黄瓜酸辣小黄瓜酸辣小黄瓜</h3>
+              <div class="category"># &nbsp;早餐</div>
+              <div class="userAndImg">
+                <div class="left_name_img">
+                    <img src="../../assets/icon/20180831142237_413.png"  />
+                    <div>昵称</div>
+                </div>
+                <div class="right_time">2月18日</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 第四层 -->
+        <div class="user_item" >
+          <div class="user_nume" v-for="i in 10" :key="i" >
+            <img src="./s16210777158.jpg" />
+            <div class="details">
+              <h3>酸辣黄瓜酸辣黄瓜酸辣黄瓜酸辣黄瓜</h3>
+              <div class="category"># &nbsp;早餐</div>
+              <div class="userAndImg">
+                <div class="left_name_img">
+                    <img src="../../assets/icon/20180831142237_413.png"  />
+                    <div>昵称</div>
+                </div>
+                <div class="right_time">2月18日</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 第五层 -->
+        <div class="user_item" >
+          <div class="user_nume" v-for="i in 10" :key="i" >
+            <img src="./s16210777158.jpg" />
+            <div class="details">
+              <h3>小炒黄瓜小炒黄瓜小炒黄瓜</h3>
+              <div class="category"># &nbsp;早餐</div>
+              <div class="userAndImg">
+                <div class="left_name_img">
+                    <img src="../../assets/icon/20180831142237_413.png"  />
+                    <div>昵称</div>
+                </div>
+                <div class="right_time">2月18日</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 第六层 -->
+        <div class="user_item" >
+          <div class="user_nume" v-for="i in 10" :key="i" >
+            <img src="./s16210777158.jpg" />
+            <div class="details">
+              <h3>乱炖小黄瓜乱炖小黄瓜乱炖小黄瓜乱炖小黄瓜</h3>
+              <div class="category"># &nbsp;早餐</div>
+              <div class="userAndImg">
+                <div class="left_name_img">
+                    <img src="../../assets/icon/20180831142237_413.png"  />
+                    <div>昵称</div>
+                </div>
+                <div class="right_time">2月18日</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -34,22 +126,59 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      list:[
+        {id:0,title:"# 热门话题"},
+        {id:1,title:"# 热门活动"},
+        {id:2,title:"# 安食油鸡"},
+        {id:3,title:"# 每日三餐"},
+        {id:4,title:"# 视频美食"},
+        {id:5,title:"# 年夜饭"}
+      ]
     }
+    },
+    methods: {
+      add(i){
+        // 查找要修改的元素
+        var nav_bar = document.getElementsByClassName("nav_bar");
+        var str = document.getElementsByClassName("img");
+        var nav_btn = document.getElementsByClassName("nav_btn")[0];
+        var slide_bar = document.getElementsByClassName("slide_bar");
+        var user_container = document.getElementsByClassName("user_container")[0];
+
+      //  var left= str[i].getBoundingClientRect().left
+      //  console.log(left)
+      //  var marginLeft=left-(i*100);
+     
+      //  console.log(str[i].marginLeft)
+        if(nav_btn){
+          //如果判断为true就清除原来的样式
+          nav_btn.classList.remove("nav_btn");
+          nav_btn.parentNode.style.width=null;
+        }
+        str[i].classList.add("nav_btn");//然后为点击元素添加样式
+        slide_bar[i].style.width="26%"  //修改原来的样式
+        user_container.style.marginLeft=(-i*100)+"%"
+      }
+    },
+    mounted() {
+      this.add(0);
+    },
     
   }
 
 </script>
 <style scope>
-
+.container{
+  margin: 15px;
+}
 .title {
   display: inline-block;
   position: relative;
-  padding: 0 5px;
+    /* margin:15px 0 0 15px; */
 }
 /* 随机更新的标语 */
 .show_title {
-  /* width: 100%; */
   color: #333;
   z-index: 10;
   position: relative;
@@ -70,12 +199,25 @@ export default {
   width: 100%;
   white-space: nowrap;
   overflow: scroll !important;
-  padding: 5px;
-  
+  /* padding: 15px 0 0 15px; */
+  box-sizing: border-box;
+  padding-top:15px ;
+  position: relative;
+}
+.nav_btn::after{
+  content:"";
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  width: 60px;
+  height: 5px;
+  border-radius: 9px;
+  background: #ff9d00;
+  margin-left: -36px
 }
 .slide_bar{
     display: inline-block;
-    width: 25%;
+    width: 24%;
     position: relative;
     overflow: hidden;
 }
@@ -85,29 +227,38 @@ export default {
   flex-grow: inherit;
   padding-right: 10px;
 }
+.user_content{
+  overflow: hidden;
+}
+.user_container{
+  display: flex;
+  width: 600%;
+  transition: .3s;
+}
 .img_title{
   display: flex;
   position: absolute;
   left: 50%;
-  bottom: 10%;
-  margin-left: -50px;
+  bottom: 20%;
+  margin-left: -41.4px;
   justify-content: center;
   color: #fff;
+  font-size: 14px;
+  font-weight: 900;
 }
 /* 用户发表教程最外层div */
 .user_item {
-  margin-top: 50px;
+  margin-top: 35px;
   display: flex;
    flex-wrap: wrap;
-   padding: 5px;
-   justify-content: center;
+   /* padding: 5px; */
+   justify-content:space-around;
+   width:calc(100%/6);
 }
 /* 用户 */
 .user_nume {
   display: inline-block;
   width: 45%;
-  height: 100%;
-  margin: 5px;
   border-radius: 7px;  
   box-shadow: 0px 0px 10px rgb(0,0,0,.6);
 }
