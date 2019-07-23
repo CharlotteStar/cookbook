@@ -16,7 +16,7 @@
               <recommend></recommend>
           </mt-tab-container-item>
           <mt-tab-container-item id="find" >
-              发现
+              <record></record>
           </mt-tab-container-item>
           <mt-tab-container-item id="food" >
               食话              
@@ -73,6 +73,8 @@
   import Recommend from './tuijian/Recommend.vue'
   // 引入登录面板
   import login from './me/login.vue'
+  //引入发现面板
+  import Record from './record/Record.vue'
   export default {
     data(){
       return {
@@ -99,6 +101,7 @@
       }
     },
     components:{
+      "record":Record,
       "cooktop":CookTop,
       "tabbaricon":TabBarIcon,
       "recommend":Recommend,

@@ -3,7 +3,7 @@
     <!-- <div class="lunbo">
             轮播组件
     </div>-->
-    <div style="height:35px"></div>
+    <div style="height:5px"></div>
     <div class="sancan_top">
       <div class="sancan_type">
         <span class="today">今日</span>
@@ -441,6 +441,7 @@ export default {
 .FourPlates .title{
   position:absolute;
   top:0;
+  left:0;
   padding:5px 10px;
 }
 .FourPlates .title h3{
