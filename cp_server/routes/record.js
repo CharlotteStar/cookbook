@@ -11,5 +11,8 @@ router.get("/record",(req,res)=>{
         if(err)throw err;
         res.send({code:1,msg:"查询成功",data:result})
         console.log(123)
-    }) 
-})
+    }); 
+});
+router.get("/recordon")
+
+module.exports = router;
