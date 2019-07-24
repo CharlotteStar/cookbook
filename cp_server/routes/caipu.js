@@ -31,8 +31,8 @@ router.get("/details", (req, res) => {
 //获取菜谱列表的数据
 router.get("/cp_list", (req, res) => {
   var tid = req.query.tid;
-  var sql = "SELECT * FROM cp_details WHERE type_id=?";
-  pool.query(sql, [tid], (err, result) => {
+  var sql = "SELECT * FROM cp_details WHERE type_id like '% "+tid+" %'";
+  pool.query(sql, (err, result) => {
     if (err) throw err;
     var cp_data=result
     var sql = "SELECT tname FROM cp_type WHERE tid=?";
@@ -64,10 +64,21 @@ router.get("/type", (req, res) => {
   })
 })
 
+//获取菜谱用户的数据
+router.get("/user", (req, res) => { 
+  var uid = req.query.uid;
+  var sql = 'SELECT * FROM cp_user WHERE uid=?';
+  pool.query(sql, [uid], (err, result) => {
+    if (err) throw err;
+    res.send({ code: 1, msg: "查询成功", data: result });
+  })
+})
+
 //菜谱的浏览量
 router.get("/browse", (req, res) => { 
   var browse = req.query.browse;
-  pool.query("UPDATE cp_details SET browse=?", [browse], (err, result) => { 
+  var did = req.query.did;
+  pool.query("UPDATE cp_details SET browse=? WHERE did=?", [browse,did], (err, result) => { 
     if (err) throw err;
     res.send("修改成功");
   })
