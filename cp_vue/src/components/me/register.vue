@@ -12,7 +12,7 @@
     <div class="reg-operation">
       <mt-field  placeholder="手机号" :class=" isPhoneReg ? '' : 'd-none' " v-model="phone"></mt-field>
       <mt-field placeholder="邮箱" :class=" isEmailReg ? '' : 'd-none' " v-model="email"></mt-field>
-      <mt-field placeholder="密码" v-model="upwd"></mt-field>
+      <mt-field placeholder="密码" v-model="upwd" type="password"></mt-field>
       <mt-field placeholder="验证码" :class=" isPhoneReg ? '' : 'd-none' " v-model="verCode"></mt-field>
     </div>
     <div class="register">
@@ -80,6 +80,7 @@ export default {
               ).then(res=>{
                 if(res.data.code==1){
                   toast(res.data.msg,"icon-biaoqing");
+                  this.$router.push("/login")
                 }else{
                   toast(res.data.msg,"icon-biaoqing");
                 }
@@ -103,7 +104,8 @@ export default {
           ).then(res=>{
             if(res.data.code==0){
               toast(res.data.msg,"icon-biaoqing1");
-            }else{
+            }
+            else{
               var data={phone,upwd,uname}
               this.axios.post(
                 "/user/register",
@@ -111,6 +113,7 @@ export default {
                 {headers:{'Content-Type':'application/x-www-form-urlencoded'}}
               ).then(res=>{
                 toast(res.data.msg,"icon-biaoqing");
+                this.$router.push("/login")
               })
             }
           })
