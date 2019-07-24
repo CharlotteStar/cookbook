@@ -6,6 +6,7 @@ const session = require("express-session");
 const userRouter = require("./routes/user.js");
 const tjRouter = require("./routes/tuijian.js");
 const cpRouter = require("./routes/caipu.js");
+const shoucan=require("./routes/shoucan.js")
 
 //创建express对象
 var server = express();
@@ -37,7 +38,8 @@ server.use(express.static("public"))
 //过载的路由器
 server.use("/user", userRouter);
 server.use("/tj", tjRouter);
-server.use("/caipu", cpRouter)
+server.use("/caipu", cpRouter);
+server.use("/shoucan",shoucan)
 
 
 // //首先引入https和querystring模块

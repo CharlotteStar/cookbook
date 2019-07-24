@@ -94,4 +94,17 @@ router.get("/ver_phone", (req, res) => {
   })
 })
 
+//个人中心
+router.post("/personal",(req,res)=>{
+  var uid=req.body.uid;
+  pool.query("SELECT * FROM cp_user WHERE uid=?",[uid],(err,result)=>{
+    if(err)throw err;
+    if(result.length>0){
+      res.send(result)
+    }else{
+      res.send('0')
+    }
+  })
+})
+
 module.exports = router;
