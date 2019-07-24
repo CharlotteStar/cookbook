@@ -19,12 +19,11 @@
     <div class="w-message">
       <router-link to="/menu01_item" class="weibou">
         <img
-          src="https://s1.st.meishij.net/r/106/232/3995606/s3995606_156172491177683.jpg"
-          alt
+          :src="user_data.avatar"
           style="width:40px;height:40px;border-radius:50%"
         />
         <span class="w-name">
-          <span>能吃的小胖子微博</span>
+          <span v-text="user_data.uname"></span>
           <br />
           <span>发布1130篇菜谱</span>
         </span>
@@ -97,8 +96,9 @@ export default {
       cp_details:{},
       cp_step:[],   //菜谱的步骤
       benefit:[],
+      user_data:{},
       cp_complete:[],   //菜谱步骤的成品图
-      show_complete:"",
+      show_complete:"", //突出显示的成品图
       isSpread:false
     };
   },
@@ -122,11 +122,20 @@ export default {
         item.step>0 ? this.cp_step.push(item) : this.cp_complete.push(item)
       }
       this.benefit=this.cp_details.benefit.split(' ');
-      this.show_complete=this.cp_complete[0].step_img;
+      this.cp_complete[0] ? this.show_complete=this.cp_complete[0].step_img : '';
+      //获取对应用户的数据
+      var uid=this.cp_details.user_id;
+      this.axios.get(
+        "/caipu/user",
+        {params:{uid}}
+      ).then(res=>{
+        this.user_data=res.data.data[0];
+      })
+      //页面加载时浏览量加一;
       var browse=++res.data.cp_details.browse;
       this.axios.get(
         "/caipu/browse",
-        {params:{browse}}
+        {params:{browse,did:this.did}}
       ).then(res=>{
         console.log(res);
       })
@@ -184,7 +193,7 @@ export default {
 .list {
   font-size: 15px;
   color:#ec8638;
-  margin-right: 10px;
+  padding-right: 10px;
 }
 .w-name {
   position: absolute;

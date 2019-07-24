@@ -42,29 +42,29 @@
       </div>
     </div>
     <div class="FourPlates">
-      <router-link class="mrfl" to="">
-        <img src="@/assets/tj_img/timg.jpg">
+      <router-link class="mrfl" to>
+        <img src="@/assets/tj_img/timg.jpg" />
         <div class="title">
           <h3>每日福利</h3>
           <p>好货推荐</p>
         </div>
       </router-link>
-      <router-link class="bzlx" to="" >
-        <img src="@/assets/tj_img/bzlx.jpg">
+      <router-link class="bzlx" to>
+        <img src="@/assets/tj_img/bzlx.jpg" />
         <div class="title">
           <h3>本周流行</h3>
           <p>最佳菜肴</p>
         </div>
       </router-link>
-      <router-link class="znzc" to="">
-        <img src="@/assets/tj_img/znzc.jpg">
+      <router-link class="znzc" to="/SearchFirst">
+        <img src="@/assets/tj_img/znzc.jpg" />
         <div class="title">
           <h3>智能组菜</h3>
           <p>选择神器</p>
         </div>
       </router-link>
       <router-link class="cpfl" to="/classify">
-        <img src="@/assets/tj_img/cpfl.jpg">
+        <img src="@/assets/tj_img/cpfl.jpg" />
         <div class="title">
           <h3>菜谱分类</h3>
           <p>美味分类</p>
@@ -72,50 +72,286 @@
       </router-link>
     </div>
     <div class="today-recommend">
-      <!-- 推荐导航栏 -->
-      <ul class="index-nume">
-        <li class="isSelected">推荐</li>
-        <li>时令</li>
-        <li>食肉</li>
-        <li>素食</li>
-        <li>烘焙</li>
-      </ul>
-      <!-- 推荐用户展示 -->
-      <div class="index_img_text">
-        <div class="img_txt img_text_content">
-          <img src="http://127.0.0.1:9999/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg" class="img" />
-          <h3>部队火锅</h3>
-          <h6>家常菜|天涯海角最想念的味道</h6>
-          <div class="user_index">
-            <div class="user_img_name">
-              <img
-                src="http://127.0.0.1:9999/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg"
-                class="user_img"
-              />
-              <span class="user_name">菜菜美食记</span>
-            </div>
-            <div class="watch_time">
-              <img src="../../assets/icon/watch_time.png" /> 
-              <i>1w+</i>
+      <div class="zhanwei">
+        <div class="navbar">
+        <ul class="nav">
+          <li class="navItem selected">
+            <span>推荐</span>
+          </li>
+          <li class="navItem">
+            <span>烘焙</span>
+          </li>
+          <li class="navItem">
+            <span>时令</span>
+          </li>
+          <li class="navItem">
+            <span>食肉</span>
+          </li>
+          <li class="navItem">
+            <span>素食</span>
+          </li>
+          <li class="navItem">
+            <span>韩国料理</span>
+          </li>
+        </ul>
+      </div>
+      </div>
+      <div class="recommend-container">
+        <div class="recommend-list">
+          <div class="recommend-container-item">
+            <!--推荐-->
+            <div class="recommend-slide">
+              <div class="column">
+                <router-link
+                  :to="`/menu01/${item.did}`"
+                  class="recommend-item"
+                  v-for="(item,index) in tuijian"
+                  v-if="index%2==0"
+                  :key="index"
+                >
+                  <div class="imgDiv">
+                    <img :src="item.pic" />
+                  </div>
+                  <div class="info">
+                    <p class="title" v-text="item.title"></p>
+                    <div class="user-info">
+                      <div class="user-tx">
+                        <img :src="item.avatar" />
+                      </div>
+                      <span v-text="item.uname"></span>
+                      <div class="browse" v-text="item.browse"></div>
+                    </div>
+                  </div>
+                </router-link>
+              </div>
+              <div class="column">
+                <router-link
+                  :to="`/menu01/${item.did}`"
+                  class="recommend-item"
+                  v-for="(item,index) in tuijian"
+                  v-if="index%2==1"
+                  :key="index"
+                >
+                  <div class="imgDiv">
+                    <img :src="item.pic" />
+                  </div>
+                  <div class="info">
+                    <p class="title" v-text="item.title"></p>
+                    <div class="user-info">
+                      <div class="user-tx">
+                        <img :src="item.avatar" />
+                      </div>
+                      <span v-text="item.uname"></span>
+                      <div class="browse" v-text="item.browse"></div>
+                    </div>
+                  </div>
+                </router-link>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="img_txt img_text_content">
-          <img src="http://127.0.0.1:9999/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg" class="img" />
-          <h3>部队火锅</h3>
-          <h6>家常菜|天涯海角最想念的味道</h6>
-          <div class="user_index">
-            <div class="user_img_name">
-              <img
-                src="http://127.0.0.1:9999/tj_sancan/125454d0ba92403e7f34bb5025284d9b.jpg"
-                class="user_img"
-              />
-              <span class="user_name">菜菜美食记</span>
+          <div class="recommend-container-item">
+            <!--烘焙-->
+            <div class="recommend-slide">
+              <div class="column">
+                <router-link
+                  :to="`/menu01/${item.did}`"
+                  class="recommend-item"
+                  v-for="(item,index) of hongbei"
+                  v-if="index%2==0"
+                  :key="index"
+                >
+                  <div class="imgDiv">
+                    <img :src="item.pic" />
+                  </div>
+                  <div class="info">
+                    <p class="title" v-text="item.title"></p>
+                    <div class="user-info">
+                      <div class="user-tx">
+                        <img :src="item.avatar" />
+                      </div>
+                      <span v-text="item.uname"></span>
+                      <div class="browse" v-text="item.browse"></div>
+                    </div>
+                  </div>
+                </router-link>
+              </div>
+              <div class="column">
+                <router-link
+                  :to="`/menu01/${item.did}`"
+                  class="recommend-item"
+                  v-for="(item,index) of hongbei"
+                  v-if="index%2==1"
+                  :key="index"
+                >
+                  <div class="imgDiv">
+                    <img :src="item.pic" />
+                  </div>
+                  <div class="info">
+                    <p class="title" v-text="item.title"></p>
+                    <div class="user-info">
+                      <div class="user-tx">
+                        <img :src="item.avatar" />
+                      </div>
+                      <span v-text="item.uname"></span>
+                      <div class="browse" v-text="item.browse"></div>
+                    </div>
+                  </div>
+                </router-link>
+              </div>
             </div>
-            <span class="watch_time">
-              <img src="../../assets/icon/watch_time.png" />
-              1w+ 
-            </span>
+          </div>
+          <div class="recommend-container-item">
+            <!--时令-->
+            <div class="recommend-slide">
+              <div class="column">
+                <router-link
+                  :to="`/menu01/${item.did}`"
+                  class="recommend-item"
+                  v-for="(item,index) of shiling"
+                  v-if="index%2==0"
+                  :key="index"
+                >
+                  <div class="imgDiv">
+                    <img :src="item.pic" />
+                  </div>
+                  <div class="info">
+                    <p class="title" v-text="item.title"></p>
+                    <div class="user-info">
+                      <div class="user-tx">
+                        <img :src="item.avatar" />
+                      </div>
+                      <span v-text="item.uname"></span>
+                      <div class="browse" v-text="item.browse"></div>
+                    </div>
+                  </div>
+                </router-link>
+              </div>
+              <div class="column">
+                <router-link
+                  :to="`/menu01/${item.did}`"
+                  class="recommend-item"
+                  v-for="(item,index) of shiling"
+                  v-if="index%2==1"
+                  :key="index"
+                >
+                  <div class="imgDiv">
+                    <img :src="item.pic" />
+                  </div>
+                  <div class="info">
+                    <p class="title" v-text="item.title"></p>
+                    <div class="user-info">
+                      <div class="user-tx">
+                        <img :src="item.avatar" />
+                      </div>
+                      <span v-text="item.uname"></span>
+                      <div class="browse" v-text="item.browse"></div>
+                    </div>
+                  </div>
+                </router-link>
+              </div>
+            </div>
+          </div>
+          <div class="recommend-container-item">
+            <!--食肉-->
+            <div class="recommend-slide">
+              <div class="column">
+                <router-link
+                  :to="`/menu01/${item.did}`"
+                  class="recommend-item"
+                  v-for="(item,index) of shirou"
+                  v-if="index%2==0"
+                  :key="index"
+                >
+                  <div class="imgDiv">
+                    <img :src="item.pic" />
+                  </div>
+                  <div class="info">
+                    <p class="title" v-text="item.title"></p>
+                    <div class="user-info">
+                      <div class="user-tx">
+                        <img :src="item.avatar" />
+                      </div>
+                      <span v-text="item.uname"></span>
+                      <div class="browse" v-text="item.browse"></div>
+                    </div>
+                  </div>
+                </router-link>
+              </div>
+              <div class="column">
+                <router-link
+                  :to="`/menu01/${item.did}`"
+                  class="recommend-item"
+                  v-for="(item,index) of shirou"
+                  v-if="index%2==1"
+                  :key="index"
+                >
+                  <div class="imgDiv">
+                    <img :src="item.pic" />
+                  </div>
+                  <div class="info">
+                    <p class="title" v-text="item.title"></p>
+                    <div class="user-info">
+                      <div class="user-tx">
+                        <img :src="item.avatar" />
+                      </div>
+                      <span v-text="item.uname"></span>
+                      <div class="browse" v-text="item.browse"></div>
+                    </div>
+                  </div>
+                </router-link>
+              </div>
+            </div>
+          </div>
+          <div class="recommend-container-item">
+            <!--素食-->
+            <div class="recommend-slide">
+              <div class="column">
+                <router-link
+                  :to="`/menu01/${item.did}`"
+                  class="recommend-item"
+                  v-for="(item,index) of sushi"
+                  v-if="index%2==0"
+                  :key="index"
+                >
+                  <div class="imgDiv">
+                    <img :src="item.pic" />
+                  </div>
+                  <div class="info">
+                    <p class="title" v-text="item.title"></p>
+                    <div class="user-info">
+                      <div class="user-tx">
+                        <img :src="item.avatar" />
+                      </div>
+                      <span v-text="item.uname"></span>
+                      <div class="browse" v-text="item.browse"></div>
+                    </div>
+                  </div>
+                </router-link>
+              </div>
+              <div class="column">
+                <router-link
+                  :to="`/menu01/${item.did}`"
+                  class="recommend-item"
+                  v-for="(item,index) of sushi"
+                  v-if="index%2==1"
+                  :key="index"
+                >
+                  <div class="imgDiv">
+                    <img :src="item.pic" />
+                  </div>
+                  <div class="info">
+                    <p class="title" v-text="item.title"></p>
+                    <div class="user-info">
+                      <div class="user-tx">
+                        <img :src="item.avatar" />
+                      </div>
+                      <span v-text="item.uname"></span>
+                      <div class="browse" v-text="item.browse"></div>
+                    </div>
+                  </div>
+                </router-link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -124,110 +360,345 @@
 </template>
 
 <script>
-import { setTimeout } from 'timers';
+import { setTimeout, setInterval } from "timers";
 export default {
   data() {
     return {
-      list: [],
+      list: [], //三餐推荐的数据
       start_x: 0,
-      prev_x:0,
-      offset_x:0,
-      end_x:0
+      prev_x: 0,
+      offset_x: 0,
+      end_x: 0,
+      selected: "tuijian",
+      time: 0,
+      i: 0,
+      tuijian: [],
+      shiling: [],
+      shirou: [],
+      sushi: [],
+      hongbei: [],
+      pages: 0,
+      count: 8
     };
   },
   methods: {
+    setHeight: function (i) {
+      var recommend_list = document.getElementsByClassName("recommend-list")[0];
+      var recommend_container_item = document.getElementsByClassName(
+        "recommend-container-item"
+      );
+      recommend_list.style.height = recommend_container_item[i].clientHeight + "px";
+    },
+    loadBottom: function() {
+      this.pages++;
+      this.axios
+        .get("/tj/tuijian", {
+          params: { pages: this.pages, count: this.count }
+        })
+        .then(res => {
+          this.tuijian = this.tuijian.concat(res.data.data);
+          this.setHeight(0);
+        });
+    },
     slide_start(e) {
-      var sancan_list=document.getElementsByClassName("sancan_list")[0];
-      var left=window.getComputedStyle(sancan_list,null).left;
-
-      sancan_list.style.transition="0s";
-
-      this.offset_x=parseInt(left)
-      this.start_x=e.changedTouches[0].pageX;
-      this.prev_x=e.changedTouches[0].pageX;
+      var sancan_list = document.getElementsByClassName("sancan_list")[0];
+      var left = window.getComputedStyle(sancan_list, null).left;
+      sancan_list.style.transition = "0s";
+      this.offset_x = parseInt(left);
+      this.start_x = e.changedTouches[0].pageX;
+      this.prev_x = e.changedTouches[0].pageX;
+      this.time = new Date().getTime();
     },
     slide_move(e) {
-      var sancan_list=document.getElementsByClassName("sancan_list")[0];
-      var now_x=e.changedTouches[0].pageX;
-      this.offset_x+= now_x-this.prev_x;
-      sancan_list.style.left=`${this.offset_x}px`;
-      this.prev_x=now_x;
+      var sancan_list = document.getElementsByClassName("sancan_list")[0];
+      var now_x = e.changedTouches[0].pageX;
+
+      this.offset_x += now_x - this.prev_x;
+      sancan_list.style.left = `${this.offset_x}px`;
+      this.prev_x = now_x;
     },
     slide_end(e) {
-      var sancan_list=document.getElementsByClassName("sancan_list")[0];
-      var sancan_slide=document.getElementsByClassName("sancan_slide");
-      var type_list=document.getElementsByClassName("type_list")[0];
-      var width=sancan_slide[0].clientWidth;
+      this.time = new Date().getTime() - this.time; //获取按下时  移动的时间
+      var lc = this.prev_x - this.start_x; //获取按下后  移动的距离
+      var speed = Math.abs(lc) / (this.time / 1000); //计算出按下后 移动的速度
+      this.time = 0;
 
-      sancan_list.style.transition="0.3s";
+      var sancan_list = document.getElementsByClassName("sancan_list")[0];
+      var sancan_slide = document.getElementsByClassName("sancan_slide");
+      var type_list = document.getElementsByClassName("type_list")[0];
+      var width = sancan_slide[0].clientWidth;
+      sancan_list.style.transition = "0.3s";
 
-      //循环判断当前位移量的值与每个滑块宽度之间的距离
-      for(var i=0,arr=[];i<sancan_slide.length;i++){ 
-        var n=Math.abs(sancan_slide[i].offsetLeft+this.offset_x);
-        if(n-30<sancan_slide[0].clientWidth/2-30){
-          type_list.className="type_list type_"+i;
-          sancan_list.style.left=`-${i*width}px`;
-          break;
+      //判断 移动的速度 speed 是否大于 400px/1s 并且移动距离大于 50px
+      if (speed > 400 && lc < -50) {
+        this.i < 4 ? this.i++ : this.i;
+        type_list.className = "type_list type_" + this.i;
+        sancan_list.style.left = `-${this.i * width}px`;
+      } else if (speed > 400 && lc > 50) {
+        this.i > 0 ? this.i-- : this.i;
+        type_list.className = "type_list type_" + this.i;
+        sancan_list.style.left = `-${this.i * width}px`;
+      } else {
+        //循环判断当前位移量的值与每个滑块宽度之间的距离
+        for (var i = 0, arr = []; i < sancan_slide.length; i++) {
+          var n = Math.abs(sancan_slide[i].offsetLeft + this.offset_x);
+          if (n < sancan_slide[0].clientWidth / 2) {
+            type_list.className = "type_list type_" + i;
+            sancan_list.style.left = `-${i * width}px`;
+            this.i = i;
+            break;
+          }
         }
-      }
-      //超出时候的样式
-      if(this.offset_x>0){
-        type_list.className="type_list type_0";
-        sancan_list.style.left=`-0px`;
-      }
-      if(Math.abs(this.offset_x)>sancan_slide[0].clientWidth*4){
-        type_list.className="type_list type_4";
-        sancan_list.style.left=`-${4*width}px`;
+        //超出时候的样式
+        if (this.offset_x > 0) {
+          type_list.className = "type_list type_0";
+          sancan_list.style.left = `-0px`;
+        }
+        if (Math.abs(this.offset_x) > sancan_slide[0].clientWidth * 4) {
+          type_list.className = "type_list type_4";
+          sancan_list.style.left = `-${4 * width}px`;
+        }
       }
     }
   },
   created() {
+    this.axios.get("tj/qita").then(res => {
+      var data = res.data.data;
+      for (var i = 0; i < data.length; i++) {
+        switch (data[i].type_name) {
+          case "时令":
+            this.shiling.push(data[i]);
+            break;
+          case "肉食":
+            this.shirou.push(data[i]);
+            break;
+          case "素食":
+            this.sushi.push(data[i]);
+            break;
+          case "烘焙":
+            this.hongbei.push(data[i]);
+            break;
+        }
+      }
+    });
+
     this.axios.get("/tj/sancan").then(result => {
       this.list = result.data.data;
       var sancan_items = document.getElementsByClassName("sancan_item");
       for (let i = 0; i < this.list.length; i++) {
         sancan_items[i].getElementsByClassName("img")[0].src = this.list[i].pic;
-        sancan_items[i].getElementsByClassName("txt_title")[0].innerHTML = this.list[i].title;
-        sancan_items[i].getElementsByClassName("txt_content")[0].innerHTML = this.list[i].benefit;
-        sancan_items[i].addEventListener("click",()=>{
-          this.$router.push("/menu01/"+this.list[i].cp_id)
-        })
+        sancan_items[i].getElementsByClassName(
+          "txt_title"
+        )[0].innerHTML = this.list[i].title;
+        sancan_items[i].getElementsByClassName(
+          "txt_content"
+        )[0].innerHTML = this.list[i].benefit;
+        sancan_items[i].addEventListener("click", () => {
+          this.$router.push("/menu01/" + this.list[i].cp_id);
+        });
       }
 
-
-      var type_list=document.getElementsByClassName("type_list")[0];
-      var types=document.querySelectorAll(".type_list>li");
-      var sancan_list=document.getElementsByClassName("sancan_list")[0];  
-      for(let i=0;i<types.length;i++){
-        types[i].addEventListener("click",fn);
-        function fn(){
-          toggle_type(i)
+      var type_list = document.getElementsByClassName("type_list")[0];
+      var types = document.querySelectorAll(".type_list>li");
+      var sancan_list = document.getElementsByClassName("sancan_list")[0];
+      for (let i = 0; i < types.length; i++) {
+        types[i].addEventListener("click", fn);
+        function fn() {
+          toggle_type(i);
         }
       }
-      setTimeout(function(){
-        var time = new Date().toLocaleString('chinese',{hour12:false});
-        var now=parseInt(time.split(" ")[1]);
-        now >= 21 ? toggle_type(4) :  
-        now >= 18 ? toggle_type(3) : 
-        now >= 14 ? toggle_type(2) : 
-        now >= 12 ? toggle_type(1) : toggle_type(0);
-      },600);
-      function toggle_type(i){
-        var width=document.getElementsByClassName("sancan_slide")[0].clientWidth;
-        type_list.className="type_list type_"+i;
-        sancan_list.style.left=`-${i*width}px`;
+      setTimeout(function() {
+        var time = new Date().toLocaleString("chinese", { hour12: false });
+        var now = parseInt(time.split(" ")[1]); //获取当前刷新页面时的时间
+        now >= 21
+          ? toggle_type(4)
+          : now >= 18
+          ? toggle_type(3)
+          : now >= 14
+          ? toggle_type(2)
+          : now >= 12
+          ? toggle_type(1)
+          : toggle_type(0);
+      }, 500);
+      var toggle_type = i => {
+        var width = document.getElementsByClassName("sancan_slide")[0]
+          .clientWidth;
+        type_list.className = "type_list type_" + i;
+        sancan_list.style.left = `-${i * width}px`;
+        this.i = i;
+      };
+
+      var navItem = document.getElementsByClassName("navItem"); //获取指示器元素
+      var recommend_container_item = document.getElementsByClassName(
+        "recommend-container-item"
+      ); //获取切换的滑块元素
+      //用循环给所有指示器元素绑定事件点击事件
+      for (let i = 0; i < navItem.length; i++) {
+        navItem[i].onclick = ()=> {
+          var selected = document.getElementsByClassName("navItem selected")[0];
+          selected.classList.remove("selected"); //删除上一次选中的指示器的样式
+          navItem[i].classList.add("selected"); //添加当前选中的指示器的样式
+          for (var item of recommend_container_item) {
+            item.style.left = `-${i * 100}%`; //点击指示器时滑块的偏移量
+          }
+          this.setHeight(i);
+        };
       }
+
+      window.onscroll = () => {
+        //判断页面是否到底部
+        if (
+          document.documentElement.scrollTop +
+            document.documentElement.clientHeight ==
+          document.documentElement.scrollHeight
+        ) {
+          this.loadBottom();
+        }
+        var zhanwei=document.getElementsByClassName("zhanwei")[0];
+        var navbar=document.getElementsByClassName("navbar")[0];
+        if(zhanwei.offsetTop-44<=document.documentElement.scrollTop){
+          navbar.classList.add("fixed")
+          console.log(123)
+        }else{
+          navbar.classList.remove("fixed")
+        }
+      };
     });
+  },
+  mounted() {
+    //页面加载时加载一次数据;
+    this.loadBottom();
+    setTimeout(() => {
+      this.setHeight(0);
+    }, 100);  
   }
 };
 </script>
-<style>
-.container {
-  justify-content: space-between;
-  padding-bottom: 50px;
+<style scoped>
+.zhanwei{
+  height: 40px;
+}
+.navbar {
+  display: flex;
+  height: 40px;
+  align-content: center;
+  padding-left: 5px;
+  background:#fff;
+  width: 100%;
+}
+.navbar.fixed{
+  position:fixed;
+  top:40px;
+  z-index:999;
+  padding:8px 5px;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: scroll;
+}
+.navItem {
+  transition: 0.2s;
+}
+.navItem + .navItem {
+  padding-left: 20px;
+  font-size: 15px;
+}
+.navItem.selected {
+  font-size: 20px;
+  font-weight: 700;
+}
+.navItem.selected span {
+  background-image: linear-gradient(to bottom, transparent 60%, #f20 100%);
+  border-radius: 5px;
+}
+.recommend-container {
+  overflow: hidden;
+}
+.recommend-list {
+  white-space: nowrap;
+}
+.recommend-container-item {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  transition: 0.3s;
+  left: 0;
+  overflow: hidden;
+}
+.recommend-slide {
+  display: flex;
+  justify-content: space-around;
+  float: left;
+  flex-wrap: wrap;
+}
+.column {
+  width: 45%;
+}
+.recommend-item {
+  display: block;
+  width: 100%;
+  box-shadow: 0 5px 10px -5px #000;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 15px 0;
+  vertical-align: middle;
+  color: #2c3e50;
+}
+.recommend-item img {
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+}
+.recommend-item .imgDiv {
+  max-height: 200px;
+  overflow: hidden;
+}
+.recommend-item .info {
+  padding: 5px 10px;
+}
+.recommend-item .title {
+  margin: 5px 0;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.user-info {
+  display: flex;
+  position: relative;
+  font-size: 14px;
+  margin: 8px 0;
+  align-items: center;
+}
+.user-info span {
+  margin-left: 5px;
+}
+.user-info .browse {
+  position: absolute;
+  right: 0;
+  padding-left: 25px;
+  background: url("../../assets/icon/watch_time.png") no-repeat left center;
+  background-size: 20px auto;
+}
+.user-tx {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 2px 12px -4px #000;
 }
 
-.today{
+.container {
+  justify-content: space-between;
+  padding-top: 30px;
+}
+
+.today {
   color: #333;
   line-height: 22px;
   font-size: 20px;
@@ -237,125 +708,122 @@ export default {
   margin-left: 15px;
   font-weight: 900;
 }
-.sancan_type{
-  position:relative;
-  width:100%;
-  padding:20px 0 15px;
+.sancan_type {
+  position: relative;
+  width: 100%;
+  padding: 20px 0 15px;
 }
-.type_list{
-  position:absolute;
+.type_list {
+  position: absolute;
   height: 22px;
   display: inline-block;
   vertical-align: top;
   position: absolute;
   left: 55px;
   width: 265px;
-  bottom:15px;
+  bottom: 15px;
 }
-.type_list li{
-  position:absolute;
-  font-size:14px;
-  bottom:-3px;
+.type_list li {
+  position: absolute;
+  font-size: 14px;
+  bottom: -3px;
   color: #666;
-  transition:0.3s 0.3s;
+  transition: 0.3s 0.3s;
 }
-.type_0 .type1{
+.type_0 .type1 {
   left: 0px;
   font-size: 20px !important;
   color: #333 !important;
   font-weight: 900;
 }
-.type_0 .type2{
+.type_0 .type2 {
   left: 55px;
 }
-.type_0 .type3{
+.type_0 .type3 {
   left: 100px;
 }
-.type_0 .type4{
+.type_0 .type4 {
   left: 155px;
 }
-.type_0 .type5{
+.type_0 .type5 {
   left: 200px;
 }
 
-
-.type_1 .type2{
+.type_1 .type2 {
   left: 0px;
   font-size: 20px !important;
   color: #333 !important;
   font-weight: 900;
 }
-.type_1 .type3{
+.type_1 .type3 {
   left: 55px;
 }
-.type_1 .type4{
+.type_1 .type4 {
   left: 110px;
 }
-.type_1 .type5{
+.type_1 .type5 {
   left: 155px;
 }
-.type_1 .type1{
+.type_1 .type1 {
   left: 200px;
 }
 
-.type_2 .type3{
+.type_2 .type3 {
   left: 0px;
   font-size: 20px !important;
   color: #333 !important;
   font-weight: 900;
 }
-.type_2 .type4{
+.type_2 .type4 {
   left: 75px;
 }
-.type_2  .type5{
+.type_2 .type5 {
   left: 120px;
 }
-.type_2 .type1{
+.type_2 .type1 {
   left: 165px;
 }
-.type_2 .type2{
+.type_2 .type2 {
   left: 205px;
 }
 
-.type_3 .type4{
+.type_3 .type4 {
   left: 0px;
   font-size: 20px !important;
   color: #333 !important;
   font-weight: 900;
 }
-.type_3 .type5{
+.type_3 .type5 {
   left: 55px;
 }
-.type_3  .type1{
+.type_3 .type1 {
   left: 105px;
 }
-.type_3 .type2{
+.type_3 .type2 {
   left: 155px;
 }
-.type_3 .type3{
+.type_3 .type3 {
   left: 200px;
 }
 
-.type_4 .type5{
+.type_4 .type5 {
   left: 0px;
   font-size: 20px !important;
   color: #333 !important;
   font-weight: 900;
 }
-.type_4 .type1{
+.type_4 .type1 {
   left: 55px;
 }
-.type_4  .type2{
+.type_4 .type2 {
   left: 100px;
 }
-.type_4 .type3{
+.type_4 .type3 {
   left: 145px;
 }
-.type_4 .type4{
+.type_4 .type4 {
   left: 205px;
 }
-
-
 
 .sancan_top {
   margin: 0 10px;
@@ -366,15 +834,15 @@ export default {
 .sancan_list {
   display: flex;
   flex-wrap: nowrap;
-  width:500%;
-  position:relative;
-  left:0;
-  transition:0.3s;
+  width: 500%;
+  position: relative;
+  left: 0;
+  transition: 0.3s;
 }
 .sancan_slide {
   display: flex;
   justify-content: space-between;
-  position:relative;
+  position: relative;
 }
 .sancan_item {
   width: 50%;
@@ -394,69 +862,76 @@ export default {
   color: #000;
   font-size: 18px;
   font-weight: 900;
-  margin:10px 0 3px;
+  margin: 10px 0 3px;
 }
 /* 标题文字内容 */
 .txt_content {
   color: #333;
   font-size: 12px;
   white-space: nowrap;
-  position:relative;
-  z-index:10;
+  position: relative;
+  z-index: 10;
   display: inline-block;
   overflow: hidden;
-  background:linear-gradient(to bottom, transparent 0%,transparent 40%, #fde8e6 40%, #fde8e6 100%);
-  border-radius:5px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 40%,
+    #fde8e6 40%,
+    #fde8e6 100%
+  );
+  border-radius: 5px;
 }
 
-.FourPlates{
-  display:flex;
+.FourPlates {
+  display: flex;
   justify-content: space-around;
-  align-items:center;
-  margin:30px 0;
-  padding:0 10px;
+  align-items: center;
+  margin: 30px 0;
+  padding: 0 10px;
 }
-.FourPlates>a{
-  width:21%;height:120px;
-  display:block;
-  background:#fff;
-  border-radius:3px;
-  box-shadow:0 2px 5px 0px #888;
-  position:relative;
+.FourPlates > a {
+  width: 21%;
+  height: 120px;
+  display: block;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px 0px #888;
+  position: relative;
   overflow: hidden;
   min-width: 80px;
 }
-.FourPlates img{
-  width:100%;height:100%;
+.FourPlates img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  object-position:0 95%;
-  transform :translateX(30%);
+  object-position: 0 95%;
+  transform: translateX(30%);
 }
-.FourPlates .cpfl img{
-  object-position:0 200%;
+.FourPlates .cpfl img {
+  object-position: 0 200%;
 }
-.mrfl img{
-  object-position:0 130%;
+.mrfl img {
+  object-position: 0 130%;
 }
-.FourPlates .title{
-  position:absolute;
-  top:0;
-  left:0;
-  padding:5px 10px;
+.FourPlates .title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px 10px;
 }
-.FourPlates .title h3{
-  font-size:0.87rem;
+.FourPlates .title h3 {
+  font-size: 0.87rem;
   font-weight: 700;
-  color:#222;
+  color: #222;
 }
-.FourPlates .title p{
-  font-size:0.7rem;
-  color:#222;
+.FourPlates .title p {
+  font-size: 0.7rem;
+  color: #222;
 }
 
-
-.today-recommend{
-  padding:0 10px;
+.today-recommend {
+  padding: 0 15px;
 }
 
 .tuijian {
@@ -470,7 +945,7 @@ export default {
 .index-nume li {
   float: left;
   list-style: none;
-  padding:5px 10px;
+  padding: 5px 10px;
 }
 .index-nume li:first-child {
   margin-left: 0;
@@ -533,7 +1008,7 @@ export default {
   /* position: absolute;
   top: 7px;
   right: 30px; */
-  margin-right: 0
+  margin-right: 0;
 }
 </style>
 
