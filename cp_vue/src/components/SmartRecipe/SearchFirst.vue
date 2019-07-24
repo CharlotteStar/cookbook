@@ -44,8 +44,8 @@ export default {
     display: block;
     position: relative;
     top: 6px;
-    border-radius:5px;
-    border:1px solid  #ccc;
+    border-radius:3px;
+    border:1px solid  #aaa;
 }
 .word{
   position:absolute;

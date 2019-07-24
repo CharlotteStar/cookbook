@@ -12,15 +12,15 @@ router.post("/email_login", (req, res) => {
     if (result.length == 0) {
       res.send({ code: "0", msg: "邮箱未注册" })
     } else { 
-      pool.query("SELECT * FROM cp_user WHERE email=? AND upwd=md5(?)", [email,upwd], (err, result) => {
+      pool.query("SELECT * FROM cp_user WHERE email=? AND upwd=md5(?)", [email, upwd], (err, result) => {
         if (err) throw err;
         if (result.length == 0) {
           res.send({ code: 0, msg: "密码不正确" });
-        } else { 
+        } else {
           req.session.uid = result[0].uid;    //将用户id保存到session对象中
           res.send({ code: 1, msg: "登陆成功", data: result });
         }
-      })
+      });
     }
   })
 })
@@ -90,6 +90,19 @@ router.get("/ver_phone", (req, res) => {
       res.send({ code: 0, msg: "手机号已注册" })
     } else { 
       res.send({ code: 1, msg: "手机号可以注册" });
+    }
+  })
+})
+
+//个人中心
+router.post("/personal",(req,res)=>{
+  var uid=req.body.uid;
+  pool.query("SELECT * FROM cp_user WHERE uid=?",[uid],(err,result)=>{
+    if(err)throw err;
+    if(result.length>0){
+      res.send(result)
+    }else{
+      res.send('0')
     }
   })
 })
