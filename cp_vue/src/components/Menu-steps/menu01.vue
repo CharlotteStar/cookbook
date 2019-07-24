@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page_details">
     <div class="sign-food">
       <img :src="cp_details.pic">
     </div>
@@ -61,28 +61,31 @@
       </div>
     </div>
 
-    <div class="stepitem1" v-for="(item,index) of cp_step" :key="index">
-      <strong class="step_title" id="step_num1">步骤{{item.step}}</strong>
-      <img alt="东北大丰收的做法大全" :src="item.step_img" class="stepimg"/>
-      <div class="stepc comment">
-        <p class="stepdes" v-text="item.content"></p>
+    <div class="cp_step" :class="isSpread ? 'spread' : ''">
+      <div class="stepitem1" v-for="(item,index) of cp_step" :key="index">
+        <strong class="step_title" id="step_num1">步骤{{item.step}}</strong>
+        <img alt="东北大丰收的做法大全" :src="item.step_img" class="stepimg"/>
+        <div class="stepc comment">
+          <p class="stepdes" v-text="item.content"></p>
+        </div>
       </div>
-    </div>
 
-    <div class="fineshed">
-      <strong class="step_title" style="font-size:20px;" v-text="cp_details.title+'成品图'"></strong>
-      <div class="fineshed-item">
-         <img src="https://s1.st.meishij.net/rs/106/232/3995606/n3995606_156172709464504.jpg" class="fineshed-img">
+      <div class="fineshed">
+        <strong class="step_title" style="font-size:20px;" v-text="cp_details.title+'成品图'"></strong>
+        <div class="fineshed-item">
+          <img :src="show_complete" class="fineshed-img">
+        </div>
       </div>
-    </div>
-    <div class="doneimg_preview">
-      <div class="imgw current" v-for="(item,index) of cp_complete" :key="index">
-        <img :src="item.step_img"/>
+      <div class="doneimg_preview">
+        <div class="imgw current" v-for="(item,index) of cp_complete" :key="index" @click="toggle_pic(index)">
+          <img :src="item.step_img"/>
+        </div>
       </div>
-    </div>
-    <div class="skill">
-      <strong>烹饪技巧</strong>
-      <p class="stepdes1">如果是新鲜的嫩玉米，需要和排骨一起入锅炖，排骨和玉米炖熟了再加入土豆和豆角、胡萝卜等容易熟的蔬菜，这样炖出来的各种蔬菜恰到好处</p>
+      <div class="skill">
+        <strong>烹饪技巧</strong>
+        <p class="stepdes1">如果是新鲜的嫩玉米，需要和排骨一起入锅炖，排骨和玉米炖熟了再加入土豆和豆角、胡萝卜等容易熟的蔬菜，这样炖出来的各种蔬菜恰到好处</p>
+      </div>
+      <div class="seeallbtn" id="seeallbtn" @click="zhankai" style="display: block;">点击展开 ↓</div>
     </div>
   </div>
 </template>
@@ -92,10 +95,22 @@ export default {
   data() {
     return {
       cp_details:{},
-      cp_step:[],
+      cp_step:[],   //菜谱的步骤
       benefit:[],
-      cp_complete:[]
+      cp_complete:[],   //菜谱步骤的成品图
+      show_complete:"",
+      isSpread:false
     };
+  },
+  methods:{
+    zhankai(){
+      this.isSpread=true;
+      seeallbtn.style="display:none";
+    },
+    toggle_pic(i){
+      console.log(12);
+      this.show_complete=this.cp_complete[i].step_img
+    }
   },
   created(){
     this.axios.get(
@@ -107,13 +122,30 @@ export default {
         item.step>0 ? this.cp_step.push(item) : this.cp_complete.push(item)
       }
       this.benefit=this.cp_details.benefit.split(' ');
-      console.log(this.cp_details.user_id)
+      this.show_complete=this.cp_complete[0].step_img;
+      var browse=++res.data.cp_details.browse;
+      this.axios.get(
+        "/caipu/browse",
+        {params:{browse}}
+      ).then(res=>{
+        console.log(res);
+      })
     })
   }
 };
 </script>
 <style scoped>
-/* .first{display:flex} */
+.cp_step{
+  position:relative;
+  height:1200px;
+  overflow: hidden;
+}
+.cp_step.spread{
+  height:auto; 
+  overflow:none;
+}
+
+
 .sign-food {
   height: 15rem;
   overflow: hidden;
@@ -240,16 +272,20 @@ em {
   width: 100%;
 }
 .doneimg_preview {
-  margin-top: 30px;
+  padding:10px 5px;
   width: 100%;
-  height: 84px;
-  white-space:nowrap;  
-  text-align: center;
+  display:flex;
+  position:relative;
 }
 .imgw {
-  display: inline-block;
-  margin-right: 16px;
-  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0 5px;
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+
 }
 .imgw > img {
   width: 100%;
@@ -268,8 +304,16 @@ em {
   margin-bottom: 50px;
 }
 .fineshed{margin-top:50px;}
-.fineshed-item{width:100%;}
-.fineshed-img{width:100%;}
+.fineshed-item{
+  width:100%;
+  height:300px;
+  overflow: hidden;
+}
+.fineshed-img{
+  width:100%;height:100%;
+  object-fit: cover
+}
+
 .cp_score{
   width:25px;
   margin:0 5px;
@@ -311,4 +355,20 @@ em {
   right: 15px;
   top: 15px;
 }
+.seeallbtn {
+    display: none;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 80px;
+    line-height: 100px;
+    color: #666;
+    text-align: center;
+    font-size: 16px;
+    background: linear-gradient(to bottom,rgba(245,245,245,0),color-stop(30%,rgba(245,245,245,0.8)),rgba(245,245,245,1));
+    background: -webkit-gradient(linear,0 0,0 bottom,from(rgba(245,245,245,0)),color-stop(30%,rgba(245,245,245,0.8)),to(rgba(245,245,245,1)));
+}
+
+
 </style>

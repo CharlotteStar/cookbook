@@ -11,11 +11,15 @@ import 'mint-ui/lib/style.css'
 import "./font_xqweyihcnjm/iconfont.css"
 //引入axios.js
 import axios from "./axios"
+import { Swipe, SwipeItem } from 'mint-ui';
+
+
 
 
 //将mint-ui组件库中组件注册vue实例中
 Vue.use(MintUI);
-
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);
 Vue.config.productionTip = false;
 
 

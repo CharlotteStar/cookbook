@@ -83,4 +83,18 @@ ul{
 img{
   vertical-align: middle;
 }
+
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background-color: #F5F5F5;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background-color: #555;
+}
+::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background-color: #F5F5F5;
+}
 </style>

@@ -42,18 +42,15 @@ export default {
     background-size: 100%;
 }
 .topsearch img{
-  width:20px;
-  height:20px;
+  width:15px;
+  height:15px;
   position:absolute;
-  top:50%;left:10px;
+  top:50%;left:15px;
   transform: translateY(-50%);
 }
 .topsearch {
     width:80%;
     height: 40px;
-    border:1px solid #888;
-    border-radius: 2px;
-    background: #f5f5f5;
     line-height: 32px;
     margin: 0px 52px;
     color: #aaa;
@@ -61,10 +58,13 @@ export default {
     display: block;
     position: relative;
     top: 6px;
+    border-radius:5px;
+    border:1px solid  #ccc;
 }
 .word{
   position:absolute;
-  top:50%;left:35px;
+  top:50%;left:45px;
+  font-size:16px;
   transform: translateY(-50%);
 }
 .group-btn{
@@ -74,15 +74,15 @@ export default {
 }
 .Btn{
   display:inline-block;
-  width:25%;
+  width:30%;
   min-width:100px;
   height:50px;
-  background-color:red;
+  background-color:#ff5151;
   font-size: 17px;
   color:blanchedalmond;
   border:0px;
   outline:0px;
-  border-radius: 5%;
-  box-shadow: 0 10px 12px -5px #000;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px 0px #888;
 }
 </style>

@@ -3,7 +3,7 @@
     <!-- <div class="lunbo">
             轮播组件
     </div>-->
-    <div style="height:35px"></div>
+    <div style="height:5px"></div>
     <div class="sancan_top">
       <div class="sancan_type">
         <span class="today">今日</span>
@@ -26,19 +26,15 @@
             <div class="sancan_item">
               <div class="img_txt">
                 <img class="img" />
-                <div class="txt_box">
-                  <div class="txt_title"></div>
-                  <div class="txt_content"></div>
-                </div>
+                <div class="txt_title"></div>
+                <div class="txt_content"></div>
               </div>
             </div>
             <div class="sancan_item">
               <div class="img_txt">
                 <img class="img" />
-                <div class="txt_box">
-                  <div class="txt_title"></div>
-                  <div class="txt_content"></div>
-                </div>
+                <div class="txt_title"></div>
+                <div class="txt_content"></div>
               </div>
             </div>
           </div>
@@ -76,9 +72,9 @@
       </router-link>
     </div>
     <div class="today-recommend">
-        <!-- 推荐导航栏 -->
+      <!-- 推荐导航栏 -->
       <ul class="index-nume">
-        <li>推荐</li>
+        <li class="isSelected">推荐</li>
         <li>时令</li>
         <li>食肉</li>
         <li>素食</li>
@@ -98,9 +94,10 @@
               />
               <span class="user_name">菜菜美食记</span>
             </div>
-            <span class="watch_time">
-              <img src="../../assets/icon/watch_time.png" /> 1w+
-            </span>
+            <div class="watch_time">
+              <img src="../../assets/icon/watch_time.png" /> 
+              <i>1w+</i>
+            </div>
           </div>
         </div>
         <div class="img_txt img_text_content">
@@ -116,7 +113,8 @@
               <span class="user_name">菜菜美食记</span>
             </div>
             <span class="watch_time">
-              <img src="../../assets/icon/watch_time.png" /> 
+              <img src="../../assets/icon/watch_time.png" />
+              1w+ 
             </span>
           </div>
         </div>
@@ -187,36 +185,39 @@ export default {
     this.axios.get("/tj/sancan").then(result => {
       this.list = result.data.data;
       var sancan_items = document.getElementsByClassName("sancan_item");
-      for (var i = 0; i < this.list.length; i++) {
+      for (let i = 0; i < this.list.length; i++) {
         sancan_items[i].getElementsByClassName("img")[0].src = this.list[i].pic;
         sancan_items[i].getElementsByClassName("txt_title")[0].innerHTML = this.list[i].title;
         sancan_items[i].getElementsByClassName("txt_content")[0].innerHTML = this.list[i].benefit;
+        sancan_items[i].addEventListener("click",()=>{
+          this.$router.push("/menu01/"+this.list[i].cp_id)
+        })
+      }
+
+
+      var type_list=document.getElementsByClassName("type_list")[0];
+      var types=document.querySelectorAll(".type_list>li");
+      var sancan_list=document.getElementsByClassName("sancan_list")[0];  
+      for(let i=0;i<types.length;i++){
+        types[i].addEventListener("click",fn);
+        function fn(){
+          toggle_type(i)
+        }
+      }
+      setTimeout(function(){
+        var time = new Date().toLocaleString('chinese',{hour12:false});
+        var now=parseInt(time.split(" ")[1]);
+        now >= 21 ? toggle_type(4) :  
+        now >= 18 ? toggle_type(3) : 
+        now >= 14 ? toggle_type(2) : 
+        now >= 12 ? toggle_type(1) : toggle_type(0);
+      },600);
+      function toggle_type(i){
+        var width=document.getElementsByClassName("sancan_slide")[0].clientWidth;
+        type_list.className="type_list type_"+i;
+        sancan_list.style.left=`-${i*width}px`;
       }
     });
-  },
-  mounted(){
-    var type_list=document.getElementsByClassName("type_list")[0];
-    var types=document.querySelectorAll(".type_list>li");
-    var sancan_list=document.getElementsByClassName("sancan_list")[0];  
-    for(let i=0;i<types.length;i++){
-      types[i].addEventListener("click",fn);
-      function fn(){
-        toggle_type(i)
-      }
-    }
-    setTimeout(function(){
-      var time = new Date().toLocaleString('chinese',{hour12:false});
-      var now=parseInt(time.split(" ")[1]);
-      now >= 21 ? toggle_type(4) :  
-      now >= 18 ? toggle_type(3) : 
-      now >= 14 ? toggle_type(2) : 
-      now >= 12 ? toggle_type(1) : toggle_type(0);
-    },300);
-    function toggle_type(i){
-      var width=document.getElementsByClassName("sancan_slide")[0].clientWidth;
-      type_list.className="type_list type_"+i;
-      sancan_list.style.left=`-${i*width}px`;
-    }
   }
 };
 </script>
@@ -388,21 +389,6 @@ export default {
   width: 100%;
 }
 
-.txt_box{
-  position:relative;
-  display: inline-block;
-  z-index:10;
-}
-.txt_box::after{
-  content:"";
-  height: 10px;
-  background: #fde8e6;
-  width: 100%;
-  bottom: 2px;
-  position: absolute;
-  left: 0px;
-  z-index: 1;
-}
 /* 标题文字 */
 .txt_title {
   color: #000;
@@ -413,10 +399,14 @@ export default {
 /* 标题文字内容 */
 .txt_content {
   color: #333;
-  font-size: 14px;
+  font-size: 12px;
   white-space: nowrap;
   position:relative;
   z-index:10;
+  display: inline-block;
+  overflow: hidden;
+  background:linear-gradient(to bottom, transparent 0%,transparent 40%, #fde8e6 40%, #fde8e6 100%);
+  border-radius:5px;
 }
 
 .FourPlates{
@@ -431,9 +421,10 @@ export default {
   display:block;
   background:#fff;
   border-radius:3px;
-  box-shadow:0 0px 8px -2px #888;
+  box-shadow:0 2px 5px 0px #888;
   position:relative;
   overflow: hidden;
+  min-width: 80px;
 }
 .FourPlates img{
   width:100%;height:100%;
@@ -450,6 +441,7 @@ export default {
 .FourPlates .title{
   position:absolute;
   top:0;
+  left:0;
   padding:5px 10px;
 }
 .FourPlates .title h3{
@@ -478,7 +470,7 @@ export default {
 .index-nume li {
   float: left;
   list-style: none;
-  margin: 5px 20px;
+  padding:5px 10px;
 }
 .index-nume li:first-child {
   margin-left: 0;
@@ -511,38 +503,37 @@ export default {
   justify-content: space-between;
   margin: 18px 5px 12px 12px;
 }
+/* 用户头像姓名及观看 */
 .user_img_name {
   align-items: center;
   line-height: 170%;
 }
 .user_index .user_img {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   border-radius: 17px;
-  vertical-align: top;
 }
 .user_index .user_name {
   color: #333;
   font-size: 12px;
-  padding-left: 5px;
 }
 .user_index .watch_time {
   float: right;
-  margin-right: 5px;
-  padding: 7px;
+  padding: 7px 3px 7px 7px;
   color: #333;
   font-size: 12px;
   justify-content: space-between;
   vertical-align: top;
-  position: relative;
+  /* position: relative; */
 }
 .watch_time img {
   width: 15px;
   height: 15px;
   background-color: #fff;
-  position: absolute;
+  /* position: absolute;
   top: 7px;
-  right: 30px;
+  right: 30px; */
+  margin-right: 0
 }
 </style>
 

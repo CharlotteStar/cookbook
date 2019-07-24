@@ -11,9 +11,13 @@ Vue.use(Router)
 import menu01_item from './components/Menu-steps/menu01_item.vue'
 import SearchFirst from './components/SmartRecipe/SearchFirst.vue'
 import suggest from './components/SmartRecipe/suggest.vue'
+import Record from './components/record/Record.vue'
 
+import ShowTime from './components/record/ShowTime.vue'
 export default new Router({
   routes: [
+    {path:'/ShowTime',component:ShowTime},
+    {path:'/Record',component:Record},
     {path: '/',redirect:'/home'},
     {path: '/home',component: Home},
     { path: '/about', name: 'about' },

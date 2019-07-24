@@ -12,7 +12,7 @@ router.post("/email_login", (req, res) => {
     if (result.length == 0) {
       res.send({ code: "0", msg: "邮箱未注册" })
     } else { 
-      pool.query("SELECT * FROM cp_user WHERE email=? AND upwd=?", [email,upwd], (err, result) => {
+      pool.query("SELECT * FROM cp_user WHERE email=? AND upwd=md5(?)", [email,upwd], (err, result) => {
         if (err) throw err;
         if (result.length == 0) {
           res.send({ code: 0, msg: "密码不正确" });
@@ -33,7 +33,7 @@ router.post("/phone_login", (req, res) => {
     if (result.length == 0) {
       res.send({ code: "0", msg: "手机号未注册" })
     } else { 
-      pool.query("SELECT * FROM cp_user WHERE phone=? AND upwd=?", [phone,upwd], (err, result) => {
+      pool.query("SELECT * FROM cp_user WHERE phone=? AND upwd=md5(?)", [phone,upwd], (err, result) => {
         if (err) throw err;
         if (result.length == 0) {
           res.send({ code: 0, msg: "密码不正确" });
@@ -50,8 +50,17 @@ router.post("/phone_login", (req, res) => {
 
 //用户注册
 router.post("/register", (req, res) => { 
+  var phone_reg=/^1[3-9][0-9]{9}$/;
   var obj = req.body;
-  pool.query("INSERT INTO cp_user SET ?", [obj], (err, result) => { 
+  var sql, account;
+  if (phone_reg.test(obj.phone)) {
+    sql = "INSERT INTO cp_user  (phone,upwd,uname) VALUES (?,md5(?),?)";
+    account = obj.phone;
+  } else { 
+    sql = "INSERT INTO cp_user  (email,upwd,uname) VALUES (?,md5(?),?)";
+    account = obj.email;
+  }
+  pool.query(sql, [account,obj.upwd,obj.uname], (err, result) => { 
     if (err) throw err;
     if (result.affectedRows > 0) {
       res.send({ code: 1, msg: "注册成功" })
