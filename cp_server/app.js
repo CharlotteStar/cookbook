@@ -34,7 +34,7 @@ server.use(session({
 //托管静态文件夹
 server.use(express.static("public"))
 
-//过载的路由器
+//挂载的路由器
 server.use("/user", userRouter);
 server.use("/tj", tjRouter);
 server.use("/caipu", cpRouter)

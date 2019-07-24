@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="r_container">
     <!-- 随机生成标语 -->
     <div class="title">
        <div class="show_title">有些人温暖了，</div>
@@ -145,12 +145,11 @@ export default {
         var nav_btn = document.getElementsByClassName("nav_btn")[0];
         var slide_bar = document.getElementsByClassName("slide_bar");
         var user_container = document.getElementsByClassName("user_container")[0];
-
-      //  var left= str[i].getBoundingClientRect().left
-      //  console.log(left)
-      //  var marginLeft=left-(i*100);
-     
-      //  console.log(str[i].marginLeft)
+        var lft = slide_bar[i].offsetLeft;
+        console.log(i.pageX)
+        console.log(lft)
+        slide_bar [0].style.marginLeft=(-10*i)+"%";
+        
         if(nav_btn){
           //如果判断为true就清除原来的样式
           nav_btn.classList.remove("nav_btn");
@@ -169,13 +168,13 @@ export default {
 
 </script>
 <style scope>
-.container{
-  margin: 15px;
+.r_container{
+  padding-top: 62px
 }
 .title {
   display: inline-block;
   position: relative;
-    /* margin:15px 0 0 15px; */
+    margin-left: 15px;
 }
 /* 随机更新的标语 */
 .show_title {
@@ -201,7 +200,7 @@ export default {
   overflow: scroll !important;
   /* padding: 15px 0 0 15px; */
   box-sizing: border-box;
-  padding-top:15px ;
+  padding:15px 0 0 15px ;
   position: relative;
 }
 .nav_btn::after{
@@ -227,8 +226,13 @@ export default {
   flex-grow: inherit;
   padding-right: 10px;
 }
+.slide_bar .img img{
+  border-radius: 7px;
+}
 .user_content{
   overflow: hidden;
+  position: relative;
+ 
 }
 .user_container{
   display: flex;
@@ -261,6 +265,7 @@ export default {
   width: 45%;
   border-radius: 7px;  
   box-shadow: 0px 0px 10px rgb(0,0,0,.6);
+  margin-bottom: 10px;
 }
 /* 图片 */
 .user_nume img{
