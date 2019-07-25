@@ -19,7 +19,16 @@ var  router=express.Router();
        res.send('1')
      }else{res.send('0')}
    }); 
-
+ });
+ router.get("/quanshan",(req,res)=>{
+   var qs=res.query.sids;
+   pool.query("`DELETE FROM cp_collect WHERE sid IN (${qs})",(err,result)=>{
+     if(err) throw err;
+     if(result.affectedRows>0){
+      res.send('1')
+    }else{res.send('0')}
+       }); 
+   })
  })
 
 module.exports = router;
