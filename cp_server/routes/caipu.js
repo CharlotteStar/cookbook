@@ -2,6 +2,19 @@ const express = require("express");
 const pool = require("../pool.js");
 var router = express.Router();
 
+//获取对应用户的菜谱
+router.get("/user_cp", (req, res) => { 
+  var user_id = req.query.uid;
+  var sql = "SELECT pic,title FROM cp_details WHERE user_id=?";
+  pool.query(sql, [user_id], (err, result) => { 
+    if (err) throw err;
+    res.send({ code: 1, msg: "查询成功", data: result });
+  })
+})
+
+router.get("/user_cp",(req,res)=>{
+  var sql="SELECT pic,title"
+})
 
 //获取菜谱详情的数据
 router.get("/details", (req, res) => { 
@@ -37,6 +50,8 @@ router.get("/cp_list", (req, res) => {
 
 //获取菜谱分类的数据
 router.get("/classify", (req, res) => { 
+  var id =req.query.id
+  var sql='SELECT * FROM cp_details WHERE user_id=?'
   var sql = "SELECT * FROM cp_fenlei";
   pool.query(sql, (err, result) => { 
     if (err) throw err;
@@ -53,6 +68,7 @@ router.get("/type", (req, res) => {
   })
 })
 
+
 //获取菜谱用户的数据
 router.get("/user", (req, res) => { 
   var uid = req.query.uid;
@@ -62,6 +78,18 @@ router.get("/user", (req, res) => {
     res.send({ code: 1, msg: "查询成功", data: result });
   })
 })
+
+//添加收藏
+router.get("/shoucang", (req, res) => { 
+  var uid=req.query.uid;
+  var did=req.query.did;
+  var sql = 'INSERT INTO cp_collect(ct_user_id,cp_id) VALUES (?,?)';
+  pool.query(sql, [uid,did], (err, result) => {
+    if (err) throw err;
+    res.send({ code: 1, msg: "查询成功", data: result });
+  })
+})
+
 
 //菜谱的浏览量
 router.get("/browse", (req, res) => { 

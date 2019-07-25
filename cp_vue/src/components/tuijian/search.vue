@@ -124,6 +124,12 @@ export default {
     if(this.uid){
       this.loadSearchHistory()
     }
+
+    this.axios.get(
+      '/search/top'
+    ).then(res=>{
+      this.searchTop=res.data;
+    })
   }
 }
 </script>

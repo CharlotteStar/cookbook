@@ -59,7 +59,7 @@ export default {
             position:"top",
             duration:1500,
           });
-          this.$router.push("/personal");
+          this.$router.push("/home");
         })
       }else if(phone_reg.test(this.account)){
         this.axios.post(
@@ -77,7 +77,7 @@ export default {
               duration:1500,
               iconClass:"iconfont icon-biaoqing",   
             })
-            this.$router.push("/personal");
+            this.$router.push("/home");
           }else{
             this.$toast({
               message:res.data.msg,

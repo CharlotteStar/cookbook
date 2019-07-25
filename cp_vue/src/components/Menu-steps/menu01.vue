@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="w-message">
-      <router-link to="/menu01_item" class="weibou">
+      <router-link :to="`/menu01_item?uid=`+cp_details.user_id" class="weibou">
         <img
           :src="user_data.avatar"
           style="width:40px;height:40px;border-radius:50%"
@@ -28,7 +28,10 @@
           <span>发布1130篇菜谱</span>
         </span>
       </router-link>
-      <a href class="focus">关注</a>
+      <div class="star-love">
+        <a href class="focus">关注</a>
+        <div class="love" @click="change"></div>
+      </div>
     </div>
     <div class="comment">
       <p class="comment-p" v-text="cp_details.user_log"></p>
@@ -103,6 +106,24 @@ export default {
     };
   },
   methods:{
+    change(e){
+      var love=document.getElementById("love");
+      e.target.className="";
+      e.target.className="loves";
+      console.log(this.cp_details.user_id);
+        console.log(this.cp_details.pic)
+        console.log(this.cp_details.title)
+        console.log(this.user_data.uname);
+        console.log(this.user_data.avatar);
+        console.log(this.cp_details.did);
+      this.axios.get(
+        '/caipu/shoucang',
+        {params:{
+          uid:this.cp_details.user_id,
+          did:this.cp_details.did
+        }}
+      )
+    },
     zhankai(){
       this.isSpread=true;
       seeallbtn.style="display:none";
@@ -214,7 +235,7 @@ export default {
   height: 30px;
   position: absolute;
   right: 20px;
-  top: 50%;
+  top: -9px;
   transform: translateY(-50%);
   border: 1px solid #ff4c39;
   line-height: 30px;
@@ -232,7 +253,7 @@ export default {
   margin-bottom: 20px;
   font-size:0.95rem;
 }
-.star {
+/* .star {
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -249,7 +270,7 @@ export default {
   background-image: url("../../assets/icon/wap2017icons1.png");
   background-size: 353px;
   background-position: 0px 333px;
-}
+} */
 .pingfeng {
   margin-right: 10px;
 }
@@ -378,6 +399,28 @@ em {
     background: linear-gradient(to bottom,rgba(245,245,245,0),color-stop(30%,rgba(245,245,245,0.8)),rgba(245,245,245,1));
     background: -webkit-gradient(linear,0 0,0 bottom,from(rgba(245,245,245,0)),color-stop(30%,rgba(245,245,245,0.8)),to(rgba(245,245,245,1)));
 }
-
+.star-love{
+   position: relative;
+}
+.love{
+   position:absolute;
+   right:10px;
+   top:68px;
+  width:49px;
+  height:69px;
+  background-image: url("../../assets/icon/wap2017icons1.png");
+  background-size: 353px;
+  background-position: 0px 333px;
+}
+.loves{
+   position:absolute;
+   right:10px;
+   top:68px;
+  width:49px;
+  height:69px;
+  background-image: url("../../assets/icon/wap2017icons1.png");
+  background-size: 353px;
+  background-position: -33px 333px;
+}
 
 </style>

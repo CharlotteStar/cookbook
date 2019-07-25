@@ -125,7 +125,8 @@ export default {
     };
   },
   created(){
-    this.axios.post("/user/personal",
+     if(window.sessionStorage.uid){
+       this.axios.post("/user/personal",
     qs.stringify({uid:window.sessionStorage.uid}),
      {headers:{'Content-Type':'application/x-www-form-urlencoded'}}
     ).then(
@@ -149,6 +150,9 @@ export default {
          }
       }
     )
+     }else{
+       this.pic="http://127.0.0.1:9999/user_avatar/se.png"
+     }
   },
   methods:{
   myshoucan(){

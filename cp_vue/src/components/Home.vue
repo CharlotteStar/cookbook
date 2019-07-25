@@ -22,8 +22,7 @@
               食话              
           </mt-tab-container-item>
           <mt-tab-container-item id="me" class="liang" >
-            <me v-if="zong"></me>
-            <login v-else></login>
+            <me></me>
           </mt-tab-container-item>
         </mt-tab-container>
       </div>
@@ -74,7 +73,6 @@
   // 引入首页推荐面板
   import Recommend from './tuijian/Recommend.vue'
   import me from './me/Personal.vue'
-  import login from "./me/login.vue"
   export default {
     data(){
       return {
@@ -84,8 +82,7 @@
           {isSelect:false},
           {isSelect:false},
           {isSelect:false},
-        ],
-        zong:window.sessionStorage.uid
+        ]
       }
     },
     methods: {
@@ -110,8 +107,7 @@
       "cooktop":CookTop,
       "tabbaricon":TabBarIcon,
       "recommend":Recommend,
-      "me":me,
-      "login":login
+      "me":me
     }
   }
 </script>
