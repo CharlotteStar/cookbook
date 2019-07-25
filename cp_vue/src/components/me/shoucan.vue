@@ -45,7 +45,7 @@
           </div>
         </div>
       </div>
-      <div class="xiao_sc" :class="cc ? 'kaiguan' : '' ">
+      <div class="xiao_sc" :class="cc ? 'kaiguan' : '' " @click="delone(item.sid)">
         <img src="@/assets/per/close.png" alt />
       </div>
     </div>
@@ -94,6 +94,28 @@ export default {
        this.zz=1
       }
       }
+    },
+    delone(sid){
+     this.axios.get("/shoucan/shangchu",{params:{sid:sid}})
+     .then(res=>{
+       console.log(res.data)
+       if(res.data==1){
+          this.$toast({
+          message:"删除了",
+          position:"center",
+          duration:800,
+        })
+        setTimeout(()=>{
+          this.$router.go(0);
+        },800)
+       }else{
+          this.$toast({
+          message:"没删",
+          position:"center",
+          duration:800,
+        })
+       }
+     })
     }
   }
 };
