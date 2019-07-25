@@ -25,7 +25,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .Top{
   position:absolute;
   top:30px;

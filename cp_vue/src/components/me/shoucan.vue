@@ -98,7 +98,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .p_zhuti {
   margin: 0 0;
   padding: 0;

@@ -552,7 +552,7 @@ export default {
         //判断页面是否到底部
         if (tj_container.scrollTop+tj_container.clientHeight==tj_container.scrollHeight) {
           this.loadBottom();
-          console.log(true)
+          console.log()
         }
         var zhanwei=document.getElementsByClassName("zhanwei")[0];
         var navbar=document.getElementsByClassName("navbar")[0];
@@ -1013,5 +1013,8 @@ export default {
   right: 30px; */
   margin-right: 0;
 }
+/* .title>h3{
+  padding-left: 0px !important;
+} */
 </style>
 

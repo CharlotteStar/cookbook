@@ -167,14 +167,14 @@ export default {
   }
 
 </script>
-<style scope>
+<style scoped>
 .r_container{
   padding-top: 62px
 }
 .title {
   display: inline-block;
   position: relative;
-    margin-left: 15px;
+  margin-left: 15px;
 }
 /* 随机更新的标语 */
 .show_title {

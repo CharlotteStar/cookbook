@@ -158,7 +158,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .zhuti {
   background: #f5f5f5;
 }

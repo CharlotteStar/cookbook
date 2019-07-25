@@ -10,26 +10,7 @@
       </div>
       <button class="search-btn" @click="search">搜索</button>
     </div>
-    <!--搜索结果-->
-    <div class="search-result">
-      <div class="title" :style="cp_data.length!=0 ? '' : 'display:none'">
-        <span>搜索结果</span>
-      </div>
-      <div class="search-list">
-        <router-link :to="'/menu01/'+item.did" class="search_item" v-for="(item,index) of cp_data" :key="index">
-          <div class="cp_image">
-            <img :src="item.pic">
-          </div>
-          <div class="cp_info">
-            <h3 v-text="item.title"></h3>
-            <div class="cp_score">
-              <img :src="require(item.score>=i ? '@/assets/icon/20180831142237_413.png' : '@/assets/icon/20180831142237_552.png')" v-for="i in 5" :key="i">
-            </div>
-            <div class="view-count" v-text="`${item.shoucang}收藏  ${item.browse}浏览`"></div>
-          </div>
-        </router-link>
-      </div>
-    </div>
+    
     <!--搜索历史-->
     <div class="search-history">
       <div class="title">
@@ -49,6 +30,26 @@
           @click="fuzhi(item.title)">
           </li>
         </ul>
+      </div>
+    </div>
+    <!--搜索结果-->
+    <div class="search-result">
+      <div class="title" :style="cp_data.length!=0 ? '' : 'display:none'">
+        <span>搜索结果</span>
+      </div>
+      <div class="search-list">
+        <router-link :to="'/menu01/'+item.did" class="search_item" v-for="(item,index) of cp_data" :key="index">
+          <div class="cp_image">
+            <img :src="item.pic">
+          </div>
+          <div class="cp_info">
+            <h3 v-text="item.title"></h3>
+            <div class="cp_score">
+              <img :src="require(item.score>=i ? '@/assets/icon/20180831142237_413.png' : '@/assets/icon/20180831142237_552.png')" v-for="i in 5" :key="i">
+            </div>
+            <div class="view-count" v-text="`${item.shoucang}收藏  ${item.browse}浏览`"></div>
+          </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -96,16 +97,13 @@ export default {
 
 <style>
 .search-list{
-  max-height:330px;
   overflow:scroll;
 }
 .search-history,
 .search-result{
   padding:0 15px;
 }
-.search-list{
-  padding:0 5px;
-}
+
 .search_item{
   display:flex; 
   align-items: center;
@@ -160,17 +158,18 @@ export default {
   padding-bottom:3px;
   font-weight: 700;
   border-bottom:3px solid #888;
+  display:inline-block;
   margin:5px 0;
 }
 .top-search-box{
-  padding:10px 5px;
+  padding:5px 0px;
 }
 .top-search-item{
   border:1px solid #aaa;
   padding:4px 10px;
   margin-right:8px;
   margin-bottom:5px;
-  font-size:15px;
+  font-size:14px;
 }
 .top-search-list{
   display:flex;
