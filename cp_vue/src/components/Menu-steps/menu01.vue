@@ -4,7 +4,7 @@
       <img :src="cp_details.pic">
     </div>
     <div class="top">
-	    <router-link to="javascript" class="btn1">&lt; 美食杰</router-link>
+	    <div class="btn1" @click="fh">&lt; 美食杰</div>
 	    <router-link to="javascript" class="btn2">菜谱分类 &gt;</router-link>
     </div>
     <div class="effect">
@@ -106,6 +106,9 @@ export default {
     };
   },
   methods:{
+    fh(){
+      this.$router.push("/home");
+    },
     change(e){
       var love=document.getElementById("love");
       e.target.className="";
