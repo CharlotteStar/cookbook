@@ -28,7 +28,10 @@
           <span>发布1130篇菜谱</span>
         </span>
       </router-link>
-      <a href class="focus">关注</a>
+      <div class="star-love">
+        <a href class="focus">关注</a>
+        <div class="love"></div>
+      </div>
     </div>
     <div class="comment">
       <p class="comment-p" v-text="cp_details.user_log"></p>
@@ -214,7 +217,7 @@ export default {
   height: 30px;
   position: absolute;
   right: 20px;
-  top: 50%;
+  top: -9px;
   transform: translateY(-50%);
   border: 1px solid #ff4c39;
   line-height: 30px;
@@ -232,7 +235,7 @@ export default {
   margin-bottom: 20px;
   font-size:0.95rem;
 }
-.star {
+/* .star {
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -249,7 +252,7 @@ export default {
   background-image: url("../../assets/icon/wap2017icons1.png");
   background-size: 353px;
   background-position: 0px 333px;
-}
+} */
 .pingfeng {
   margin-right: 10px;
 }
@@ -378,6 +381,18 @@ em {
     background: linear-gradient(to bottom,rgba(245,245,245,0),color-stop(30%,rgba(245,245,245,0.8)),rgba(245,245,245,1));
     background: -webkit-gradient(linear,0 0,0 bottom,from(rgba(245,245,245,0)),color-stop(30%,rgba(245,245,245,0.8)),to(rgba(245,245,245,1)));
 }
-
+.star-love{
+   position: relative;
+}
+.love{
+   position:absolute;
+   right:10px;
+   top:68px;
+  width:49px;
+  height:69px;
+  background-image: url("../../assets/icon/wap2017icons1.png");
+  background-size: 353px;
+  background-position: 0px 333px;
+}
 
 </style>
