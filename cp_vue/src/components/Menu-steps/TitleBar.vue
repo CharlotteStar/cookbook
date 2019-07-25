@@ -24,6 +24,7 @@ export default {
    .page-head{
     display:flex;
     position:fixed;
+    top:0;
     z-index: 999;
     width:100%;
     align-items:center;

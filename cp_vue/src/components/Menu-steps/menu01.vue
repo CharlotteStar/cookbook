@@ -30,7 +30,7 @@
       </router-link>
       <div class="star-love">
         <a href class="focus">关注</a>
-        <div class="love"></div>
+        <div class="love" @click="change"></div>
       </div>
     </div>
     <div class="comment">
@@ -106,6 +106,11 @@ export default {
     };
   },
   methods:{
+    change(e){
+      var love=document.getElementById("love");
+      e.target.className="";
+      e.target.className="loves"
+    },
     zhankai(){
       this.isSpread=true;
       seeallbtn.style="display:none";
@@ -393,6 +398,16 @@ em {
   background-image: url("../../assets/icon/wap2017icons1.png");
   background-size: 353px;
   background-position: 0px 333px;
+}
+.loves{
+   position:absolute;
+   right:10px;
+   top:68px;
+  width:49px;
+  height:69px;
+  background-image: url("../../assets/icon/wap2017icons1.png");
+  background-size: 353px;
+  background-position: -33px 333px;
 }
 
 </style>
