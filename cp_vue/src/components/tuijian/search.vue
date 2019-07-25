@@ -86,6 +86,7 @@ export default {
     }
   },
   created(){
+    console.log(window.sessionStorage.uid);
     this.axios.get(
       '/search/top'
     ).then(res=>{
