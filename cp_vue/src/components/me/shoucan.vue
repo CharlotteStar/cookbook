@@ -14,8 +14,7 @@
     </div>
     <div class="p_caidan" v-for="(item,i) of sc" :key="i">
       <div class="p_sc p_sd" :class="cc ? 'kaiguan' : '' ">
-        <input type="checkbox" id="check1" />
-        <label for="check1"></label>
+        <input type="checkbox" class="dagou" :data-id="item.sid"/>
       </div>
       <div class="p_caidan_xq">
         <img :src="item.pic" alt class="xq_caitu" />
@@ -49,7 +48,10 @@
         <img src="@/assets/per/close.png" alt />
       </div>
     </div>
-    <div class="qx p_sc" @click="del" :class="cc ? 'kaiguan' : '' ">全选</div>
+    <div :class="cc ? 'kaiguan' : '' " class="qx p_sc">
+     <div @click="del" class="xuanzhong">全选</div>
+     <div class="quanshan" @click="qshang">多选删</div>  
+    </div>
   </div>
 </template>
 <script>
@@ -73,7 +75,6 @@ export default {
       )
       .then(res => {
         this.sc = res.data;
-        console.log(res.data);
       });
   },
   methods: {
@@ -98,7 +99,6 @@ export default {
     delone(sid){
      this.axios.get("/shoucan/shangchu",{params:{sid:sid}})
      .then(res=>{
-       console.log(res.data)
        if(res.data==1){
           this.$toast({
           message:"删除了",
@@ -116,26 +116,76 @@ export default {
         })
        }
      })
-    }
+    },
+  qshang(){
+    var str="";
+    var  dagou=document.getElementsByClassName("dagou")
+      for(var da of dagou){
+        if(da.checked==true){
+          str+=da.getAttribute("data-id")+","
+        }
+      }
+      str=str.substring(0,str.length-1);
+      console.log(str);
+       if(str.length==0){
+        this.$toast("请选中商品");
+        return;
+      }
+     this.axios.get("/shoucan/quanshan",{params:{sids:str}})
+     .then(res=>{
+       if(res.data==1){
+          this.$toast({
+          message:"删除了",
+          position:"center",
+          duration:800,
+        })
+        setTimeout(()=>{
+          this.$router.go(0);
+        },800)
+       }else{
+          this.$toast({
+          message:"没删",
+          position:"center",
+          duration:800,
+        })
+       }
+     })
+   }
   }
 };
 </script>
 <style scoped>
 .p_zhuti {
-  margin: 0 0;
-  padding: 0;
+  margin: 0 ;
+  padding-top:53px;
+
 }
 .qx {
-  width: 90%;
+  width: 100%;
+  position: fixed;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+}
+.xuanzhong{
+ background: lightsalmon;
+ width: 50%;
   height: 40px;
-  background: lightsalmon;
   text-align: center;
   line-height: 40px;
   border-radius: 4px;
-  position: fixed;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+}
+.quanshan{
+  width: 20%;
+  background: rgb(212, 18, 18);
+   height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 4px;
+  color: #fff;
 }
 .qx > input {
   height: 23px;
@@ -148,6 +198,11 @@ export default {
   justify-content: space-between;
   height: 53px;
   border-bottom: 1px solid gray;
+  position: fixed;
+  top: 0px;
+  background-color: #fff;
+  width: 100%;
+  z-index: 9999;
 }
 .p_img {
   width: 30px;
