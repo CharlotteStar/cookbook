@@ -1,7 +1,7 @@
 <template>
   <div class="contail">
     <img :src="tu" alt="">
-    <div class="ge_xinxi" v-if="uid==true">
+    <div class="ge_xinxi" v-if="tt==true">
       <router-link to="" v-text="title"></router-link><br>
       <router-link to="">正在前往美食达人广场路上</router-link><br>
       <router-link to="" class="dna">美食杰DNA 0 条</router-link><br>
@@ -20,14 +20,19 @@ export default {
   },
   data(){
     return{
-      uid:""
+      tt:""
     }
   },
   created(){
-   this.uid=window.sessionStorage.uid;
+    if(window.sessionStorage.uid){
+      this.tt=true;
+    }else{
+      this.tt=false;
+    }
  },
  methods:{
    denglu(){
+     console.log(this.tt)
     this.$router.push("/login");
    }
  }
