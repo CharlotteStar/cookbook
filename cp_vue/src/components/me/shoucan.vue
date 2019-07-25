@@ -78,12 +78,12 @@ export default {
       });
   },
   methods: {
+    // 单击显示删除按钮
     kaiguan() {
       this.cc ? (this.cc = false) : (this.cc = true);
     },
     del() {
       var del = document.querySelectorAll(".p_sd>input");
-      console.log(del);
       if (this.zz) {
         for (var i = 0; i < del.length; i++) {
           del[i].checked = true;
@@ -96,6 +96,7 @@ export default {
       }
       }
     },
+    // 单条删除
     delone(sid){
      this.axios.get("/shoucan/shangchu",{params:{sid:sid}})
      .then(res=>{
@@ -117,6 +118,7 @@ export default {
        }
      })
     },
+    // 多选删除
   qshang(){
     var str="";
     var  dagou=document.getElementsByClassName("dagou")
@@ -126,7 +128,6 @@ export default {
         }
       }
       str=str.substring(0,str.length-1);
-      console.log(str);
        if(str.length==0){
         this.$toast("请选中商品");
         return;

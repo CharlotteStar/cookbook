@@ -30,7 +30,6 @@
       </router-link>
       <div class="star-love">
         <a href class="focus">关注</a>
-        <div class="love" @click="change"></div>
       </div>
     </div>
     <div class="comment">
@@ -38,6 +37,7 @@
       <div class="pinfen-container">
         <strong class="pingfeng">评分</strong>
         <img class="cp_score" :src="require(cp_details.score>=i ? '@/assets/icon/20180831142237_413.png' : '@/assets/icon/20180831142237_552.png')" v-for="i in 5" :key="i">
+        <div class="love" @click="change" :class="selected ? 'selected' : ''"></div>
       </div>
       <div class="sc_miniw">
         <span>主料</span>
@@ -102,27 +102,28 @@ export default {
       user_data:{},
       cp_complete:[],   //菜谱步骤的成品图
       show_complete:"", //突出显示的成品图
-      isSpread:false
+      isSpread:false,
+      selected:false
     };
   },
   methods:{
     change(e){
-      var love=document.getElementById("love");
-      e.target.className="";
-      e.target.className="loves";
-      console.log(this.cp_details.user_id);
-        console.log(this.cp_details.pic)
-        console.log(this.cp_details.title)
-        console.log(this.user_data.uname);
-        console.log(this.user_data.avatar);
-        console.log(this.cp_details.did);
-      this.axios.get(
-        '/caipu/shoucang',
-        {params:{
-          uid:this.cp_details.user_id,
-          did:this.cp_details.did
-        }}
-      )
+      if(!this.selected){
+        this.selected=true;
+        var love=document.getElementById("love");
+        this.axios.get(
+          '/caipu/shoucang',
+          {params:{
+            uid:window.sessionStorage.uid,
+            did:this.cp_details.did,
+          }}
+        ).then(res=>{
+          console.log(res.data)
+          return;
+        })
+      }else{
+        this.selected=false;
+      }
     },
     zhankai(){
       this.isSpread=true;
@@ -332,6 +333,7 @@ em {
 }
 .pinfen-container {
   margin-bottom: 50px;
+  position:relative;
 }
 .fineshed{margin-top:50px;}
 .fineshed-item{
@@ -403,24 +405,17 @@ em {
    position: relative;
 }
 .love{
-   position:absolute;
-   right:10px;
-   top:68px;
-  width:49px;
+  position:absolute;
+  right:10px;
+  top:0px;
+  width:42px;
   height:69px;
   background-image: url("../../assets/icon/wap2017icons1.png");
   background-size: 353px;
   background-position: 0px 333px;
 }
-.loves{
-   position:absolute;
-   right:10px;
-   top:68px;
-  width:49px;
-  height:69px;
-  background-image: url("../../assets/icon/wap2017icons1.png");
-  background-size: 353px;
-  background-position: -33px 333px;
+.love.selected{
+  background-position: -41px 333px;
 }
 
 </style>
