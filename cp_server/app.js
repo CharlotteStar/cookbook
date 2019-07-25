@@ -6,7 +6,9 @@ const session = require("express-session");
 const userRouter = require("./routes/user.js");
 const tjRouter = require("./routes/tuijian.js");
 const cpRouter = require("./routes/caipu.js");
-const shoucan=require("./routes/shoucan.js")
+const shoucan = require("./routes/shoucan.js");
+const search = require("./routes/search.js");
+
 
 
 const pool = require("./pool.js");
@@ -42,6 +44,7 @@ server.use("/user", userRouter);
 server.use("/tj", tjRouter);
 server.use("/caipu", cpRouter);
 server.use("/shoucan",shoucan)
+server.use("/search", search);
 
 server.get("/menu01_item",(req,res)=>{
   var pno=req.query.pno;

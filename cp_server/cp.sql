@@ -128,11 +128,19 @@ INSERT INTO cp_tj VALUES
 (null,2,109,"烘焙");
 
 
+/*搜索历史记录*/
+CREATE TABLE user_search(
+  sid INT PRIMARY KEY AUTO_INCREMENT,
+  keyword VARCHAR(64),
+  user_id INT
+);
+
+
 /*收藏*/
 CREATE TABLE cp_collect(
-sid INT PRIMARY KEY AUTO_INCREMENT,
-ct_user_id SMALLINT, #用户的id
-cp_id VARCHAR(32)#菜铺id
+  sid INT PRIMARY KEY AUTO_INCREMENT,
+  ct_user_id SMALLINT, #用户的id
+  cp_id VARCHAR(32)#菜铺id
 );
 INSERT INTO cp_collect VALUES(NULL,1,1);
 INSERT INTO cp_collect VALUES(NULL,1,2);

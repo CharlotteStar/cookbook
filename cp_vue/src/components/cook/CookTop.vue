@@ -6,10 +6,10 @@
                 <img :src="leftImg" slot="icon" style="width:52px; margin-top:-5px">
             </div>
             <div class="center_title">
-                <a href="">
+                <router-link to="/search">
                     <img :src="centerImg" slot="icon" s>
                     搜索你感兴趣的
-                </a>
+                </router-link>
             </div>
             <div class="right_title_icon">
                 <img :src="rightImg" slot="icon" style="width:52px; margin-top:-5px">
