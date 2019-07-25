@@ -49,15 +49,18 @@ export default {
         })
       }else if(email_reg.test(this.account)){
         console.log(this.account);
-        this.axios.post('/user/email_login',
+        this.axios.post(
+          '/user/email_login',
           qs.stringify(data),
           {headers:{'Content-Type':'application/x-www-form-urlencoded'}}
         ).then(res=>{
+          window.sessionStorage.uid=res.data.data[0].uid;
           this.$toast({
             message:res.data.msg,
             position:"top",
             duration:1500,
-          })
+          });
+          this.$router.push("/personal");
         })
       }else if(phone_reg.test(this.account)){
         console.log(this.account);
@@ -66,15 +69,16 @@ export default {
           qs.stringify(data),
           {headers:{'Content-Type':'application/x-www-form-urlencoded'}}
         ).then(res=>{
-          console.log(res.data.data)
           var code=res.data.code;
           if(code==1){
+            window.sessionStorage.uid=res.data.data[0].uid;
             this.$toast({
               message:res.data.msg,
               position:"top",
               duration:1500,
-              iconClass:"iconfont icon-biaoqing"
+              iconClass:"iconfont icon-biaoqing",   
             })
+            this.$router.push("/personal");
           }else{
             this.$toast({
               message:res.data.msg,

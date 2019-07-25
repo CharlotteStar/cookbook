@@ -128,6 +128,20 @@ INSERT INTO cp_tj VALUES
 (null,2,109,"烘焙");
 
 
+/*收藏*/
+CREATE TABLE cp_collect(
+sid INT PRIMARY KEY AUTO_INCREMENT,
+ct_user_id SMALLINT, #用户的id
+cp_id VARCHAR(32)#菜铺id
+);
+INSERT INTO cp_collect VALUES(NULL,1,1);
+INSERT INTO cp_collect VALUES(NULL,1,2);
+INSERT INTO cp_collect VALUES(NULL,4,1);
+INSERT INTO cp_collect VALUES(NULL,4,2);
+INSERT INTO cp_collect VALUES(NULL,4,3);
+INSERT INTO cp_collect VALUES(NULL,3,2);
+INSERT INTO cp_collect VALUES(NULL,2,3);
+INSERT INTO cp_collect VALUES(NULL,3,5);
 
 
 /**用户信息**/
@@ -140,11 +154,11 @@ CREATE TABLE cp_user(
   avatar VARCHAR(128)    #头像
 );
 INSERT INTO cp_user VALUES
-(NULL,"美食小编","123456",13579246810,"13579246810@qq.com","http://127.0.0.1:9999/user_avatar/20120902160411_ik2UH.jpg"),
-(NULL,"唐莎","123456",15324652145,"tangsha@qq.com","http://127.0.0.1:9999/user_avatar/fc86fbe322952f4babdb29857b36fc8.png"),
-(NULL,"小珍","123456",15348235468,"xiaozhen@qq.com","http://127.0.0.1:9999/user_avatar/u=527690908,841994411&fm=26&gp=0.jpg"),
-(NULL,"宗良","123456",13478549543,"zongliang@qq.com","http://127.0.0.1:9999/user_avatar/u=1471800268,3373504429&fm=26&gp=0.jpg"),
-(NULL,"靓仔","123456",13729412134,"liangzai@qq.com","http://127.0.0.1:9999/user_avatar/u=2136146216,1955357192&fm=26&gp=0.jpg");
+(NULL,"美食小编",md5("123456"),13579246810,"13579246810@qq.com","http://127.0.0.1:9999/user_avatar/20120902160411_ik2UH.jpg"),
+(NULL,"唐莎",md5("123456"),15324652145,"tangsha@qq.com","http://127.0.0.1:9999/user_avatar/fc86fbe322952f4babdb29857b36fc8.png"),
+(NULL,"小珍",md5("123456"),15348235468,"xiaozhen@qq.com","http://127.0.0.1:9999/user_avatar/u=527690908,841994411&fm=26&gp=0.jpg"),
+(NULL,"宗良",md5("123456"),13478549543,"zongliang@qq.com","http://127.0.0.1:9999/user_avatar/u=1471800268,3373504429&fm=26&gp=0.jpg"),
+(NULL,"靓仔",md5("123456"),13729412134,"liangzai@qq.com","http://127.0.0.1:9999/user_avatar/u=2136146216,1955357192&fm=26&gp=0.jpg");
 
 
 /*菜谱详情*/
@@ -962,3 +976,32 @@ TIPS
 
 
 
+/*用户上传美食图片*/
+CREATE TABLE user_img(
+  nid INT PRIMARY KEY AUTO_INCREMENT,
+  u_id INT, #用户的id
+  u_img VARCHAR(126),#用户上传美食图片
+  title VARCHAR(36),   #美食标题
+  subtitle VARCHAR(88)  #小标题
+  h_portrait VARCHAR(126) #用户头像
+  uname VARCHAR(16),#用户名
+  m_day VARCHAR(8),#上传时间
+);
+INSERT INTO user_img VALUES
+(null,1,"http://127.0.0.1:9999/cp_details_img/s_1.jpg","土豆炖牛肉","# 午餐","http://127.0.0.1:9999/cp_icon/h_1.jpg","丝丝食客","07月24日"),
+(null,2,"http://127.0.0.1:9999/cp_details_img/s_2.jpg","鸡汤","# 早餐","http://127.0.0.1:9999/cp_icon/h_2.jpg","二狗","06月22日"),
+(null,3,"http://127.0.0.1:9999/cp_details_img/s_43530388247146.jpg"," 抄意面","# 午餐","http://127.0.0.1:9999/cp_icon/h_3.jpg","铁蛋","06月22日"),
+(null,4,"http://127.0.0.1:9999/cp_details_img/n117912_148179934476793.jpg","酸辣土豆丝","# 早餐","http://127.0.0.1:9999/cp_icon/h_4.jpg","大锤","06月22日"),
+(null,5,"http://127.0.0.1:9999/cp_details_img/n2937731_156180605273615.jpg","豆瓣酱烧黄鱼","# 晚餐","http://127.0.0.1:9999/cp_icon/h_5.jpg","二娃","06月22日"),
+(null,6,"http://127.0.0.1:9999/cp_details_img/s3260746_142476637836952.jpg","西红柿鸡蛋","","http://127.0.0.1:9999/cp_icon/h_6.jpg","大娃","06月23日"),
+(null,7,"http://27.0.0.1:9999/cp_details_img/s5458252_150176317087685.jpg","早餐鸡蛋米饭饼","早餐","http://127.0.0.1:9999/cp_icon/h_7.jpg","放牛娃","06月23日"),
+(null,8,"http://127.0.0.1:9999/cp_details_img/s3995606_154566255407631.jpg","冰糖双耳","","http://127.0.0.1:9999/cp_icon/h_8.jpg","大海微澜","06月23日"),
+(null,9,"http://http://127.0.0.1:9999/cp_details_img/f024232af56daa943f02b5b6171ad872.jpg","洋芋片饭","# 午餐","http://127.0.0.1:9999/cp_icon/h_9.jpg","达内烹鱼宴","06月23日"),
+(null,10,"http://127.0.0.1:9999/cp_details_img/s6174466_151556223876727.jpg","酸辣面","# 早餐","http://127.0.0.1:9999/cp_icon/h_10.jpg","达内顾富春","06月24日"),
+(null,11,"http://127.0.0.1:9999/cp_details_img/20180612173446_36292.jpg","酸菜鱼","# 午餐","http://127.0.0.1:9999/cp_icon/h_11.jpg","达内张学友","06月24日"),
+(null,12,"http://http://127.0.0.1:9999/cp_details_img/6ed9270a688604769d6ac529ec3a962a.jpg","大肉面","# 早餐","127.0.0.1:9999/cp_icon/h_12.jpg","达内芷蘋","01月24日"),
+(null,13,"http://127.0.0.1:9999/cp_details_img/s10031823_155050276060580.jpg","土豆芹菜","","http://127.0.0.1:9999/cp_icon/h_13.jpg","达内王大锤","05月24日"),
+(null,14,"http://127.0.0.1:9999/cp_details_img/a1008115_144170389553682.jpg","来个下午茶","# 午餐","http://127.0.0.1:9999/cp_icon/h_14.jpg","小小星","07月24日"),
+(null,15,"http://127.0.0.1:9999/cp_details_img/s4021908_143148053043292.jpg","皮皮虾","# 晚餐","http://127.0.0.1:9999/cp_icon/h_15.jpg","爱吃屎的阿拉蕾","07月24日"),
+(null,16,"http:///127.0.0.1:9999/cp_details_img/s4758097_151615859914753.jpg","沙拉拌菜","#早餐","http://127.0.0.1:9999/cp_icon/h_16.jpg","百变小樱","06月23日"),
+(null,17,"http://127.0.0.1:9999/cp_details_img/s1641211_148479689598532.jpg","大小虾","# 晚餐","http://127.0.0.1:9999/cp_icon/h_17.jpg","孙悟空狂扁奥特曼","05月24日"),

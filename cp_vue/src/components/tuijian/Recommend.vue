@@ -560,6 +560,7 @@ export default {
           navbar.classList.add("fixed")
           console.log(123)
         }else{
+          
           navbar.classList.remove("fixed")
         }
       };
