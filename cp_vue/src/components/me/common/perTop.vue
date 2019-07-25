@@ -1,10 +1,14 @@
 <template>
   <div class="contail">
     <img :src="tu" alt="">
-    <div class="ge_xinxi">
+    <div class="ge_xinxi" v-if="uid==true">
       <router-link to="" v-text="title"></router-link><br>
       <router-link to="">正在前往美食达人广场路上</router-link><br>
       <router-link to="" class="dna">美食杰DNA 0 条</router-link><br>
+    </div>
+    <div v-else>
+      <div class="denglu" @click="denglu">点击登陆</div>
+      <p>做菜好吃</p>
     </div>
   </div>
 </template>
@@ -15,15 +19,25 @@ export default {
     title:{default:""},
   },
   data(){
-    return{}
-  }
+    return{
+      uid:""
+    }
+  },
+  created(){
+   this.uid=window.sessionStorage.uid;
+ },
+ methods:{
+   denglu(){
+    this.$router.push("/login");
+   }
+ }
 }
 </script>
-<style>
+<style scoped>
 .contail{
   display: flex;
   text-align: center;
-  height: 5rem;
+  height: 7rem;
   width: 100%;
   background-image:url(../../../assets/per/home_bgOnline@3x.png); 
   padding: 1rem;
@@ -54,4 +68,13 @@ export default {
   box-sizing: border-box;
   padding: 0 12px;
 }
+.denglu{
+  color: black;
+  font-size: 24px;
+  margin: 10px 0;
+}
+.denglu+p{
+  color: #fff;
+}
+
 </style>

@@ -147,7 +147,15 @@ INSERT INTO cp_collect VALUES(NULL,1,2);
 INSERT INTO cp_collect VALUES(NULL,4,1);
 INSERT INTO cp_collect VALUES(NULL,4,2);
 INSERT INTO cp_collect VALUES(NULL,4,3);
-INSERT INTO cp_collect VALUES(NULL,3,2);
+INSERT INTO cp_collect VALUES(NULL,4,4);
+INSERT INTO cp_collect VALUES(NULL,4,5);
+INSERT INTO cp_collect VALUES(NULL,4,6);
+INSERT INTO cp_collect VALUES(NULL,4,7);
+INSERT INTO cp_collect VALUES(NULL,4,8);
+INSERT INTO cp_collect VALUES(NULL,4,9);
+INSERT INTO cp_collect VALUES(NULL,4,10);
+INSERT INTO cp_collect VALUES(NULL,4,11);
+INSERT INTO cp_collect VALUES(NULL,3,12);
 INSERT INTO cp_collect VALUES(NULL,2,3);
 INSERT INTO cp_collect VALUES(NULL,3,5);
 
@@ -992,7 +1000,6 @@ CREATE TABLE user_img(
   title VARCHAR(36),   #美食标题
   subtitle VARCHAR(88),  #小标题
   h_portrait VARCHAR(126), #用户头像
-  
   uname VARCHAR(16),#用户名
   m_day VARCHAR(8)#上传时间
 );
@@ -1013,4 +1020,4 @@ INSERT INTO user_img VALUES
 (null,14,"http://127.0.0.1:9999/cp_details_img/a1008115_144170389553682.jpg","来个下午茶","# 午餐","http://127.0.0.1:9999/cp_icon/h_14.jpg","小小星","07月24日"),
 (null,15,"http://127.0.0.1:9999/cp_details_img/s4021908_143148053043292.jpg","皮皮虾","# 晚餐","http://127.0.0.1:9999/cp_icon/h_15.jpg","爱吃屎的阿拉蕾","07月24日"),
 (null,16,"http:///127.0.0.1:9999/cp_details_img/s4758097_151615859914753.jpg","沙拉拌菜","#早餐","http://127.0.0.1:9999/cp_icon/h_16.jpg","百变小樱","06月23日"),
-(null,17,"http://127.0.0.1:9999/cp_details_img/s1641211_148479689598532.jpg","大小虾","# 晚餐","http://127.0.0.1:9999/cp_icon/h_17.jpg","孙悟空狂扁奥特曼","05月24日"),
+(null,17,"http://127.0.0.1:9999/cp_details_img/s1641211_148479689598532.jpg","大小虾","# 晚餐","http://127.0.0.1:9999/cp_icon/h_17.jpg","孙悟空狂扁奥特曼","05月24日");

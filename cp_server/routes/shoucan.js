@@ -11,7 +11,15 @@ var  router=express.Router();
      res.send(result)
   });
  });
- router.get("/shanchu")
- 
+ router.get("/shangchu",(req,res)=>{
+   var ql=req.query.sid;
+   pool.query("DELETE FROM cp_collect WHERE sid=?",[ql],(err,result)=>{
+    if(err) throw err; 
+     if(result.affectedRows>0){
+       res.send('1')
+     }else{res.send('0')}
+   }); 
+
+ })
 
 module.exports = router;

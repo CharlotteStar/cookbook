@@ -14,7 +14,7 @@
   </div>
 </template>
 
-<script>
+<script scoped>
 import qs from 'qs';
 import meTop from './common/meTop.vue'
 export default {
@@ -48,7 +48,6 @@ export default {
           duration:1500,
         })
       }else if(email_reg.test(this.account)){
-        console.log(this.account);
         this.axios.post(
           '/user/email_login',
           qs.stringify(data),
@@ -60,10 +59,9 @@ export default {
             position:"top",
             duration:1500,
           });
-          this.$router.push("/personal");
+          this.$router.push("/home");
         })
       }else if(phone_reg.test(this.account)){
-        console.log(this.account);
         this.axios.post(
           "/user/phone_login",
           qs.stringify(data),
@@ -72,13 +70,14 @@ export default {
           var code=res.data.code;
           if(code==1){
             window.sessionStorage.uid=res.data.data[0].uid;
+            console.log(window.sessionStorage.uid)
             this.$toast({
               message:res.data.msg,
               position:"top",
               duration:1500,
               iconClass:"iconfont icon-biaoqing",   
             })
-            this.$router.push("/personal");
+            this.$router.push("/home");
           }else{
             this.$toast({
               message:res.data.msg,

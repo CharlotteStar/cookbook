@@ -6,7 +6,7 @@
       <div class="page-tabber">
         <!-- <h3>一个父面板 四个子面板</h3> -->
         <mt-tab-container v-model="active">
-          <mt-tab-container-item id="recommend" class="recommend">
+          <mt-tab-container-item id="recommend" >
             <!-- <h3>顶部导航栏</h3> -->
             <cooktop
             :leftImg="require('../assets/icon/left_title_icon.png')"
@@ -16,13 +16,13 @@
               <recommend></recommend>
           </mt-tab-container-item>
           <mt-tab-container-item id="find" >
-              <!-- <record></record> -->
+              发现
           </mt-tab-container-item>
           <mt-tab-container-item id="food" >
               食话              
           </mt-tab-container-item>
-          <mt-tab-container-item id="me" >
-              <login></login>
+          <mt-tab-container-item id="me" class="liang" >
+            <me></me>
           </mt-tab-container-item>
         </mt-tab-container>
       </div>
@@ -36,7 +36,7 @@
           ></tabbaricon>
           推荐
         </mt-tab-item>
-        <mt-tab-item id="find" @click.native="changeState(1)">
+        <mt-tab-item id="find" @click.native="changeState(1)" @click="tz">
           <tabbaricon
             :selectedImage="require('../assets/icon/f_selected_img.png')"
             :normalImage="require('../assets/icon/f_normal_img.png')"
@@ -52,7 +52,8 @@
           ></tabbaricon>
           食话
         </mt-tab-item>
-        <mt-tab-item id="me" @click.native="changeState(3)">
+        <mt-tab-item id="me" @click.native="changeState(3)" @click="tz"
+        class="zong">
           <tabbaricon
             :selectedImage="require('../assets/icon/w_selected_img.png')"
             :normalImage="require('../assets/icon/w_normal_img.png')"
@@ -71,10 +72,7 @@
   import TabBarIcon from './cook/TabBarIcon.vue'
   // 引入首页推荐面板
   import Recommend from './tuijian/Recommend.vue'
-  // 引入登录面板
-  import login from './me/login.vue'
-  //引入发现面板
-  import Record from './record/Record.vue'
+  import me from './me/Personal.vue'
   export default {
     data(){
       return {
@@ -88,35 +86,33 @@
       }
     },
     methods: {
+      tz(){
+        console.log(window.sessionStorage.uid)
+      },
       changeState(n){
         for(var i=0;i<this.currentIndex.length;i++){
           if(n==i){
             this.currentIndex[i].isSelect=true;
-            console.log(123)
+            // console.log(window.sessionStorage.uid)
           }else{
             this.currentIndex[i].isSelect=false;
-            console.log(321)
           }
         }
       }
     },
+    mounted(){
+      
+    },
     components:{
-      "record":Record,
       "cooktop":CookTop,
       "tabbaricon":TabBarIcon,
       "recommend":Recommend,
-      "login":login,
+      "me":me
     }
   }
 </script>
 
 <style scoped>
-.recommend{
-  position: absolute;
-  top:0;
-  height:100%;
-  width:100%;
-}
   .page-tabber{
     padding-bottom:60px; 
   }
