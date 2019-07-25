@@ -14,7 +14,7 @@
   </div>
 </template>
 
-<script>
+<script scoped>
 import qs from 'qs';
 import meTop from './common/meTop.vue'
 export default {
