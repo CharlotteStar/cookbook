@@ -10,6 +10,8 @@ const shoucan = require("./routes/shoucan.js");
 const search = require("./routes/search.js");
 
 
+
+const pool = require("./pool.js");
 //创建express对象
 var server = express();
 //绑定监听端口
@@ -43,6 +45,33 @@ server.use("/tj", tjRouter);
 server.use("/caipu", cpRouter);
 server.use("/shoucan",shoucan)
 server.use("/search", search);
+
+
+//用户菜谱页面加载更多
+server.get("/menu01_item",(req,res)=>{
+  var pno=req.query.pno;
+  var ps=req.query.pageSize;
+  var uid=req.query.uid;
+  console.log(pno,ps)
+  if(!pno){pno=1}
+  if(!ps){ps=10}
+  var obj={code:1,msg:"查询成功"};
+  var sql="SELECT pic,title FROM cp_details WHERE user_id=? LIMIT ?,?";
+  var off=(pno-1)*ps;
+  ps=parseInt(ps);
+  pool.query(sql,[uid,off,ps],(err,result)=>{
+    if(err)throw err;
+    obj.data=result;
+    res.send(obj);
+    // var sql="SELECT count(*) AS c FROM cp_details";
+    // pool.query(sql,(err,result)=>{
+    //   if(err)throw err;
+    //   var pc=Math.ceil(result[0].c/ps);
+    //   obj.pc=pc;
+    //   res.send(obj);
+    // })
+  });
+});
 
 
 // //首先引入https和querystring模块

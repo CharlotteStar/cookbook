@@ -178,7 +178,7 @@ INSERT INTO cp_user VALUES
 
 
 /*菜谱详情*/
-CREATE TABLE cp_details(
+CREATE TABLE cp_details(  
   did INT PRIMARY KEY AUTO_INCREMENT,
   title VARCHAR(32),
   benefit VARCHAR(128),       #益处
