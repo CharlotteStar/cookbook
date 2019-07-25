@@ -19,11 +19,11 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .contail{
   display: flex;
   text-align: center;
-  height: 5rem;
+  height: 7rem;
   width: 100%;
   background-image:url(../../../assets/per/home_bgOnline@3x.png); 
   padding: 1rem;
