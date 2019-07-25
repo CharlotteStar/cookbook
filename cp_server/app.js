@@ -23,7 +23,7 @@ server.use(bodyParser.urlencoded({
 
 //跨域
 server.use(cors({
-  origin:['http://127.0.0.1:8081',"http://localhost:8081"],
+  origin:['http://127.0.0.1:8080',"http://localhost:8080"],
   credentials: true  //是否验证
 }));
 
@@ -46,6 +46,8 @@ server.use("/caipu", cpRouter);
 server.use("/shoucan",shoucan)
 server.use("/search", search);
 
+
+//用户菜谱页面加载更多
 server.get("/menu01_item",(req,res)=>{
   var pno=req.query.pno;
   var ps=req.query.pageSize;

@@ -109,7 +109,20 @@ export default {
     change(e){
       var love=document.getElementById("love");
       e.target.className="";
-      e.target.className="loves"
+      e.target.className="loves";
+      console.log(this.cp_details.user_id);
+        console.log(this.cp_details.pic)
+        console.log(this.cp_details.title)
+        console.log(this.user_data.uname);
+        console.log(this.user_data.avatar);
+        console.log(this.cp_details.did);
+      this.axios.get(
+        '/caipu/shoucang',
+        {params:{
+          uid:this.cp_details.user_id,
+          did:this.cp_details.did
+        }}
+      )
     },
     zhankai(){
       this.isSpread=true;
@@ -145,7 +158,7 @@ export default {
         "/caipu/browse",
         {params:{browse,did:this.did}}
       ).then(res=>{
-        console.log(res);
+        //console.log(res);
       })
     })
   }

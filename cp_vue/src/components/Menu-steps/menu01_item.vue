@@ -11,7 +11,7 @@
               to="https://m.meishij.net/html5/news.php?from=author&amp;id=1934621"
               class="link">
                 <img alt="天鹅蛋白菜海鲜小炒" :src="item.pic" class="img" />
-              <strong v-text="item.cname"></strong>
+              <strong v-text="item.title"></strong>
             </router-link>
           </div>
         </div>
@@ -101,6 +101,7 @@ export default {
   color: slategray;
   text-align: center;
   border-top: 1px solid #ddd;
+  background:#efefef;
 }
 strong {
   color: black !important;

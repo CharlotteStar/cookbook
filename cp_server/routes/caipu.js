@@ -12,6 +12,10 @@ router.get("/user_cp", (req, res) => {
   })
 })
 
+router.get("/user_cp",(req,res)=>{
+  var sql="SELECT pic,title"
+})
+
 //获取菜谱详情的数据
 router.get("/details", (req, res) => { 
   var did = req.query.did;
@@ -64,6 +68,7 @@ router.get("/type", (req, res) => {
   })
 })
 
+
 //获取菜谱用户的数据
 router.get("/user", (req, res) => { 
   var uid = req.query.uid;
@@ -73,6 +78,18 @@ router.get("/user", (req, res) => {
     res.send({ code: 1, msg: "查询成功", data: result });
   })
 })
+
+//添加收藏
+router.get("/shoucang", (req, res) => { 
+  var uid=req.query.uid;
+  var did=req.query.did;
+  var sql = 'INSERT INTO cp_collect(ct_user_id,cp_id) VALUES (?,?)';
+  pool.query(sql, [uid,did], (err, result) => {
+    if (err) throw err;
+    res.send({ code: 1, msg: "查询成功", data: result });
+  })
+})
+
 
 //菜谱的浏览量
 router.get("/browse", (req, res) => { 
