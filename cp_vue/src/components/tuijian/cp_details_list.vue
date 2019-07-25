@@ -171,7 +171,7 @@ export default {
   display: block;
 }
 .cp_score{
-  display: block;
+  display: inline-block;
   font-size: 0px;
   padding: 4px 0px 6px;
 }

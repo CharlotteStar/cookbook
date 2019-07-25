@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="tj_container">
     <!-- <div class="lunbo">
             轮播组件
     </div>-->
@@ -361,6 +361,7 @@
 
 <script>
 import { setTimeout, setInterval } from "timers";
+import { Promise } from 'q';
 export default {
   data() {
     return {
@@ -483,6 +484,7 @@ export default {
     });
 
     this.axios.get("/tj/sancan").then(result => {
+      
       this.list = result.data.data;
       var sancan_items = document.getElementsByClassName("sancan_item");
       for (let i = 0; i < this.list.length; i++) {
@@ -544,23 +546,19 @@ export default {
           this.setHeight(i);
         };
       }
-
-      window.onscroll = () => {
+      
+      var tj_container=document.getElementsByClassName("tj_container")[0];
+      tj_container.onscroll = () => {
         //判断页面是否到底部
-        if (
-          document.documentElement.scrollTop +
-            document.documentElement.clientHeight ==
-          document.documentElement.scrollHeight
-        ) {
+        if (tj_container.scrollTop+tj_container.clientHeight==tj_container.scrollHeight) {
           this.loadBottom();
+          console.log(true)
         }
         var zhanwei=document.getElementsByClassName("zhanwei")[0];
         var navbar=document.getElementsByClassName("navbar")[0];
         if(zhanwei.offsetTop-44<=document.documentElement.scrollTop){
           navbar.classList.add("fixed")
-          console.log(123)
         }else{
-          
           navbar.classList.remove("fixed")
         }
       };
@@ -571,7 +569,7 @@ export default {
     this.loadBottom();
     setTimeout(() => {
       this.setHeight(0);
-    }, 100);  
+    }, 500);
   }
 };
 </script>
@@ -694,9 +692,13 @@ export default {
   box-shadow: 0 2px 12px -4px #000;
 }
 
-.container {
+.tj_container {
   justify-content: space-between;
   padding-top: 30px;
+  position:relative;
+  height:100%;
+  width:100%;
+  overflow: auto;
 }
 
 .today {

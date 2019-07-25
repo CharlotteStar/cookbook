@@ -7,6 +7,7 @@ import classify from './components/tuijian/classify.vue'  //分类页面
 import Recommend from './components/tuijian/Recommend'    //首页推荐
 import DetailsList from './components/tuijian/cp_details_list.vue'  //详情列表页
 import menu01 from './components/Menu-steps/menu01.vue'   //详情页
+import search from './components/tuijian/search.vue'  //搜索页
 Vue.use(Router)
 import menu01_item from './components/Menu-steps/menu01_item.vue'
 import SearchFirst from './components/SmartRecipe/SearchFirst.vue'
@@ -30,5 +31,6 @@ export default new Router({
     {path:'/menu01_item',component:menu01_item},
     {path:'/SearchFirst',component:SearchFirst},
     {path:'/suggest',component:suggest},
+    {path:'/search',component:search},
   ]
 })

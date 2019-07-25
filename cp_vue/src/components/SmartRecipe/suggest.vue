@@ -6,13 +6,7 @@
         <input class="inputBox" type="text" autofocus="autofocus"/>
       </div>
     </div>
-    <div class="div-out">
-      <div class="food-img">
-        <img src="https://s1.st.meishij.net/r/197/182/6108197/a6108197_156285817636368.jpg" alt />
-        <div class="food-name">鸡肉</div>
-        <div class="add">+</div>
-      </div>
-    </div>
+    
   </div>
 </template>
 <script>

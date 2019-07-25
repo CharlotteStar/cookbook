@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="Top" @click="fanhui"></div>
     <div class="bgImg"></div>
     <div class="div-search">
       <router-link to="/suggest" class="topsearch">
@@ -16,10 +17,30 @@
 export default {
   data(){
     return{}
+  },
+  methods:{
+    fanhui() {
+      this.$router.go(-1);
+    }
   }
 }
 </script>
 <style>
+.Top{
+  position:absolute;
+  top:30px;
+}
+.Top::before{
+  content:"";
+  display: block;
+  width:16px;height:16px;
+  border-left:2px solid #ff5151;
+  border-bottom:2px solid #ff5151;
+  transform:translateY(-55%) rotate(45deg) ;
+  position:absolute;
+  left:20px;top:50%;
+}
+
 .bgImg{
     width:100%;
     height:300px;
