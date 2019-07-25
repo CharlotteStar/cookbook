@@ -6,7 +6,7 @@
       <div class="page-tabber">
         <!-- <h3>一个父面板 四个子面板</h3> -->
         <mt-tab-container v-model="active">
-          <mt-tab-container-item id="recommend" >
+          <mt-tab-container-item id="recommend" class="recommend">
             <!-- <h3>顶部导航栏</h3> -->
             <cooktop
             :leftImg="require('../assets/icon/left_title_icon.png')"
@@ -117,6 +117,11 @@
 </script>
 
 <style scoped>
+  .recommend{
+    position:absolute;
+    width:100%;
+    height:100%;
+  }
   .page-tabber{
     padding-bottom:60px; 
   }

@@ -556,7 +556,7 @@ export default {
         }
         var zhanwei=document.getElementsByClassName("zhanwei")[0];
         var navbar=document.getElementsByClassName("navbar")[0];
-        if(zhanwei.offsetTop-44<=document.documentElement.scrollTop){
+        if(zhanwei.offsetTop-44<=tj_container.scrollTop){
           navbar.classList.add("fixed")
         }else{
           navbar.classList.remove("fixed")

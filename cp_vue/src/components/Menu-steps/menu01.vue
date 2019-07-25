@@ -137,7 +137,7 @@ export default {
         "/caipu/browse",
         {params:{browse,did:this.did}}
       ).then(res=>{
-        console.log(res);
+        return;
       })
     })
   }

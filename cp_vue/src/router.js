@@ -10,31 +10,31 @@ import menu01 from './components/Menu-steps/menu01.vue'   //详情页
 import search from './components/tuijian/search.vue'  //搜索页
 import personal from './components/me/Personal.vue'//个人
 import shoucan from './components/me/shoucan.vue'//收藏
-Vue.use(Router)
 import menu01_item from './components/Menu-steps/menu01_item.vue'
-import SearchFirst from './components/SmartRecipe/SearchFirst.vue'
-import suggest from './components/SmartRecipe/suggest.vue'
+import SearchFirst from './components/tuijian/SearchFirst.vue'
 import Record from './components/record/Record.vue'
-
 import ShowTime from './components/record/ShowTime.vue'
+
+
+Vue.use(Router);
+
 export default new Router({
   routes: [
-    {path:'/ShowTime',component:ShowTime},
-    {path:'/Record',component:Record},
-    {path: '/',redirect:'/home'},
-    {path: '/home',component: Home},
+    { path: '/ShowTime', component: ShowTime },
+    { path: '/Record', component: Record },
+    { path: '/', redirect: '/home' },
+    { path: '/home', component: Home },
     { path: '/about', name: 'about' },
-    { path: '/login' ,component: Login},
+    { path: '/login', component: Login },
     { path: '/register', component: Register },
     { path: '/classify', component: classify },
     { path: '/detailslist/:tid', component: DetailsList, props: true },
     { path: '/menu01/:did', component: menu01, props: true },
-    {path:'/Recommend',component:Recommend},
-    {path:'/menu01_item',component:menu01_item},
-    {path:'/SearchFirst',component:SearchFirst},
-    {path:'/suggest',component:suggest},
-    {path:'/search',component:search},
-    {path:'/personal',component:personal},
-    {path:'/shoucan',component:shoucan},
+    { path: '/Recommend', component: Recommend },
+    { path: '/menu01_item', component: menu01_item },
+    { path: '/SearchFirst', component: SearchFirst },
+    { path: '/search', component: search },
+    { path: '/personal', component: personal },
+    { path: '/shoucan', component: shoucan },
   ]
 })
