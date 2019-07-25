@@ -154,7 +154,7 @@ export default {
 .top-search{
   padding:10px 15px;
 }
-.title{
+.page-search .title{
   font-size:18px;
   margin-left:5px;
   padding-bottom:3px;
