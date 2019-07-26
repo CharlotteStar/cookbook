@@ -29,7 +29,7 @@
         </span>
       </router-link>
       <div class="star-love">
-        <a href class="focus">关注</a>
+        <div class="focus" @click="focus">关注</div>
       </div>
     </div>
     <div class="comment">
@@ -104,7 +104,7 @@ export default {
       show_complete:"", //突出显示的成品图
       isSpread:false,
       scIsSelected:false,
-      sid:''
+      sid:'',
     }
   },
   methods:{
@@ -138,6 +138,9 @@ export default {
           })
         })
       }
+    },
+    focus(){
+     
     },
     zhankai(){
       this.isSpread=true;
