@@ -37,7 +37,11 @@
       <div class="pinfen-container">
         <strong class="pingfeng">评分</strong>
         <img class="cp_score" :src="require(cp_details.score>=i ? '@/assets/icon/20180831142237_413.png' : '@/assets/icon/20180831142237_552.png')" v-for="i in 5" :key="i">
+<<<<<<< HEAD
         <div class="love" @click="change" :class="scIsSelected ? 'selected' : ''"></div>
+=======
+        <div class="love" @click="change" :class="selected ? 'selected' : ''"></div>
+>>>>>>> c897449ce7b72b71ff89cb3398fc22334a753b6d
       </div>
       <div class="sc_miniw">
         <span>主料</span>
@@ -103,6 +107,7 @@ export default {
       cp_complete:[],   //菜谱步骤的成品图
       show_complete:"", //突出显示的成品图
       isSpread:false,
+<<<<<<< HEAD
       scIsSelected:false,
       sid:''
     }
@@ -137,6 +142,28 @@ export default {
             duration:1500,
           })
         })
+=======
+      selected:false
+    };
+  },
+  methods:{
+    change(e){
+      if(!this.selected){
+        this.selected=true;
+        var love=document.getElementById("love");
+        this.axios.get(
+          '/caipu/shoucang',
+          {params:{
+            uid:window.sessionStorage.uid,
+            did:this.cp_details.did,
+          }}
+        ).then(res=>{
+          console.log(res.data)
+          return;
+        })
+      }else{
+        this.selected=false;
+>>>>>>> c897449ce7b72b71ff89cb3398fc22334a753b6d
       }
     },
     zhankai(){
@@ -360,7 +387,11 @@ em {
 }
 .pinfen-container {
   margin-bottom: 50px;
+<<<<<<< HEAD
   position: relative;
+=======
+  position:relative;
+>>>>>>> c897449ce7b72b71ff89cb3398fc22334a753b6d
 }
 .fineshed{margin-top:50px;}
 .fineshed-item{
@@ -442,7 +473,11 @@ em {
   background-position:0px 333px;
 }
 .love.selected{
+<<<<<<< HEAD
   background-position: -42px 333px;
+=======
+  background-position: -41px 333px;
+>>>>>>> c897449ce7b72b71ff89cb3398fc22334a753b6d
 }
 
 </style>

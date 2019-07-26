@@ -50,7 +50,6 @@ router.get("/add", (req, res) => {
 
  router.get("/quanshan",(req,res)=>{
    var qs=req.query.sids;
-   console.log(qs)
    pool.query(`DELETE FROM cp_collect WHERE sid IN (${qs})`,(err,result)=>{
      if(err) throw err;
      if(result.affectedRows>0){
