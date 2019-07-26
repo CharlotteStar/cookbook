@@ -5,7 +5,7 @@
  
       <div class="page-tabber">
         <!-- <h3>一个父面板 四个子面板</h3> -->
-        <mt-tab-container v-model="active">
+        <mt-tab-container v-model="active" class="tabContainer">
           <mt-tab-container-item id="recommend" class="recommend">
             <!-- <h3>顶部导航栏</h3> -->
             <cooktop
@@ -16,7 +16,7 @@
               <recommend></recommend>
           </mt-tab-container-item>
           <mt-tab-container-item id="find" >
-              发现
+              <classify></classify>
           </mt-tab-container-item>
           <mt-tab-container-item id="food" >
               食话              
@@ -38,11 +38,11 @@
         </mt-tab-item>
         <mt-tab-item id="find" @click.native="changeState(1)" @click="tz">
           <tabbaricon
-            :selectedImage="require('../assets/icon/f_selected_img.png')"
-            :normalImage="require('../assets/icon/f_normal_img.png')"
+            :selectedImage="require('../assets/icon/fenlei_selected.png')"
+            :normalImage="require('../assets/icon/fenlei_normal.png')"
             :focused="currentIndex[1].isSelect"
           ></tabbaricon>
-          发现
+          分类
         </mt-tab-item>
         <mt-tab-item id="food" @click.native="changeState(2)">
           <tabbaricon
@@ -72,6 +72,7 @@
   import TabBarIcon from './cook/TabBarIcon.vue'
   // 引入首页推荐面板
   import Recommend from './tuijian/Recommend.vue'
+  import classify from './tuijian/classify.vue'  //分类
   import me from './me/Personal.vue'
   export default {
     data(){
@@ -100,14 +101,15 @@
         }
       }
     },
-    mounted(){
+    created(){
       
     },
     components:{
       "cooktop":CookTop,
       "tabbaricon":TabBarIcon,
       "recommend":Recommend,
-      "me":me
+      "me":me,
+      'classify':classify
     }
   }
 </script>

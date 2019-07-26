@@ -5,7 +5,7 @@
     <div class="div-search">
       <div class="topsearch" @click="show=true">
         <img src="../../assets/icon/center_title_icon.png" />
-        <span class="word">搜索你感兴趣的</span>
+        <span class="word">搜索你需要的食材</span>
       </div>
     </div>
     <div class="search-keyword" :style="keywords.length==0? 'display:none' : ''">
@@ -102,8 +102,12 @@ export default {
           '/search/zn_search',
           {params:{keywords:this.keywords}}
         ).then(res=>{
-          console.log(res.data);
           this.cp_data=res.data.data
+        })
+      }else{
+        this.$toast({
+          message:"请选择食材",
+          duration:1500,
         })
       }
     },
@@ -114,7 +118,9 @@ export default {
       this.keywords.splice(i,1);
     },
     tianjia(keyword){
-      this.keywords.push(keyword);
+      if(keyword){
+        this.keywords.push(keyword);
+      }
       this.show=false
     },
     getKeyword() {

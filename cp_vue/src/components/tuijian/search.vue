@@ -107,7 +107,6 @@ export default {
         '/search/history',
         {params:{uid:this.uid}}
       ).then(res=>{
-        console.log(res.data.data);
         this.searchHistory=res.data.data;
       })
     },

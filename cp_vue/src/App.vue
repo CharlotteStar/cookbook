@@ -23,7 +23,7 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-.mint-tab-container {
+.mint-tab-container.tabContainer {
   position: absolute !important;
   height: 100%;
   width: 100%;
