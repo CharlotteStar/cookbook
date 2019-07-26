@@ -167,14 +167,17 @@ CREATE TABLE cp_user(
   upwd VARCHAR(32),
   phone BIGINT,
   email VARCHAR(256),
-  avatar VARCHAR(128)    #头像
+  avatar VARCHAR(128),    #头像
+  fans  BIGINT(32),  /*粉丝*/
+  focus  BIGINT(12),/*关注*/
+  menu   BIGINT(12)/*菜谱*/
 );
 INSERT INTO cp_user VALUES
-(NULL,"美食小编",md5("123456"),13579246810,"13579246810@qq.com","http://127.0.0.1:9999/user_avatar/20120902160411_ik2UH.jpg"),
-(NULL,"唐莎",md5("123456"),15324652145,"tangsha@qq.com","http://127.0.0.1:9999/user_avatar/fc86fbe322952f4babdb29857b36fc8.png"),
-(NULL,"小珍",md5("123456"),15348235468,"xiaozhen@qq.com","http://127.0.0.1:9999/user_avatar/u=527690908,841994411&fm=26&gp=0.jpg"),
-(NULL,"宗良",md5("123456"),13478549543,"zongliang@qq.com","http://127.0.0.1:9999/user_avatar/u=1471800268,3373504429&fm=26&gp=0.jpg"),
-(NULL,"靓仔",md5("123456"),13729412134,"liangzai@qq.com","http://127.0.0.1:9999/user_avatar/u=2136146216,1955357192&fm=26&gp=0.jpg");
+(NULL,"美食小编",md5("123456"),13579246810,"13579246810@qq.com","http://127.0.0.1:9999/user_avatar/20120902160411_ik2UH.jpg",50,131,5),
+(NULL,"唐莎",md5("123456"),15324652145,"tangsha@qq.com","http://127.0.0.1:9999/user_avatar/fc86fbe322952f4babdb29857b36fc8.png",60,12,48),
+(NULL,"小珍",md5("123456"),15348235468,"xiaozhen@qq.com","http://127.0.0.1:9999/user_avatar/u=527690908,841994411&fm=26&gp=0.jpg",70,52,68),
+(NULL,"宗良",md5("123456"),13478549543,"zongliang@qq.com","http://127.0.0.1:9999/user_avatar/u=1471800268,3373504429&fm=26&gp=0.jpg",58,14,45),
+(NULL,"靓仔",md5("123456"),13729412134,"liangzai@qq.com","http://127.0.0.1:9999/user_avatar/u=2136146216,1955357192&fm=26&gp=0.jpg",20,120,8);
 
 
 /*菜谱详情*/

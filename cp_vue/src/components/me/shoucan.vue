@@ -1,6 +1,7 @@
 <template>
   <div class="p_zhuti">
     <div class="p_daohan">
+      <fanhui></fanhui>
       <div>收藏</div>
       <div>全部</div>
       <div>我的</div>
@@ -55,8 +56,12 @@
   </div>
 </template>
 <script>
+import fanhui from "./common/fanhui.vue"
 import qs from "qs";
 export default {
+   components:{
+     fanhui
+   },
   data() {
     return {
       fans: "",
@@ -216,12 +221,12 @@ export default {
   line-height: 51px;
   font-size: 16px;
 }
-.p_daohan > div:first-child {
+.p_daohan > div:nth-child(2) {
   font-weight: 600;
   font-size: 30px;
   padding-left: 15px;
 }
-.p_daohan > div:nth-child(2) {
+.p_daohan > div:nth-child(3) {
   font-weight: 800;
   border-bottom: 3px solid pink;
   height: 51px;
