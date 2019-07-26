@@ -105,6 +105,7 @@ export default {
       isSpread:false,
       scIsSelected:false,
       sid:'',
+      canquguan:true
     }
   },
   methods:{
@@ -140,7 +141,19 @@ export default {
       }
     },
     focus(){
-     
+      var gz=document.getElementsByClassName("focus")[0]
+     if(this.canquguan){
+       gz.innerHTML=("已关注")
+       this.canquguan=false;
+       gz.style.background="red";
+       gz.style.color="#fff";
+       this.axios.get()
+     }else{
+       gz.innerHTML=("关注")
+       this.canquguan=true;
+        gz.style.background="#fff";
+        gz.style.color="red"
+     }
     },
     zhankai(){
       this.isSpread=true;
