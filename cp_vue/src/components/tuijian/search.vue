@@ -12,9 +12,19 @@
     </div>
     
     <!--搜索历史-->
-    <div class="search-history">
+    <div class="search-history" :style="searchHistory.length!=0 ? '' : 'display:none'">
       <div class="title">
         <span>搜索历史</span>
+      </div>
+      <div class="qingkong" @click="qingkong">清空</div>
+      <div class="top-search-box">
+        <ul class="top-search-list">
+          <li class="top-search-item"  
+          v-for="(item,index) of searchHistory" :key="index" 
+          v-text="item.keyword"
+          @click="fuzhi(item.keyword)">
+          </li>
+        </ul>
       </div>
     </div>
     <!--热搜-->
@@ -36,7 +46,7 @@
     <div class="search-result">
       <div class="title" :style="cp_data.length!=0 ? '' : 'display:none'">
         <span>搜索结果</span>
-      </div>
+      </div>   
       <div class="search-list">
         <router-link :to="'/menu01/'+item.did" class="search_item" v-for="(item,index) of cp_data" :key="index">
           <div class="cp_image">
@@ -61,7 +71,9 @@ export default {
     return {
       searchTop:[],
       keyword:"",
-      cp_data:[]
+      cp_data:[],
+      searchHistory:[],
+      uid:window.sessionStorage.uid
     }
   },
   methods:{
@@ -72,21 +84,47 @@ export default {
       this.keyword=keyword;
     },
     search(){
-      if(!this.keyword){
-        return
-      }else{
+      if(this.keyword){
         this.axios.get(
           '/search/keyword',
-          {params:{pname:this.keyword}}
+          {params:{pname:this.keyword,uid:this.uid}}
         ).then(res=>{
-          console.log(res.data);
           this.cp_data=res.data;
+          this.loadSearchHistory()
         })
       }
+    },
+    qingkong(){
+      this.axios.get(
+        '/search/qingkong',
+        {params:{uid:this.uid}}
+      ).then(res=>{
+        this.loadSearchHistory()
+      })
+    },
+    loadSearchHistory(){
+      this.axios.get(
+        '/search/history',
+        {params:{uid:this.uid}}
+      ).then(res=>{
+        console.log(res.data.data);
+        this.searchHistory=res.data.data;
+      })
+    },
+    loadSearchTop(){
+      this.axios.get(
+        '/search/top'
+      ).then(res=>{
+        this.searchTop=res.data;
+      });
     }
   },
   created(){
-    console.log(window.sessionStorage.uid);
+    this.loadSearchTop()
+    if(this.uid){
+      this.loadSearchHistory()
+    }
+
     this.axios.get(
       '/search/top'
     ).then(res=>{
@@ -97,12 +135,18 @@ export default {
 </script>
 
 <style>
+.qingkong{
+  position:absolute;
+  right:30px;;
+  top:10px;;
+}
 .search-list{
   overflow:scroll;
 }
 .search-history,
 .search-result{
   padding:0 15px;
+  position: relative;
 }
 
 .search_item{
@@ -215,6 +259,7 @@ export default {
   border-left:2px solid #ff5151;
   border-bottom:2px solid #ff5151;
   transform:translateY(-55%) rotate(45deg) ;
+  border-radius:3px;
 }
 .page-top{
   position:relative;

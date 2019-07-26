@@ -12,9 +12,6 @@ router.get("/user_cp", (req, res) => {
   })
 })
 
-router.get("/user_cp",(req,res)=>{
-  var sql="SELECT pic,title"
-})
 
 //获取菜谱详情的数据
 router.get("/details", (req, res) => { 
