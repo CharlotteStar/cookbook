@@ -47,7 +47,7 @@ router.get("/add", (req, res) => {
      }else{res.send('0')}
    }); 
  });
-
+// 全删
  router.get("/quanshan",(req,res)=>{
    var qs=req.query.sids;
    pool.query(`DELETE FROM cp_collect WHERE sid IN (${qs})`,(err,result)=>{
