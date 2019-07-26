@@ -5,7 +5,7 @@
     </div>
     <div class="top">
 	    <div class="btn1" @click="fh">&lt; 美食杰</div>
-	    <router-link to="javascript" class="btn2">菜谱分类 &gt;</router-link>
+	    <div class="btn2" @click="blockFenlei">菜谱分类 &gt;</div>
     </div>
     <div class="effect">
       <table></table>
@@ -29,7 +29,7 @@
         </span>
       </router-link>
       <div class="star-love">
-        <a href class="focus">关注</a>
+        <a class="focus">关注</a>
       </div>
     </div>
     <div class="comment">
@@ -110,6 +110,9 @@ export default {
     fh(){
       this.$router.push("/home");
     },
+    blockFenlei(){
+      this.$router.push("/classify");
+    },
     change(e){
       if(!this.selected){
         this.selected=true;
@@ -121,7 +124,7 @@ export default {
             did:this.cp_details.did,
           }}
         ).then(res=>{
-          console.log(res.data)
+          console.log(res.data);
           return;
         })
       }else{
