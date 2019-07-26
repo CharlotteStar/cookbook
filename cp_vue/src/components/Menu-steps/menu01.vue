@@ -163,7 +163,44 @@ export default {
     toggle_pic(i) {
       console.log(12);
       this.show_complete = this.cp_complete[i].step_img;
-    }
+    },
+    focus() {
+      var gz = document.getElementsByClassName("focus")[0];
+      if (this.canquguan) {
+        gz.innerHTML = "已关注";
+
+        this.canquguan = false;
+        gz.style.background = "red";
+        gz.style.color = "#fff";
+        var uid = window.sessionStorage.uid;
+         this.ff = Number(this.ff) + 1
+        this.axios
+          .get("/tj/focus", {
+            params: {
+              uid,
+              focus: this.ff
+            }
+          })
+          .then(res => {
+          });
+      } else {
+        gz.innerHTML = "关注";
+        this.canquguan = true;
+        gz.style.background = "#fff";
+        gz.style.color = "red";
+         var uid = window.sessionStorage.uid;
+         this.ff = Number(this.ff)- 1;
+        this.axios
+          .get("/tj/focus", {
+            params: {
+              uid,
+              focus: this.ff
+            }
+          })
+          .then(res => {
+          });
+      }
+    },
   },
   created() {
     this.axios
