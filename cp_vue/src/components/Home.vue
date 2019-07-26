@@ -99,10 +99,25 @@
             this.currentIndex[i].isSelect=false;
           }
         }
+        switch(n){
+          case 0:
+            window.sessionStorage.active="recommend";
+            break;
+          case 1:
+            window.sessionStorage.active='find';
+            break;
+          case 2:
+            window.sessionStorage.active='food';
+            break;
+          case 3:
+            window.sessionStorage.active='me';
+            break;
+        }
       }
     },
     created(){
-      
+      var active=window.sessionStorage.active
+      if(active){this.active=active};
     },
     components:{
       "cooktop":CookTop,

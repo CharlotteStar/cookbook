@@ -4,8 +4,8 @@
       <img :src="cp_details.pic">
     </div>
     <div class="top">
-	    <router-link to="javascript" class="btn1">&lt; 美食杰</router-link>
-	    <router-link to="javascript" class="btn2">菜谱分类 &gt;</router-link>
+	    <div  @click="$router.go(-1)" class="btn1">&lt; 返回</div>
+	    <router-link to="/home" class="btn2">首页 &gt;</router-link>
     </div>
     <div class="effect">
       <table></table>
@@ -432,7 +432,11 @@ em {
     background: -webkit-gradient(linear,0 0,0 bottom,from(rgba(245,245,245,0)),color-stop(30%,rgba(245,245,245,0.8)),to(rgba(245,245,245,1)));
 }
 .star-love{
-   position: relative;
+   position: absolute;
+   top:60%;
+   transform: translateY(-50%);
+   right:0;
+   width:100px;
 }
 .love{
   position:absolute;
