@@ -108,6 +108,12 @@ export default {
     }
   },
   methods:{
+    fh(){
+      this.$router.push("/home");
+    },
+    blockFenlei(){
+      this.$router.push("/classify");
+    },
     change(){
       if(!this.scIsSelected){
         var uid=window.sessionStorage.uid;
