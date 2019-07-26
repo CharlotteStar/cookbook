@@ -109,33 +109,41 @@ export default {
   },
   methods:{
     change(){
-      if(!this.scIsSelected){
-        var uid=window.sessionStorage.uid;
-        this.scIsSelected=true
-        this.axios.get(
-          '/shoucan/add',
-          {params:{
-            uid,
-            did:this.cp_details.did
-          }}
-        ).then(res=>{
-          this.$toast({
-            message:"添加收藏",
-            position:"center",
-            duration:1500,
-          });
-        })
-      }else{
-        this.scIsSelected=false;
-        this.axios.get(
-          '/shoucan/shangchu',
-          {params:{sid:this.sid}}
-        ).then(res=>{
-          this.$toast({
-            message:"取消收藏",
-            position:"center",
-            duration:1500,
+      if(window.sessionStorage.uid){
+        if(!this.scIsSelected){
+          var uid=window.sessionStorage.uid;
+          this.scIsSelected=true
+          this.axios.get(
+            '/shoucan/add',
+            {params:{
+              uid,
+              did:this.cp_details.did
+            }}
+          ).then(res=>{
+            this.$toast({
+              message:"添加收藏",
+              position:"center",
+              duration:1500,
+            });
           })
+        }else{
+          this.scIsSelected=false;
+          this.axios.get(
+            '/shoucan/shangchu',
+            {params:{sid:this.sid}}
+          ).then(res=>{
+            this.$toast({
+              message:"取消收藏",
+              position:"center",
+              duration:1500,
+            })
+          })
+        }
+      }else{
+        this.$toast({
+          message:"请登录",
+          position:"center",
+          duration:1500,
         })
       }
     },

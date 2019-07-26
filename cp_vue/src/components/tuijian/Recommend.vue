@@ -580,15 +580,18 @@ export default {
   display: flex;
   height: 40px;
   align-content: center;
-  padding-left: 5px;
+  padding-left: 10px;
   background:#fff;
   width: 100%;
 }
 .navbar.fixed{
   position:fixed;
-  top:40px;
+  top:40px;left:0;
   z-index:999;
-  padding:8px 5px;
+  padding:0px 5px;
+  padding-left:30px;
+  box-shadow: 0 5px 10px -5px #aaa;
+  height:50px;
 }
 .nav {
   display: flex;

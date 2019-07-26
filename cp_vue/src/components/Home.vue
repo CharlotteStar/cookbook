@@ -15,7 +15,7 @@
             ></cooktop>
               <recommend></recommend>
           </mt-tab-container-item>
-          <mt-tab-container-item id="find" >
+          <mt-tab-container-item id="find" class="find">
               <classify></classify>
           </mt-tab-container-item>
           <mt-tab-container-item id="food" >
@@ -36,7 +36,7 @@
           ></tabbaricon>
           推荐
         </mt-tab-item>
-        <mt-tab-item id="find" @click.native="changeState(1)" @click="tz">
+        <mt-tab-item id="find" @click.native="changeState(1)" @click="tz" >
           <tabbaricon
             :selectedImage="require('../assets/icon/fenlei_selected.png')"
             :normalImage="require('../assets/icon/fenlei_normal.png')"
@@ -92,13 +92,10 @@
       },
       changeState(n){
         for(var i=0;i<this.currentIndex.length;i++){
-          if(n==i){
-            this.currentIndex[i].isSelect=true;
-            // console.log(window.sessionStorage.uid)
-          }else{
-            this.currentIndex[i].isSelect=false;
-          }
+          this.currentIndex[i].isSelect=false;
         }
+        this.currentIndex[n].isSelect=true;
+        window.sessionStorage.currentIndex=n;
         switch(n){
           case 0:
             window.sessionStorage.active="recommend";
@@ -117,7 +114,10 @@
     },
     created(){
       var active=window.sessionStorage.active
-      if(active){this.active=active};
+      if(active){
+        this.active=active;
+        this.changeState(window.sessionStorage.currentIndex);
+      };
     },
     components:{
       "cooktop":CookTop,
@@ -130,6 +130,10 @@
 </script>
 
 <style scoped>
+.tabContainer .find .page-classify{
+  padding-bottom: 56px !important;
+}
+
   .recommend{
     position:absolute;
     width:100%;
