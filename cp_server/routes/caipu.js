@@ -76,16 +76,7 @@ router.get("/user", (req, res) => {
   })
 })
 
-//添加收藏
-router.get("/shoucang", (req, res) => { 
-  var uid=req.query.uid;
-  var did=req.query.did;
-  var sql = 'INSERT INTO cp_collect(ct_user_id,cp_id) VALUES (?,?)';
-  pool.query(sql, [uid,did], (err, result) => {
-    if (err) throw err;
-    res.send({ code: 1, msg: "查询成功", data: result });
-  })
-})
+
 
 
 //菜谱的浏览量

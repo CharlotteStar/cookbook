@@ -84,6 +84,7 @@ export default {
   overflow: hidden;
   flex-direction: column;
   padding-top:52px;
+  padding-bottom: 56px;
 }
 .classify-top {
   padding: 10px 20px;
