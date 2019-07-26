@@ -167,10 +167,10 @@ CREATE TABLE cp_user(
   upwd VARCHAR(32),
   phone BIGINT,
   email VARCHAR(256),
-  avatar VARCHAR(128)，    #头像
-  fans  INT(32),  /*粉丝*/
-  focus  INT(12),/*关注*/
-  menu   INT(12)/*菜谱*/
+  avatar VARCHAR(128),    #头像
+  fans  BIGINT(32),  /*粉丝*/
+  focus  BIGINT(12),/*关注*/
+  menu   BIGINT(12)/*菜谱*/
 );
 INSERT INTO cp_user VALUES
 (NULL,"美食小编",md5("123456"),13579246810,"13579246810@qq.com","http://127.0.0.1:9999/user_avatar/20120902160411_ik2UH.jpg",50,131,5),
