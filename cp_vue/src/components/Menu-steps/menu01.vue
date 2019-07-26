@@ -116,73 +116,44 @@ export default {
       ff: ""
     };
   },
-  methods: {
-    change() {
-      if (!this.scIsSelected) {
-        var uid = window.sessionStorage.uid;
-        this.scIsSelected = true;
-        this.axios
-          .get("/shoucan/add", {
-            params: {
+  methods:{
+    change(){
+      if(window.sessionStorage.uid){
+        if(!this.scIsSelected){
+          var uid=window.sessionStorage.uid;
+          this.scIsSelected=true
+          this.axios.get(
+            '/shoucan/add',
+            {params:{
               uid,
-              did: this.cp_details.did
-            }
-          })
-          .then(res => {
+              did:this.cp_details.did
+            }}
+          ).then(res=>{
             this.$toast({
-              message: "添加收藏",
-              position: "center",
-              duration: 1500
+              message:"添加收藏",
+              position:"center",
+              duration:1500,
             });
-          });
-      } else {
-        this.scIsSelected = false;
-        this.axios
-          .get("/shoucan/shangchu", { params: { sid: this.sid } })
-          .then(res => {
+          })
+        }else{
+          this.scIsSelected=false;
+          this.axios.get(
+            '/shoucan/shangchu',
+            {params:{sid:this.sid}}
+          ).then(res=>{
             this.$toast({
-              message: "取消收藏",
-              position: "center",
-              duration: 1500
-            });
-          });
-      }
-    },
-    focus() {
-      var gz = document.getElementsByClassName("focus")[0];
-      if (this.canquguan) {
-        gz.innerHTML = "已关注";
-
-        this.canquguan = false;
-        gz.style.background = "red";
-        gz.style.color = "#fff";
-        var uid = window.sessionStorage.uid;
-         this.ff = Number(this.ff) + 1
-        this.axios
-          .get("/tj/focus", {
-            params: {
-              uid,
-              focus: this.ff
-            }
+              message:"取消收藏",
+              position:"center",
+              duration:1500,
+            })
           })
-          .then(res => {
-          });
-      } else {
-        gz.innerHTML = "关注";
-        this.canquguan = true;
-        gz.style.background = "#fff";
-        gz.style.color = "red";
-         var uid = window.sessionStorage.uid;
-         this.ff = Number(this.ff) - 1
-        this.axios
-          .get("/tj/focus", {
-            params: {
-              uid,
-              focus: this.ff
-            }
-          })
-          .then(res => {
-          });
+        }
+      }else{
+        this.$toast({
+          message:"请登录",
+          position:"center",
+          duration:1500,
+        })
       }
     },
     zhankai() {

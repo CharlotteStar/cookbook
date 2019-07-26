@@ -69,6 +69,7 @@ router.get("/getkeyword", (req, res) => {
         res.send({ code: 1, msg: "查询成功", data: result });
     })
 })
+
 router.get("/zn_search", (req, res) => {
   var keywords = req.query.keywords;
   var sql = "SELECT * FROM cp_details WHERE  (primary_cl like '%" + keywords[0] + "%' or secondary_cl like '%" + keywords[0] + "%')";
