@@ -37,7 +37,7 @@
       <div class="pinfen-container">
         <strong class="pingfeng">评分</strong>
         <img class="cp_score" :src="require(cp_details.score>=i ? '@/assets/icon/20180831142237_413.png' : '@/assets/icon/20180831142237_552.png')" v-for="i in 5" :key="i">
-        <div class="love" @click="change" :class="selected ? 'selected' : ''"></div>
+        <div class="love" @click="change" :class="scIsSelected ? 'selected' : ''"></div>
       </div>
       <div class="sc_miniw">
         <span>主料</span>
@@ -103,32 +103,40 @@ export default {
       cp_complete:[],   //菜谱步骤的成品图
       show_complete:"", //突出显示的成品图
       isSpread:false,
-      selected:false
-    };
+      scIsSelected:false,
+      sid:''
+    }
   },
   methods:{
-    fh(){
-      this.$router.push("/home");
-    },
-    blockFenlei(){
-      this.$router.push("/classify");
-    },
-    change(e){
-      if(!this.selected){
-        this.selected=true;
-        var love=document.getElementById("love");
+    change(){
+      if(!this.scIsSelected){
+        var uid=window.sessionStorage.uid;
+        this.scIsSelected=true
         this.axios.get(
-          '/caipu/shoucang',
+          '/shoucan/add',
           {params:{
-            uid:window.sessionStorage.uid,
-            did:this.cp_details.did,
+            uid,
+            did:this.cp_details.did
           }}
         ).then(res=>{
-          console.log(res.data);
-          return;
+          this.$toast({
+            message:"添加收藏",
+            position:"center",
+            duration:1500,
+          });
         })
       }else{
-        this.selected=false;
+        this.scIsSelected=false;
+        this.axios.get(
+          '/shoucan/shangchu',
+          {params:{sid:this.sid}}
+        ).then(res=>{
+          this.$toast({
+            message:"取消收藏",
+            position:"center",
+            duration:1500,
+          })
+        })
       }
     },
     zhankai(){
@@ -167,7 +175,20 @@ export default {
       ).then(res=>{
         return;
       })
-    })
+    });
+
+    var uid=window.sessionStorage.uid;
+    if(uid){
+      this.axios.get(
+        '/shoucan/is_shoucang',
+        {params:{uid,did:this.did}}
+      ).then(res=>{ 
+        if(res.data.code=='1'){
+          this.sid=res.data.data.sid;
+          this.scIsSelected=true;
+        }
+      })
+    }
   }
 };
 </script>
@@ -339,7 +360,7 @@ em {
 }
 .pinfen-container {
   margin-bottom: 50px;
-  position:relative;
+  position: relative;
 }
 .fineshed{margin-top:50px;}
 .fineshed-item{
@@ -418,10 +439,10 @@ em {
   height:69px;
   background-image: url("../../assets/icon/wap2017icons1.png");
   background-size: 353px;
-  background-position: 0px 333px;
+  background-position:0px 333px;
 }
 .love.selected{
-  background-position: -41px 333px;
+  background-position: -42px 333px;
 }
 
 </style>

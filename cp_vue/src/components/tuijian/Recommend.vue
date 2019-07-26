@@ -552,7 +552,6 @@ export default {
         //判断页面是否到底部
         if (tj_container.scrollTop+tj_container.clientHeight==tj_container.scrollHeight) {
           this.loadBottom();
-          console.log()
         }
         var zhanwei=document.getElementsByClassName("zhanwei")[0];
         var navbar=document.getElementsByClassName("navbar")[0];
@@ -617,6 +616,7 @@ export default {
 }
 .recommend-list {
   white-space: nowrap;
+  margin-bottom: 55px;
 }
 .recommend-container-item {
   display: inline-block;

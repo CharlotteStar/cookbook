@@ -70,14 +70,13 @@ export default {
           var code=res.data.code;
           if(code==1){
             window.sessionStorage.uid=res.data.data[0].uid;
-            console.log(window.sessionStorage.uid)
             this.$toast({
               message:res.data.msg,
               position:"top",
               duration:1500,
               iconClass:"iconfont icon-biaoqing",   
             })
-            this.$router.push("/home");
+            this.$router.replace("/home");
           }else{
             this.$toast({
               message:res.data.msg,

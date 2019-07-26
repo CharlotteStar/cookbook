@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="page-user-cp">
+      <!-- <fanhui></fanhui> -->
       <title-bar getback="<<返回" authorSteps="爱吃的小胖子~菜谱"></title-bar>
       <div class="all-teps">
         <div class="moudel" v-for="(item,index) of user_cp" :key="index">
@@ -25,6 +26,7 @@
 </template>
 <script>
 import TitleBar from "./TitleBar.vue";
+import fanhui from "../me/common/fanhui.vue";
 export default {
   data() {
     return {
@@ -60,7 +62,8 @@ export default {
     // });
   },
   components: {
-    TitleBar
+    TitleBar,
+    fanhui
   }
 };
 </script>
@@ -71,6 +74,8 @@ export default {
 .link{
   display: block;
   width: 100%;
+  max-height:15rem;
+  overflow: hidden;
 }
 .all-teps {
   background-color: #efefef;
@@ -79,7 +84,6 @@ export default {
 }
 .img {
   width: 100%;
-  height:17rem;
   overflow: hidden;
 }
 .div-img {
