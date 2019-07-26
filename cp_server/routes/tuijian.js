@@ -33,9 +33,7 @@ router.get("/tuijian", (req, res) => {
 //关注
 router.get("/focus",(req,res)=>{
   var uid=req.query.uid;
-  console.log(uid)
-  var focus=req.query.focus+1;
-  console.log(focus)
+  var focus=req.query.focus;
   pool.query("UPDATE cp_user SET focus=? WHERE uid=? ",[focus,uid],(err,result)=>{
     if(err)throw err;
     res.send("1")

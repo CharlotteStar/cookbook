@@ -1,11 +1,11 @@
 <template>
   <div class="page_details">
     <div class="sign-food">
-      <img :src="cp_details.pic">
+      <img :src="cp_details.pic" />
     </div>
     <div class="top">
-	    <div  @click="$router.go(-1)" class="btn1">&lt; 返回</div>
-	    <router-link to="/home" class="btn2">首页 &gt;</router-link>
+      <div @click="$router.go(-1)" class="btn1">&lt; 返回</div>
+      <router-link to="/home" class="btn2">首页 &gt;</router-link>
     </div>
     <div class="effect">
       <table></table>
@@ -13,15 +13,12 @@
       <span class="view" v-text="cp_details.shoucang+'人收藏'"></span>
       <span class="view" v-text="cp_details.browse+'人浏览'"></span>
       <div class="xiaoguo">
-        <router-link to="" class="list" v-for="(item,index) of benefit" :key="index" v-text="item"></router-link>
+        <router-link to class="list" v-for="(item,index) of benefit" :key="index" v-text="item"></router-link>
       </div>
     </div>
     <div class="w-message">
       <router-link :to="`/menu01_item?uid=`+cp_details.user_id" class="weibou">
-        <img
-          :src="user_data.avatar"
-          style="width:40px;height:40px;border-radius:50%"
-        />
+        <img :src="user_data.avatar" style="width:40px;height:40px;border-radius:50%" />
         <span class="w-name">
           <span v-text="user_data.uname"></span>
           <br />
@@ -36,7 +33,12 @@
       <p class="comment-p" v-text="cp_details.user_log"></p>
       <div class="pinfen-container">
         <strong class="pingfeng">评分</strong>
-        <img class="cp_score" :src="require(cp_details.score>=i ? '@/assets/icon/20180831142237_413.png' : '@/assets/icon/20180831142237_552.png')" v-for="i in 5" :key="i">
+        <img
+          class="cp_score"
+          :src="require(cp_details.score>=i ? '@/assets/icon/20180831142237_413.png' : '@/assets/icon/20180831142237_552.png')"
+          v-for="i in 5"
+          :key="i"
+        />
         <div class="love" @click="change" :class="scIsSelected ? 'selected' : ''"></div>
       </div>
       <div class="sc_miniw">
@@ -46,7 +48,7 @@
           <a class="red">胡萝卜</a>1根、
           <a class="red">玉米</a>1只、
           <a class="red" href>豆角</a>适量、
-          <a class="red" href>土豆</a>1个 -->
+          <a class="red" href>土豆</a>1个-->
         </p>
         <br />
         <span>辅料</span>
@@ -58,7 +60,7 @@
           <a href>花椒大料</a>适量、
           <a href>香叶</a>1片、
           <a href>葱</a>适量、
-          <a href>姜</a>适量 -->
+          <a href>姜</a>适量-->
         </p>
       </div>
     </div>
@@ -66,7 +68,7 @@
     <div class="cp_step" :class="isSpread ? 'spread' : ''">
       <div class="stepitem1" v-for="(item,index) of cp_step" :key="index">
         <strong class="step_title" id="step_num1">步骤{{item.step}}</strong>
-        <img alt="东北大丰收的做法大全" :src="item.step_img" class="stepimg"/>
+        <img alt="东北大丰收的做法大全" :src="item.step_img" class="stepimg" />
         <div class="stepc comment">
           <p class="stepdes" v-text="item.content"></p>
         </div>
@@ -75,12 +77,17 @@
       <div class="fineshed">
         <strong class="step_title" style="font-size:20px;" v-text="cp_details.title+'成品图'"></strong>
         <div class="fineshed-item">
-          <img :src="show_complete" class="fineshed-img">
+          <img :src="show_complete" class="fineshed-img" />
         </div>
       </div>
       <div class="doneimg_preview">
-        <div class="imgw current" v-for="(item,index) of cp_complete" :key="index" @click="toggle_pic(index)">
-          <img :src="item.step_img"/>
+        <div
+          class="imgw current"
+          v-for="(item,index) of cp_complete"
+          :key="index"
+          @click="toggle_pic(index)"
+        >
+          <img :src="item.step_img" />
         </div>
       </div>
       <div class="skill">
@@ -93,171 +100,190 @@
 </template>
 <script>
 export default {
-  props:['did'],
+  props: ["did"],
   data() {
     return {
-      cp_details:{},
-      cp_step:[],   //菜谱的步骤
-      benefit:[],
-      user_data:{},
-      cp_complete:[],   //菜谱步骤的成品图
-      show_complete:"", //突出显示的成品图
-      isSpread:false,
-      scIsSelected:false,
-      sid:'',
-      canquguan:true
-    }
+      cp_details: {},
+      cp_step: [], //菜谱的步骤
+      benefit: [],
+      user_data: {},
+      cp_complete: [], //菜谱步骤的成品图
+      show_complete: "", //突出显示的成品图
+      isSpread: false,
+      scIsSelected: false,
+      sid: "",
+      canquguan: true,
+      ff: ""
+    };
   },
-  methods:{
-    change(){
-      if(!this.scIsSelected){
-        var uid=window.sessionStorage.uid;
-        this.scIsSelected=true
-        this.axios.get(
-          '/shoucan/add',
-          {params:{
-            uid,
-            did:this.cp_details.did
-          }}
-        ).then(res=>{
-          this.$toast({
-            message:"添加收藏",
-            position:"center",
-            duration:1500,
-          });
-        })
-      }else{
-        this.scIsSelected=false;
-        this.axios.get(
-          '/shoucan/shangchu',
-          {params:{sid:this.sid}}
-        ).then(res=>{
-          this.$toast({
-            message:"取消收藏",
-            position:"center",
-            duration:1500,
+  methods: {
+    change() {
+      if (!this.scIsSelected) {
+        var uid = window.sessionStorage.uid;
+        this.scIsSelected = true;
+        this.axios
+          .get("/shoucan/add", {
+            params: {
+              uid,
+              did: this.cp_details.did
+            }
           })
-        })
+          .then(res => {
+            this.$toast({
+              message: "添加收藏",
+              position: "center",
+              duration: 1500
+            });
+          });
+      } else {
+        this.scIsSelected = false;
+        this.axios
+          .get("/shoucan/shangchu", { params: { sid: this.sid } })
+          .then(res => {
+            this.$toast({
+              message: "取消收藏",
+              position: "center",
+              duration: 1500
+            });
+          });
       }
     },
-    focus(){
-      var gz=document.getElementsByClassName("focus")[0]
-     if(this.canquguan){
-       gz.innerHTML=("已关注")
-       this.canquguan=false;
-       gz.style.background="red";
-       gz.style.color="#fff";
-       this.axios.get()
-     }else{
-       gz.innerHTML=("关注")
-       this.canquguan=true;
-        gz.style.background="#fff";
-        gz.style.color="red"
-     }
+    focus() {
+      var gz = document.getElementsByClassName("focus")[0];
+      if (this.canquguan) {
+        gz.innerHTML = "已关注";
+
+        this.canquguan = false;
+        gz.style.background = "red";
+        gz.style.color = "#fff";
+        var uid = window.sessionStorage.uid;
+         this.ff = Number(this.ff) + 1
+        this.axios
+          .get("/tj/focus", {
+            params: {
+              uid,
+              focus: this.ff
+            }
+          })
+          .then(res => {
+          });
+      } else {
+        gz.innerHTML = "关注";
+        this.canquguan = true;
+        gz.style.background = "#fff";
+        gz.style.color = "red";
+         var uid = window.sessionStorage.uid;
+         this.ff = Number(this.ff) - 1
+        this.axios
+          .get("/tj/focus", {
+            params: {
+              uid,
+              focus: this.ff
+            }
+          })
+          .then(res => {
+          });
+      }
     },
-    zhankai(){
-      this.isSpread=true;
-      seeallbtn.style="display:none";
+    zhankai() {
+      this.isSpread = true;
+      seeallbtn.style = "display:none";
     },
-    toggle_pic(i){
+    toggle_pic(i) {
       console.log(12);
-      this.show_complete=this.cp_complete[i].step_img
+      this.show_complete = this.cp_complete[i].step_img;
     }
   },
-  created(){
-    this.axios.get(
-      '/caipu/details',
-      {params:{did:this.did}}
-    ).then(res=>{
-      this.cp_details=res.data.cp_details;
-      for(var item of res.data.cp_step){
-        item.step>0 ? this.cp_step.push(item) : this.cp_complete.push(item)
-      }
-      this.benefit=this.cp_details.benefit.split(' ');
-      this.cp_complete[0] ? this.show_complete=this.cp_complete[0].step_img : '';
-      //获取对应用户的数据
-      var uid=this.cp_details.user_id;
-      this.axios.get(
-        "/caipu/user",
-        {params:{uid}}
-      ).then(res=>{
-        this.user_data=res.data.data[0];
-      })
-      //页面加载时浏览量加一;
-      var browse=++res.data.cp_details.browse;
-      this.axios.get(
-        "/caipu/browse",
-        {params:{browse,did:this.did}}
-      ).then(res=>{
-        return;
-      })
-    });
-
-    var uid=window.sessionStorage.uid;
-    if(uid){
-      this.axios.get(
-        '/shoucan/is_shoucang',
-        {params:{uid,did:this.did}}
-      ).then(res=>{ 
-        if(res.data.code=='1'){
-          this.sid=res.data.data.sid;
-          this.scIsSelected=true;
+  created() {
+    this.axios
+      .get("/caipu/details", { params: { did: this.did } })
+      .then(res => {
+        this.cp_details = res.data.cp_details;
+        for (var item of res.data.cp_step) {
+          item.step > 0 ? this.cp_step.push(item) : this.cp_complete.push(item);
         }
-      })
+        this.benefit = this.cp_details.benefit.split(" ");
+        this.cp_complete[0]
+          ? (this.show_complete = this.cp_complete[0].step_img)
+          : "";
+        //获取对应用户的数据
+        var uid = this.cp_details.user_id;
+        this.axios.get("/caipu/user", { params: { uid } }).then(res => {
+          this.user_data = res.data.data[0];
+          this.ff = res.data.data[0].focus;
+        });
+        //页面加载时浏览量加一;
+        var browse = ++res.data.cp_details.browse;
+        this.axios
+          .get("/caipu/browse", { params: { browse, did: this.did } })
+          .then(res => {
+            return;
+          });
+      });
+
+    var uid = window.sessionStorage.uid;
+    if (uid) {
+      this.axios
+        .get("/shoucan/is_shoucang", { params: { uid, did: this.did } })
+        .then(res => {
+          if (res.data.code == "1") {
+            this.sid = res.data.data.sid;
+            this.scIsSelected = true;
+          }
+        });
     }
   }
 };
 </script>
 <style scoped>
-.cp_step{
-  position:relative;
-  height:1200px;
+.cp_step {
+  position: relative;
+  height: 1200px;
   overflow: hidden;
 }
-.cp_step.spread{
-  height:auto; 
-  overflow:none;
+.cp_step.spread {
+  height: auto;
+  overflow: none;
 }
-
 
 .sign-food {
   height: 15rem;
   overflow: hidden;
 }
-.sign-food img{
-  width:100%;
+.sign-food img {
+  width: 100%;
   object-fit: cover;
-  margin-top:50%;
+  margin-top: 50%;
   transform: translateY(-50%);
 }
 .effect {
   width: 100%;
   background-color: bisque;
-  padding:25px 20px;
+  padding: 25px 20px;
 }
-.effect .title{
-  font-size:20px;
+.effect .title {
+  font-size: 20px;
   font-weight: 700;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 .view {
   font-size: 15px;
 }
-.view+.view{
-  margin-left:10px;
+.view + .view {
+  margin-left: 10px;
 }
-.xiaoguo{
-  margin-top:10px;
+.xiaoguo {
+  margin-top: 10px;
 }
-.sc_miniw span{
-  display:inline-block;
-  font-size:1.1rem;
+.sc_miniw span {
+  display: inline-block;
+  font-size: 1.1rem;
   font-weight: 700;
-  margin-bottom:5px;
+  margin-bottom: 5px;
 }
 .list {
   font-size: 15px;
-  color:#ec8638;
+  color: #ec8638;
   padding-right: 10px;
 }
 .w-name {
@@ -295,7 +321,7 @@ export default {
 }
 .comment-p {
   margin-bottom: 20px;
-  font-size:0.95rem;
+  font-size: 0.95rem;
 }
 /* .star {
   display: inline-block;
@@ -326,7 +352,7 @@ em {
   color: slategrey;
 }
 .red {
-  color:red
+  color: red;
 }
 .peiliao,
 .peiliao > a {
@@ -336,62 +362,64 @@ em {
   margin-top: 70px;
 }
 .step_title {
-  font-size:24px;
+  font-size: 24px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom:8px;
+  margin-bottom: 8px;
 }
 .stepimg {
   width: 100%;
 }
 .doneimg_preview {
-  padding:10px 5px;
+  padding: 10px 5px;
   width: 100%;
-  display:flex;
-  position:relative;
+  display: flex;
+  position: relative;
 }
 .imgw {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin:0 5px;
+  margin: 0 5px;
   width: 70px;
   height: 70px;
   overflow: hidden;
-
 }
 .imgw > img {
   width: 100%;
 }
 .skill {
   margin: 10px 0;
-  padding:15px;
+  padding: 15px;
 }
-.skill strong{
+.skill strong {
   font-weight: 700;
-  font-size:1.1rem;
-  display:block;
-  margin-bottom:5px;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 5px;
 }
 .pinfen-container {
   margin-bottom: 50px;
   position: relative;
 }
-.fineshed{margin-top:50px;}
-.fineshed-item{
-  width:100%;
-  height:300px;
+.fineshed {
+  margin-top: 50px;
+}
+.fineshed-item {
+  width: 100%;
+  height: 300px;
   overflow: hidden;
 }
-.fineshed-img{
-  width:100%;height:100%;
-  object-fit: cover
+.fineshed-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.cp_score{
-  width:25px;
-  margin:0 5px;
+.cp_score {
+  width: 25px;
+  margin: 0 5px;
   vertical-align: middle;
 }
 .top {
@@ -411,7 +439,7 @@ em {
   color: #fff;
   border-radius: 15px;
   line-height: 30px;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   position: absolute;
   left: 15px;
   top: 15px;
@@ -425,44 +453,55 @@ em {
   color: #fff;
   border-radius: 15px;
   line-height: 30px;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   position: absolute;
   right: 15px;
   top: 15px;
 }
 .seeallbtn {
-    display: none;
-    width: 100%;
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    height: 80px;
-    line-height: 100px;
-    color: #666;
-    text-align: center;
-    font-size: 16px;
-    background: linear-gradient(to bottom,rgba(245,245,245,0),color-stop(30%,rgba(245,245,245,0.8)),rgba(245,245,245,1));
-    background: -webkit-gradient(linear,0 0,0 bottom,from(rgba(245,245,245,0)),color-stop(30%,rgba(245,245,245,0.8)),to(rgba(245,245,245,1)));
+  display: none;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 80px;
+  line-height: 100px;
+  color: #666;
+  text-align: center;
+  font-size: 16px;
+  background: linear-gradient(
+    to bottom,
+    rgba(245, 245, 245, 0),
+    color-stop(30%, rgba(245, 245, 245, 0.8)),
+    rgba(245, 245, 245, 1)
+  );
+  background: -webkit-gradient(
+    linear,
+    0 0,
+    0 bottom,
+    from(rgba(245, 245, 245, 0)),
+    color-stop(30%, rgba(245, 245, 245, 0.8)),
+    to(rgba(245, 245, 245, 1))
+  );
 }
-.star-love{
-   position: absolute;
-   top:60%;
-   transform: translateY(-50%);
-   right:0;
-   width:100px;
+.star-love {
+  position: absolute;
+  top: 60%;
+  transform: translateY(-50%);
+  right: 0;
+  width: 100px;
 }
-.love{
-  position:absolute;
-  right:10px;
-  top:0px;
-  width:42px;
-  height:69px;
+.love {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  width: 42px;
+  height: 69px;
   background-image: url("../../assets/icon/wap2017icons1.png");
   background-size: 353px;
-  background-position:0px 333px;
+  background-position: 0px 333px;
 }
-.love.selected{
+.love.selected {
   background-position: -42px 333px;
 }
-
 </style>
