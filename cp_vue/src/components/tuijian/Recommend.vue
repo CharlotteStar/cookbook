@@ -525,10 +525,9 @@ export default {
           : now >= 12
           ? toggle_type(1)
           : toggle_type(0);
-      }, 200);
+      }, 500);
       var toggle_type = i => {
-        var width = document.getElementsByClassName("sancan_slide")[0]
-          .clientWidth;
+        var width = document.getElementsByClassName("sancan_slide")[0].clientWidth;
         type_list.className = "type_list type_" + i;
         sancan_list.style.left = `-${i * width}px`;
         this.i = i;
