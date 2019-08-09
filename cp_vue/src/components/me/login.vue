@@ -69,7 +69,7 @@ export default {
         ).then(res=>{
           var code=res.data.code;
           if(code==1){
-            window.sessionStorage.uid=res.data.data[0].uid;
+            sessionStorage.setItem("user",JSON.stringify(res.data.data));
             this.$toast({
               message:res.data.msg,
               position:"top",

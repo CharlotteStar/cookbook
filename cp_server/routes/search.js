@@ -70,6 +70,7 @@ router.get("/getkeyword", (req, res) => {
     })
 })
 
+//智能搜索
 router.get("/zn_search", (req, res) => {
   var keywords = req.query.keywords;
   var sql = "SELECT * FROM cp_details WHERE  (primary_cl like '%" + keywords[0] + "%' or secondary_cl like '%" + keywords[0] + "%')";

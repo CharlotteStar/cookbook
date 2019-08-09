@@ -120,9 +120,7 @@ export default {
   },
   created(){
     this.loadSearchTop()
-    if(this.uid){
-      this.loadSearchHistory()
-    }
+    this.loadSearchHistory()
 
     this.axios.get(
       '/search/top'

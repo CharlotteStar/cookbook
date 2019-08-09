@@ -3,11 +3,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const session = require("express-session");
-const userRouter = require("./routes/user.js");
-const tjRouter = require("./routes/tuijian.js");
-const cpRouter = require("./routes/caipu.js");
-const shoucan = require("./routes/shoucan.js");
-const search = require("./routes/search.js");
+
+const userRouter = require("./routes/user.js");  //用户
+const tjRouter = require("./routes/tuijian.js"); //推荐页
+const cpRouter = require("./routes/caipu.js");   //菜谱
+const shoucan = require("./routes/shoucan.js"); //我的收藏
+const search = require("./routes/search.js");   //搜索
+const guanzhu = require("./routes/guanzhu.js");   //我的关注
+const footprint= require("./routes/footprint.js");  //我的足迹
 
 
 
@@ -45,6 +48,8 @@ server.use("/tj", tjRouter);
 server.use("/caipu", cpRouter);
 server.use("/shoucan",shoucan)
 server.use("/search", search);
+server.use("/gz", guanzhu);
+server.use("/footprint", footprint);
 
 
 //用户菜谱页面加载更多

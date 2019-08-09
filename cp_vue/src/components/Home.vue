@@ -73,7 +73,7 @@
   // 引入首页推荐面板
   import Recommend from './tuijian/Recommend.vue'
   import classify from './tuijian/classify.vue'  //分类
-  import me from './me/Personal.vue'
+  import me from './me/me.vue'
   export default {
     data(){
       return {
