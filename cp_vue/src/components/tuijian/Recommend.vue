@@ -650,7 +650,6 @@ export default {
   border-radius: 10px;
   overflow: hidden;
   margin: 15px 0;
-  vertical-align: middle;
   color: #2c3e50;
 }
 .recommend-item img {

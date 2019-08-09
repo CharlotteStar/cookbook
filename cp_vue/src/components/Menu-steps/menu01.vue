@@ -240,7 +240,7 @@ export default {
         .get("/caipu/details", { params: { did: this.did } })
         .then(res => {
           this.cp_details = res.data.cp_details;
-          this.footprint_add();   //添加足迹
+          // this.footprint_add();   //添加足迹
           for (var item of res.data.cp_step) {
             item.step > 0
               ? this.cp_step.push(item)
@@ -301,17 +301,18 @@ export default {
           });
       });
 
-    var uid = window.sessionStorage.uid;
-    if (uid) {
-      this.axios
-        .get("/shoucan/is_shoucang", { params: { uid, did: this.did } })
-        .then(res => {
-          if (res.data.code == "1") {
-            this.sid = res.data.data.sid;
-            this.scIsSelected = true;
-          }
-        });
-    }
+      var uid = window.sessionStorage.uid;
+      if (uid) {
+        this.axios
+          .get("/shoucan/is_shoucang", { params: { uid, did: this.did } })
+          .then(res => {
+            if (res.data.code == "1") {
+              this.sid = res.data.data.sid;
+              this.scIsSelected = true;
+            }
+          });
+      }
+    },
   },
   created() {
     this.getDetailData(); //获取整个详情页的数据
@@ -325,7 +326,7 @@ export default {
       this.is_shoucang(); //判断是否已收藏
     }
   }
-}}
+}
 </script>
 <style scoped>
 .cp_step {
