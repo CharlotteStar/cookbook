@@ -25,13 +25,8 @@
           <span>发布1130篇菜谱</span>
         </span>
       </router-link>
-<<<<<<< HEAD
       <div class="star-love" @click="gz_toggle">
         <span href class="focus" :class="isGz ? 'guanzhu' : ''">{{isGz ? '已关注' : '关注'}}</span>
-=======
-      <div class="star-love">
-        <div class="focus" @click="focus">关注</div>
->>>>>>> f88c0feec42be0c635e2897dc4a97c7ea8586cee
       </div>
     </div>
     <div class="comment">
@@ -48,32 +43,10 @@
       </div>
       <div class="sc_miniw">
         <span>主料</span>
-<<<<<<< HEAD
         <p v-text="cp_details.primary_cl"></p>
         <br />
         <span>辅料</span>
         <p class="peiliao" v-text="cp_details.secondary_cl"></p>
-=======
-        <p v-text="cp_details.primary_cl">
-          <!-- <a class="red">排骨</a>300克、
-          <a class="red">胡萝卜</a>1根、
-          <a class="red">玉米</a>1只、
-          <a class="red" href>豆角</a>适量、
-          <a class="red" href>土豆</a>1个-->
-        </p>
-        <br />
-        <span>辅料</span>
-        <p class="peiliao" v-text="cp_details.secondary_cl">
-          <!-- <a href>油</a>适量、
-          <a href>盐</a>适量、
-          <a href>自制辣椒酱</a>适量、
-          <a href>料酒</a>适量、
-          <a href>花椒大料</a>适量、
-          <a href>香叶</a>1片、
-          <a href>葱</a>适量、
-          <a href>姜</a>适量-->
-        </p>
->>>>>>> f88c0feec42be0c635e2897dc4a97c7ea8586cee
       </div>
     </div>
 
@@ -352,7 +325,7 @@ export default {
       this.is_shoucang(); //判断是否已收藏
     }
   }
-};
+}}
 </script>
 <style scoped>
 .cp_step {
