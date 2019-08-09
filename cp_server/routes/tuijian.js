@@ -30,5 +30,13 @@ router.get("/tuijian", (req, res) => {
     res.send({ code: 1, msg: "查询成功", data: result });
   })
 })
-
+//关注
+router.get("/focus",(req,res)=>{
+  var uid=req.query.uid;
+  var focus=req.query.focus;
+  pool.query("UPDATE cp_user SET focus=? WHERE uid=? ",[focus,uid],(err,result)=>{
+    if(err)throw err;
+    res.send("1")
+  })
+}) 
 module.exports = router;
