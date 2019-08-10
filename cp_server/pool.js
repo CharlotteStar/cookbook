@@ -2,11 +2,11 @@ const mysql = require("mysql");
 
 //创建连接池
 var pool = mysql.createPool({
-  host: '127.0.0.1',
+  host: 'w.rdc.sae.sina.com.cn',
   port: 3306,
-  user: 'root',
-  password: '',
-  database: 'cp',
+  user: '31xl3jy1wz',
+  password: 'iwykl4yji2x12ih140iwj5kh0llmyxjxwylyixi4',
+  database: 'app_caiputianxia',
   connectionLimit:15
 });
 

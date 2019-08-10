@@ -1,11 +1,11 @@
 <template>
-  <div class="page-shoucang">
+  <div class="page-shoucang" >
     <div class="sc_top">
       <span>收藏</span>
       <div class="top_nav">
         <div>全部</div>
       </div>
-      <div class="close">×</div>
+      <div class="close" @click="displayStatus">×</div>
     </div>
     <div class="sc_content">
       <router-link :to="'/menu01/'+item.did" class="footprint-item" v-for="(item,index) of cp_data" :key="index">
@@ -28,23 +28,26 @@
 import qs from "qs"
 export default {
   props:{
-    uid:""
+    uid:"",
   },
   data(){
     return {
-      cp_data:[]
+      cp_data:[],
+      num:1
     }
   },
   methods: {
+    displayStatus(){
+      this.$emit('displayStatus');
+    },
     get_sc_data(){
-      console.log(this.uid);
-      // this.axios.get(
-      //   "/shoucan/yh_shoucan",
-      //   qs.stringify({uid:this.uid}),
-      //   {headers:{'Content-Type':'application/x-www-form-urlencoded'}}
-      // ).then(res=>{
-      //   console.log(res.data);
-      // })
+      this.axios.post(
+        "/shoucan/yh_shoucan",
+        qs.stringify({uid:this.uid}),
+        {headers:{'Content-Type':'application/x-www-form-urlencoded'}}
+      ).then(res=>{
+        this.cp_data=res.data
+      })
     }
   },
   created(){
@@ -54,11 +57,13 @@ export default {
 </script>
 
 <style>
+@import '../scss/list.scss';
+
 .page-shoucang{
   position:absolute;
+  background:#fff;
   top:0;left:0;
   bottom:0;right:0;
-  background:#fff;
   z-index:999;
 }
 .sc_top{
@@ -86,4 +91,8 @@ export default {
   text-align: center;
   line-height: 25px;
 }
+.sc_content{
+  padding:0 15px;
+}
+
 </style>

@@ -30,7 +30,7 @@ router.get("/is_shoucang",(req,res)=>{
 //获取收藏的数据
  router.post("/yh_shoucan",(req,res)=>{
   var obj=req.body.uid;
-  var sql = "select title,score,uname,avatar,browse,pic,shoucang,benefit,sid from cp_collect,cp_details,cp_user where uid=ct_user_id and did=cp_id and ct_user_id=?";
+  var sql = "select did,title,score,uname,avatar,browse,pic,shoucang,benefit,sid from cp_collect,cp_details,cp_user where uid=ct_user_id and did=cp_id and ct_user_id=?";
   pool.query(sql,[obj],(err,result)=>{
     if(err)throw err;   
      res.send(result)

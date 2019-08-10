@@ -39,7 +39,6 @@
           v-for="i in 5"
           :key="i"
         />
-        <div class="love" @click="change" :class="scIsSelected ? 'selected' : ''"></div>
       </div>
       <div class="sc_miniw">
         <span>主料</span>
@@ -81,6 +80,38 @@
       </div>
       <div class="seeallbtn" id="seeallbtn" @click="zhankai" style="display: block;">点击展开 ↓</div>
     </div>
+
+
+    <div class="user_operate">
+      <div class="operate_item" @click="change">
+        <img :src="require(scIsSelected ? '@/assets/icon/shoucang2.png' : '@/assets/icon/shoucang.png')">
+        <span v-text="byCount"></span>
+      </div>
+      <div class="operate_item">
+        <img src="@/assets/icon/pinglun.png">
+        <span>评论</span>
+      </div>
+    </div>
+
+    <!-- <div class="pinglun">
+      <div class="pinglun-list">
+        <div class="pinglun-item">
+          <div class="pinglun-user">
+            <div class="user-avatar">
+              <img src="@/assets/icon/shoucang.png">
+            </div>
+            <div class="user-name">用户名</div>
+            <div class="pinglun-date">08-10</div>
+          </div>
+          <div class="pinglun-content">
+            评论的内容
+          </div>
+        </div>
+      </div>
+      <div class="write-pinglun">
+        <input type="text">
+      </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -240,13 +271,14 @@ export default {
         .get("/caipu/details", { params: { did: this.did } })
         .then(res => {
           this.cp_details = res.data.cp_details;
-          // this.footprint_add();   //添加足迹
+          this.footprint_add();   //添加足迹
+          //菜谱的步骤及成品图
           for (var item of res.data.cp_step) {
             item.step > 0
               ? this.cp_step.push(item)
               : this.cp_complete.push(item);
           }
-          this.benefit = this.cp_details.benefit.split(" ");
+          this.benefit = this.cp_details.benefit.split(" ");//效果
           this.cp_complete[0]
             ? (this.show_complete = this.cp_complete[0].step_img)
             : "";
@@ -257,7 +289,7 @@ export default {
             this.isGuanzhu(); //判断是否已关注
           });
           //页面加载时浏览量加一;
-          var browse = ++res.data.cp_details.browse;
+          var browse = ++this.cp_details.browse;
           this.axios
             .get("/caipu/browse", { params: { browse, did: this.did } })
             .then(res => {
@@ -282,42 +314,12 @@ export default {
         else{
           this.axios.get('/footprint/add',{params})
         }
-        this.benefit = this.cp_details.benefit.split(" ");
-        this.cp_complete[0]
-          ? (this.show_complete = this.cp_complete[0].step_img)
-          : "";
-        //获取对应用户的数据
-        var uid = this.cp_details.user_id;
-        this.axios.get("/caipu/user", { params: { uid } }).then(res => {
-          this.user_data = res.data.data[0];
-          this.ff = res.data.data[0].focus;
-        });
-        //页面加载时浏览量加一;
-        var browse = ++res.data.cp_details.browse;
-        this.axios
-          .get("/caipu/browse", { params: { browse, did: this.did } })
-          .then(res => {
-            return;
-          });
       });
-
-      var uid = window.sessionStorage.uid;
-      if (uid) {
-        this.axios
-          .get("/shoucan/is_shoucang", { params: { uid, did: this.did } })
-          .then(res => {
-            if (res.data.code == "1") {
-              this.sid = res.data.data.sid;
-              this.scIsSelected = true;
-            }
-          });
-      }
     },
   },
   created() {
     this.getDetailData(); //获取整个详情页的数据
     this.sc_count();    //获取此菜谱被收藏的个数
-
     if (sessionStorage.getItem("user")) {
       this.isLogin = true;
       this.openUser = JSON.parse(sessionStorage.getItem("user"))[0];
@@ -329,6 +331,90 @@ export default {
 }
 </script>
 <style scoped>
+.write-pinglun{
+  background:#fff;
+  position:absolute;
+  bottom:0;
+  width:100%;
+  padding:5px 20px;
+}
+.write-pinglun input{
+  border-radius:20px;
+  width:100%;height:30px;
+  border:0;
+  outline: 0;
+  background:#ddd;
+  padding:0 30px;
+  box-sizing: border-box;
+}
+
+.pinglun{
+  position:fixed;
+  background:rgba(255,255,255,0.8);
+  bottom:0;
+  height:80%;
+  width:100%;
+  z-index:20 ;
+  font-size:15px;
+}
+.pinglun-list{
+  padding:0 15px;
+}
+.pinglun-item{
+  padding:10px 0;
+}
+.pinglun-date{
+  float:right
+}
+.pinglun-user::after{
+  content:"";
+  display:block;
+  clear:both;
+}
+.user-avatar,
+.user-name{
+  float:left;
+}
+.user-name{
+  padding:0 5px;
+}
+.pinglun-content{
+  padding-left:25px;
+  margin-top:5px;
+}
+.user-avatar{
+  width:20px;
+  border-radius:50%;
+  overflow: hidden;
+}
+.user-avatar img{
+  width:100%;
+}
+
+.user_operate{
+  position:fixed;
+  bottom:20px;
+  width:100%;
+  height:50px;
+  left:0;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.operate_item{
+  border-radius:30px;
+  padding:5px 15px; 
+  box-shadow: 0 3px 5px 3px rgba(0,0,0,0.3);
+  background:rgba(255,255,255,0.8);
+}
+.operate_item img{
+  width:25px;
+  margin-right:5px;
+}
+.operate_item span{
+  vertical-align: middle;
+}
+
 .cp_step {
   position: relative;
   height: 1200px;

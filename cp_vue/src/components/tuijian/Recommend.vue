@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="FourPlates">
-      <router-link class="mrfl" to>
+      <!-- <router-link class="mrfl" to>
         <img src="@/assets/tj_img/timg.jpg" />
         <div class="title">
           <h3>每日福利</h3>
@@ -55,7 +55,7 @@
           <h3>本周流行</h3>
           <p>最佳菜肴</p>
         </div>
-      </router-link>
+      </router-link> -->
       <router-link class="znzc" to="/SearchFirst">
         <img src="@/assets/tj_img/znzc.jpg" />
         <div class="title">
@@ -901,7 +901,7 @@ export default {
   padding: 0 10px;
 }
 .FourPlates > a {
-  width: 21%;
+  width: 45%;
   height: 120px;
   display: block;
   background: #fff;

@@ -1,9 +1,17 @@
 <template>
   <div class="page-me" :class="isLogin ? '' : 'not-log'">
     <div class="me-top">
-      <div class="shezhi-btn">
+      <div class="shezhi-btn"
+        @click.stop="show_sz= show_sz ? false : true" 
+        :class="show_sz ? '' : 'hide' "
+      >
         <img src="@/assets/icon/weibiaoti-.png" >
+        <div class="shezhi-list" >
+          <div class="shezhi-item" @click="logout">退出当前账号</div>
+        </div>
       </div>
+
+      
       <div class="xinfeng-btn">
         <img src="@/assets/icon/xinfengtwo.png" >
       </div>
@@ -28,7 +36,7 @@
           <span>粉丝</span>
         </div>
         <div class="record-item">
-          <span>0</span>
+          <span v-text="gz_count"></span>
           <span>关注</span>
         </div>
         <div class="record-item">
@@ -81,7 +89,7 @@
       </div>
     </div>
 
-    <!-- <shou-cang :uid="user.uid" :class="is_show_sc ? '' : 'd-none'"></shou-cang> -->
+    <shou-cang :uid="user.uid" @click="is_show_sc=true" @displayStatus="is_show_sc=false" :class="is_show_sc ? 'd-block' : 'd-none'"></shou-cang>
   </div>
 </template>
 
@@ -89,7 +97,7 @@
 import shouCang from './common/shoucang.vue'
 export default {
   components:{
-    shouCang
+    shouCang,
   },
   
   data(){
@@ -100,27 +108,46 @@ export default {
       is_show_sc:false,
       is_show_fb:false,
       is_show_cg:false,
-      is_show_cl:false
+      is_show_cl:false,
+      show_sz:false,
+      gz_count:0
     }
   },
   methods:{
+    logout(){
+      sessionStorage.user='';
+      this.$router.go(0);
+    },
     userInfo(){
       this.$router.push("/login");
+    },
+    get_gz_count(){
+      this.axios.get(
+        "/gz/count",
+        {params:{uid:this.user.uid}}
+      ).then(res=>{
+        this.gz_count=res.data.data;
+      })
     },
     getFootprint(){
       this.axios.get(
         "/footprint/get",
         {params:{uid:this.user.uid}}
       ).then(res=>{
-        this.cp_data=res.data.data
+        this.cp_data=res.data.data;
       })
     },
   },
   created(){
-    if(sessionStorage.getItem("user")){
-      this.user=JSON.parse(sessionStorage.getItem("user"))[0];
+    var user=sessionStorage.getItem("user");
+    if(user){
+      this.user=JSON.parse(user)[0];
       this.isLogin=true;
       this.getFootprint();
+      this.get_gz_count()
+    }
+    window.onclick=()=>{
+      this.show_sz=false
     }
   },
 }
@@ -128,6 +155,7 @@ export default {
 
 <style lang="scss" scoped>
   @import './scss/me.scss';
+  @import './scss/list.scss';
   .d-none{
     display: none !important;
   }
@@ -137,75 +165,4 @@ export default {
   .d-block{
     display: block !important;
   }
-
-  .list_title{
-  font-size: 28px;
-  font-weight: 700;
-  color: #333;
-  line-height: 38px;
-  margin-top:10px
-}
-.list_subtitle{
-  font-size: 18px;
-  font-weight: 700;
-  color: #333;
-  padding: 15px 0 5px;
-  margin-bottom: 10px;
-  line-height: 24px;
-}
-   
-.details_list{
-  padding:0 20px;
-}
-.footprint-item{
-  display:flex; 
-  align-items: center;
-  padding:10px 0;
-  
-}
-.footprint-item+.footprint-item{
-  border-top:0.01rem solid #ccc;
-}
-.cp_image{
-  width:120px;height:90px;
-  border-radius:5px;
-  overflow: hidden;
-}
-.cp_image img{
-  width:100%;
-  margin-top:50%;
-  transform: translateY(-50%);
-}
-.cp_info{
-  padding-left:15px;
- 
-}
-.cp_info h3{
-  font-size: 16px;
-  font-weight: 700;
-  color: #333;
-  line-height: 24px;
-  height: 24px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
-}
-.cp_score{
-  display: inline-block;
-  font-size: 0px;
-  padding: 4px 0px 6px;
-}
-.cp_score img{
-  width:16px;
-}
-.view-count{
-  font-size: 12px;
-  color: #999;
-  line-height: 20px;
-}
-
-.cp_list_container{
-  border-bottom:1px solid #ccc;
-}
 </style>

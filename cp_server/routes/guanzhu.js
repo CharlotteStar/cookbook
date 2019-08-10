@@ -13,6 +13,16 @@ router.get("/del", (req, res) => {
   })
 })
 
+/*获取关注的数量*/
+router.get("/count", (req,res) => { 
+  var uid = req.query.uid;
+  var sql="SELECT gid FROM user_guanzhu WHERE open_id=?"
+  pool.query(sql, [uid], (err, result) => { 
+    if (err) throw err;
+    res.send({ code: 1, msg: "查询成功", data: result.length });
+  })
+})
+
 /*添加关注*/
 router.get("/add", (req, res) => { 
   var uid = req.query.uid;

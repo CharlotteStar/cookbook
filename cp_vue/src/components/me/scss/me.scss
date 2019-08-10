@@ -18,6 +18,43 @@ $btn_w:28px;
       width:$btn_w;
       display:inline-block;
       margin:0 10px;
+      position: relative;
+      text-align: center;
+    }
+    .shezhi-btn.hide{
+      background-image:linear-gradient(to top,#ddd 0%, #fff 0%) !important;
+      .shezhi-list{
+        height:0;
+      }
+    }
+    
+    .shezhi-btn{
+      background-image:linear-gradient(to top,#ddd 0%, #fff 25%);
+      .shezhi-list{
+        position: absolute;
+        top:100%;left:50%;
+        transform: translateX(-50%);
+        font-size:14px;
+        white-space: nowrap;
+        overflow: hidden;
+        transition: 0.3s;
+        .shezhi-item{
+          padding:12px 10px;
+          background:#ddd;
+          color:#3a3a3a;
+        }
+        .shezhi-item+.shezhi-item{
+          border-top:1px solid #fff;
+        }
+        .shezhi-item:first-child{
+          border-top-left-radius:5px;
+          border-top-right-radius:5px;
+        }
+        .shezhi-item:last-child{
+          border-bottom-left-radius:5px;
+          border-bottom-right-radius:5px;
+        }
+      }
     }
   }
   img{width:100%;}
