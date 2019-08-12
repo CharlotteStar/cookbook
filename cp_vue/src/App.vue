@@ -10,6 +10,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  background:#fff;
 }
 #nav {
   padding: 30px;
@@ -57,6 +58,10 @@
 .mint-cell-wrapper.focus{
   border-top:1px solid rgb(53, 221, 243);
   border-bottom:1px solid  rgb(53, 221, 243);
+}
+
+span,input{
+  vertical-align: middle;
 }
 
 body, div, span, applet, object, iframe,

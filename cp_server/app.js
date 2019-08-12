@@ -11,6 +11,7 @@ const shoucan = require("./routes/shoucan.js"); //我的收藏
 const search = require("./routes/search.js");   //搜索
 const guanzhu = require("./routes/guanzhu.js");   //我的关注
 const footprint= require("./routes/footprint.js");  //我的足迹
+const pinglun= require("./routes/pinglun.js");  //评论
 
 
 
@@ -50,6 +51,7 @@ server.use("/shoucan",shoucan)
 server.use("/search", search);
 server.use("/gz", guanzhu);
 server.use("/footprint", footprint);
+server.use("/pinglun", pinglun);
 
 
 //用户菜谱页面加载更多

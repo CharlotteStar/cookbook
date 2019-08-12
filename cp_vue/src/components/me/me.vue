@@ -165,4 +165,43 @@ export default {
   .d-block{
     display: block !important;
   }
+
+  .page-shoucang{
+  position:fixed;
+  background:#fff;
+  top:0;left:0;
+  bottom:0;right:0;
+  z-index:999;
+  display: flex;
+}
+.sc_top{
+  display: flex;
+  align-items:flex-end;
+  padding:10px 15px;
+  box-shadow:0 5px 5px -5px #aaa;
+}
+.sc_top>span{
+  font-size:25px;
+  font-weight: 600;
+}
+.top_nav{
+  flex-grow: 1;
+  justify-content: center;
+  display: flex;
+}
+.close{
+  font-size:24px;
+  background:#ccc;
+  color:#fff;
+  border-radius:50%;
+  width:25px;
+  height:24px;
+  text-align: center;
+  line-height: 25px;
+}
+.sc_content{
+  padding:0 15px;
+  flex-grow: 1;
+}
+
 </style>

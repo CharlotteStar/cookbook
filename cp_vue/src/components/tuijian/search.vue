@@ -73,7 +73,7 @@ export default {
       keyword:"",
       cp_data:[],
       searchHistory:[],
-      uid:window.sessionStorage.uid
+      uid:JSON.parse(sessionStorage.getItem("user"))[0].uid
     }
   },
   methods:{

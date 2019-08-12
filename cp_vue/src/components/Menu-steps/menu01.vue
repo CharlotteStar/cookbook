@@ -83,35 +83,39 @@
 
 
     <div class="user_operate">
-      <div class="operate_item" @click="change">
+      <div class="operate_item" @click="change" >
         <img :src="require(scIsSelected ? '@/assets/icon/shoucang2.png' : '@/assets/icon/shoucang.png')">
         <span v-text="byCount"></span>
       </div>
-      <div class="operate_item">
+      <div class="operate_item" @click="show_pl">
         <img src="@/assets/icon/pinglun.png">
         <span>评论</span>
       </div>
     </div>
 
-    <!-- <div class="pinglun">
+    <!--评论-->
+    <div class="pinglun" :class=" is_show_pl ? '' : 'd-none'">
+      <div style="text-align:right;padding:10px 15px;box-shadow:0 4px 5px -5px #ccc">
+        <div class="close" @click="is_show_pl=false">×</div>
+      </div>
       <div class="pinglun-list">
-        <div class="pinglun-item">
+        <div class="pinglun-item" v-for="(item,index) of pl_data" :key="index">
           <div class="pinglun-user">
             <div class="user-avatar">
-              <img src="@/assets/icon/shoucang.png">
+              <img :src="item.avatar">
             </div>
-            <div class="user-name">用户名</div>
-            <div class="pinglun-date">08-10</div>
+            <div class="user-name" v-text="item.uname"></div>
+            <div class="pinglun-date" v-text="new Date(item.time).getMonth()+'-'+new Date(item.time).getDate()"></div>
           </div>
-          <div class="pinglun-content">
-            评论的内容
-          </div>
+          <div class="pinglun-content" v-text="item.content"></div>
         </div>
       </div>
       <div class="write-pinglun">
-        <input type="text">
+        <input type="text" v-model="pl_value" placeholder="写评论">
+        <div class="send-pinglun"  :class="pl_value.length==0 ? 'disabled' : ''" @click="send_pl">发布</div>
       </div>
-    </div> -->
+    </div>
+
   </div>
 </template>
 <script>
@@ -120,6 +124,9 @@ export default {
   props: ["did"],
   data() {
     return {
+      is_show_pl:false,
+      pl_data:[],
+      pl_value:"",
       cp_details: {},   //菜谱的数据
       cp_step: [],    //菜谱的步骤
       benefit: [],
@@ -137,6 +144,40 @@ export default {
     };
   },
   methods: {
+    show_pl(){
+      this.is_show_pl=true;
+      this.get_pl();
+    },
+    send_pl(){
+      var params={
+        user_id:this.openUser.uid,
+        cp_id:this.cp_details.did,
+        time:new Date().getTime(),
+        content:this.pl_value,
+      }
+      if(this.pl_value.length!=0){
+        this.axios.get(
+          "/pinglun/add",
+          {params}
+        ).then(res=>{
+          this.$toast({
+            message: "发表成功",
+            position: "center",
+            duration: 1500
+          });
+          this.pl_value="";
+          this.get_pl();
+        })
+      }
+    },
+    get_pl(){
+      this.axios.get(
+        "/pinglun/get",
+        {params:{did:this.cp_details.did}}
+      ).then(res=>{
+        this.pl_data=res.data.data
+      })
+    },
     change() {      //判断是否已登录并切换收藏状态
       if (this.isLogin) {
         if (!this.scIsSelected) {
@@ -326,17 +367,44 @@ export default {
     }
     if (this.isLogin) {
       this.is_shoucang(); //判断是否已收藏
+      
     }
-  }
+  },
+  mounted() {
+    
+  },
 }
 </script>
 <style scoped>
+.close{
+  display: inline-block;
+  font-size:24px;
+  background:#ccc;
+  color:#fff;
+  border-radius:50%;
+  width:25px;
+  height:24px;
+  text-align: center;
+  line-height: 25px;
+}
+  .d-none{
+    display: none !important;
+  }
+  .d-flex{
+    display: flex !important;
+  }
+  .d-block{
+    display: block !important;
+  }
 .write-pinglun{
   background:#fff;
-  position:absolute;
+  position:fixed;
   bottom:0;
   width:100%;
   padding:5px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between
 }
 .write-pinglun input{
   border-radius:20px;
@@ -347,6 +415,21 @@ export default {
   padding:0 30px;
   box-sizing: border-box;
 }
+.write-pinglun .send-pinglun{
+  width:65px;
+  height:28px;
+  font-size:14px;
+  text-align: center;
+  line-height: 28px;
+  border-radius:3px;
+  background:#ff5151;
+  color:#fff;
+  margin-left:5px;
+}
+.write-pinglun .send-pinglun.disabled{
+  background:#ccc;
+  color:#666;
+}
 
 .pinglun{
   position:fixed;
@@ -356,9 +439,11 @@ export default {
   width:100%;
   z-index:20 ;
   font-size:15px;
+  overflow: scroll;
 }
 .pinglun-list{
-  padding:0 15px;
+  padding:0 15px 40px;
+    overflow: scroll;
 }
 .pinglun-item{
   padding:10px 0;
@@ -374,6 +459,7 @@ export default {
 .user-avatar,
 .user-name{
   float:left;
+  color:#000;
 }
 .user-name{
   padding:0 5px;
