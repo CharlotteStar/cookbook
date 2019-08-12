@@ -10,6 +10,7 @@ export default {
         return{}
     },
     components:{
+        // 如果我在这修改 
         "recommend":Recommend
     }
 }
