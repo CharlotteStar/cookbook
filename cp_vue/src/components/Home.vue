@@ -1,8 +1,6 @@
 <template>
   <div class="home">
     <div class="page-tab-container">
-      
- 
       <div class="page-tabber">
         <!-- <h3>一个父面板 四个子面板</h3> -->
         <mt-tab-container v-model="active" class="tabContainer">
@@ -19,7 +17,7 @@
               <classify></classify>
           </mt-tab-container-item>
           <mt-tab-container-item id="food" >
-              食话              
+            <make-menu></make-menu>
           </mt-tab-container-item>
           <mt-tab-container-item id="me" class="liang" >
             <me></me>
@@ -50,7 +48,7 @@
             :normalImage="require('../assets/icon/s_normal_img.png')"
             :focused="currentIndex[2].isSelect"
           ></tabbaricon>
-          食话
+          创作
         </mt-tab-item>
         <mt-tab-item id="me" @click.native="changeState(3)" @click="tz"
         class="zong">
@@ -74,6 +72,8 @@
   import Recommend from './tuijian/Recommend.vue'
   import classify from './tuijian/classify.vue'  //分类
   import me from './me/me.vue'
+  import makeMenu from './makeMenu.vue'
+
   export default {
     data(){
       return {
@@ -124,7 +124,8 @@
       "tabbaricon":TabBarIcon,
       "recommend":Recommend,
       "me":me,
-      'classify':classify
+      'classify':classify,
+      makeMenu
     }
   }
 </script>

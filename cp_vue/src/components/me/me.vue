@@ -1,5 +1,6 @@
 <template>
   <div class="page-me" :class="isLogin ? '' : 'not-log'">
+    
     <div class="me-top">
       <div class="shezhi-btn"
         @click.stop="show_sz= show_sz ? false : true" 
@@ -18,9 +19,12 @@
     </div>
     <div class="user-container">
       <div class="user-box" @click="userInfo">
-        <div class="user-tx">
+
+        <label class="user-tx">
+          <input :type="isLogin ? 'file' : ''" ref="fileBtn" style="display:none;" id="input" accept="image/*" @change="uploadImg"/>
           <img :src="isLogin ? user.avatar : require('@/assets/icon/Groupx.png') ">
-        </div>
+        </label>
+        
         <div class="user-info">
           <h1 class="uname" >{{isLogin ? user.uname : '点击登录'}}</h1>
           <p>{{isLogin ? '正在通往美食达人的路上...' : '据说登录的人做饭更好吃'}}</p>
@@ -110,16 +114,70 @@ export default {
       is_show_cg:false,
       is_show_cl:false,
       show_sz:false,
-      gz_count:0
+      gz_count:0,
+      inputFile:"",
+      imgInfo: null,
+      imgSrc: null
     }
   },
   methods:{
+    // 头像图片上传
+    async uploadImg() {
+      var that = this;
+      const inputFile = await this.$refs.fileBtn.files[0];
+      this.inputFile = inputFile;
+      if (this.inputFile) {
+        // let inputFile = this.inputFile;
+        // console.log(inputFile);
+        // this.imgInfo = Object.assign({}, this.imgInfo, {
+        //   name: inputFile.name,
+        //   size: inputFile.size,
+        //   lastModifiedDate: inputFile.lastModifiedDate.toLocaleString()
+        // });
+        const reader = new FileReader();          //创建文件读取对象
+        reader.readAsDataURL(this.inputFile);     //读取文件
+        reader.onload = function(e) {             //读取加载时调用的函数
+          // console.log(e);
+          that.imgSrc = this.result; // 注意:这里的this.result中,这个this不是vue实例,而是reader对象,所以之前用that接收vue示例  that.imgSrc
+          // console.log(that.imgSrc)
+        };
+        reader.onloadend = function() {           //读取加载完成时调用的函数
+          // var strBase64 = reader.result.substring(84);
+          var strBase64 = reader.result.substring(0);
+          // console.log(strBase64);
+          that.saveAvatar();
+        };
+      } else {
+        return;
+      }
+    },
+    //保存头像 / 切换头像
+    saveAvatar(){
+      var params={
+        uid:this.user.uid,
+        avatar:encodeURIComponent(this.imgSrc),
+        rmAvatar:encodeURIComponent(this.user.avatar)
+      }
+      this.axios.post("/user/setAvatar",params).then(result => {
+        if (result.data.code == 200) {
+          this.user.avatar=result.data.data;
+          var arr=[];
+          arr.push(this.user)
+          sessionStorage.setItem("user",JSON.stringify(arr));
+          this.$toast("头像修改成功");
+        } else {
+          this.$messagebox("头像修改失败");
+        }
+      });
+    },
     logout(){
       sessionStorage.user='';
       this.$router.go(0);
     },
     userInfo(){
-      this.$router.push("/login");
+      if(!this.isLogin){
+        this.$router.push("/login");
+      }
     },
     get_gz_count(){
       this.axios.get(

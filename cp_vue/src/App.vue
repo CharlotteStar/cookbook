@@ -94,6 +94,12 @@ img{
   vertical-align: middle;
 }
 
+input textarea{
+  border:0 !important;
+  outline: none !important;
+  box-sizing:border-box !important;
+}
+
 ::-webkit-scrollbar {
     width: 0px;
     height: 0px;

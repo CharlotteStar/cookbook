@@ -22,8 +22,12 @@ var server = express();
 server.listen(9999);
 
 server.use(bodyParser.urlencoded({
-  extended: false
+  extended: false,
+  limit: '50mb',
+  extended: true
 }))
+// 上传文件的限制大小
+server.use(bodyParser.json({ limit: '50mb' }));
 
 //跨域
 server.use(cors({
