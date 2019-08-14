@@ -109,7 +109,7 @@ export default {
   },
   methods:{
     fh(){
-      this.$router.push("/home");
+      this.$router.go(-1);
     },
     blockFenlei(){
       this.$router.push("/classify");
