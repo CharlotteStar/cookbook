@@ -4,12 +4,13 @@
   </div>
 </template>
 
-<style scope>
+<style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  background:#fff;
 }
 #nav {
   padding: 30px;
@@ -59,6 +60,10 @@
   border-bottom:1px solid  rgb(53, 221, 243);
 }
 
+span,input{
+  vertical-align: middle;
+}
+
 body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -87,6 +92,12 @@ ul{
 }
 img{
   vertical-align: middle;
+}
+
+input textarea{
+  border:0 !important;
+  outline: none !important;
+  box-sizing:border-box !important;
 }
 
 ::-webkit-scrollbar {

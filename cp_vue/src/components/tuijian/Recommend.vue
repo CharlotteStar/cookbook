@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="FourPlates">
-      <router-link class="mrfl" to>
+      <!-- <router-link class="mrfl" to>
         <img src="@/assets/tj_img/timg.jpg" />
         <div class="title">
           <h3>每日福利</h3>
@@ -55,7 +55,7 @@
           <h3>本周流行</h3>
           <p>最佳菜肴</p>
         </div>
-      </router-link>
+      </router-link> -->
       <router-link class="znzc" to="/SearchFirst">
         <img src="@/assets/tj_img/znzc.jpg" />
         <div class="title">
@@ -74,27 +74,27 @@
     <div class="today-recommend">
       <div class="zhanwei">
         <div class="navbar">
-        <ul class="nav">
-          <li class="navItem selected">
-            <span>推荐</span>
-          </li>
-          <li class="navItem">
-            <span>烘焙</span>
-          </li>
-          <li class="navItem">
-            <span>时令</span>
-          </li>
-          <li class="navItem">
-            <span>食肉</span>
-          </li>
-          <li class="navItem">
-            <span>素食</span>
-          </li>
-          <li class="navItem">
-            <span>韩国料理</span>
-          </li>
-        </ul>
-      </div>
+          <ul class="nav">
+            <li class="navItem selected">
+              <span>推荐</span>
+            </li>
+            <li class="navItem">
+              <span>烘焙</span>
+            </li>
+            <li class="navItem">
+              <span>时令</span>
+            </li>
+            <li class="navItem">
+              <span>食肉</span>
+            </li>
+            <li class="navItem">
+              <span>素食</span>
+            </li>
+            <li class="navItem">
+              <span>韩国料理</span>
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="recommend-container">
         <div class="recommend-list">
@@ -361,7 +361,7 @@
 
 <script>
 import { setTimeout, setInterval } from "timers";
-import { Promise } from 'q';
+import { Promise } from "q";
 export default {
   data() {
     return {
@@ -372,34 +372,37 @@ export default {
       end_x: 0,
       selected: "tuijian",
       time: 0,
-      i: 0,
-      tuijian: [],
-      shiling: [],
-      shirou: [],
-      sushi: [],
-      hongbei: [],
-      pages: 0,
-      count: 8
+      i: 0,             //滑块的下标
+      tuijian: [],      //推荐栏数据
+      shiling: [],      //时令栏数据
+      shirou: [],       //食肉栏数据
+      sushi: [],        //素食栏数据
+      hongbei: [],      //烘焙栏数据
+      pages: 0,         //上拉触底发送请求的页数
+      count: 8,         //一次请求的个数
+      index:0
     };
   },
   methods: {
-    setHeight: function (i) {
+    setHeight: function(i) {
       var recommend_list = document.getElementsByClassName("recommend-list")[0];
-      var recommend_container_item = document.getElementsByClassName(
-        "recommend-container-item"
-      );
+      var recommend_container_item = document.getElementsByClassName("recommend-container-item");
       recommend_list.style.height = recommend_container_item[i].clientHeight + "px";
     },
-    loadBottom: function() {
+    loadMore: function() {
       this.pages++;
-      this.axios
+      new Promise((reslove,reject)=>{
+        this.axios
         .get("/tj/tuijian", {
           params: { pages: this.pages, count: this.count }
         })
         .then(res => {
           this.tuijian = this.tuijian.concat(res.data.data);
-          this.setHeight(0);
+          reslove();
         });
+      }).then(()=>{
+        this.setHeight(this.index);
+      });
     },
     slide_start(e) {
       var sancan_list = document.getElementsByClassName("sancan_list")[0];
@@ -463,6 +466,8 @@ export default {
     }
   },
   created() {
+    
+
     this.axios.get("tj/qita").then(res => {
       var data = res.data.data;
       for (var i = 0; i < data.length; i++) {
@@ -484,7 +489,6 @@ export default {
     });
 
     this.axios.get("/tj/sancan").then(result => {
-      
       this.list = result.data.data;
       var sancan_items = document.getElementsByClassName("sancan_item");
       for (let i = 0; i < this.list.length; i++) {
@@ -514,7 +518,7 @@ export default {
         var now = parseInt(time.split(" ")[1]); //获取当前刷新页面时的时间
         now >= 21
           ? toggle_type(4)
-          : now >= 18
+          : now >= 17
           ? toggle_type(3)
           : now >= 14
           ? toggle_type(2)
@@ -523,72 +527,76 @@ export default {
           : toggle_type(0);
       }, 500);
       var toggle_type = i => {
-        var width = document.getElementsByClassName("sancan_slide")[0]
-          .clientWidth;
+        var width = document.getElementsByClassName("sancan_slide")[0].clientWidth;
         type_list.className = "type_list type_" + i;
         sancan_list.style.left = `-${i * width}px`;
         this.i = i;
       };
-
-      var navItem = document.getElementsByClassName("navItem"); //获取指示器元素
-      var recommend_container_item = document.getElementsByClassName(
-        "recommend-container-item"
-      ); //获取切换的滑块元素
-      //用循环给所有指示器元素绑定事件点击事件
-      for (let i = 0; i < navItem.length; i++) {
-        navItem[i].onclick = ()=> {
-          var selected = document.getElementsByClassName("navItem selected")[0];
-          selected.classList.remove("selected"); //删除上一次选中的指示器的样式
-          navItem[i].classList.add("selected"); //添加当前选中的指示器的样式
-          for (var item of recommend_container_item) {
-            item.style.left = `-${i * 100}%`; //点击指示器时滑块的偏移量
-          }
-          this.setHeight(i);
-        };
-      }
-      
-      var tj_container=document.getElementsByClassName("tj_container")[0];
-      tj_container.onscroll = () => {
-        //判断页面是否到底部
-        if (tj_container.scrollTop+tj_container.clientHeight==tj_container.scrollHeight) {
-          this.loadBottom();
-        }
-        var zhanwei=document.getElementsByClassName("zhanwei")[0];
-        var navbar=document.getElementsByClassName("navbar")[0];
-        if(zhanwei.offsetTop-44<=tj_container.scrollTop){
-          navbar.classList.add("fixed")
-        }else{
-          navbar.classList.remove("fixed")
-        }
-      };
     });
+
   },
   mounted() {
     //页面加载时加载一次数据;
-    this.loadBottom();
-    setTimeout(() => {
-      this.setHeight(0);
-    }, 500);
-  }
+    this.loadMore();
+
+    //给页面添加滚动条事件并判断对应条件
+    var tj_container = document.getElementsByClassName("tj_container")[0];
+    tj_container.onscroll = () => {
+      //判断页面是否到底部
+      if (tj_container.scrollTop + tj_container.clientHeight == tj_container.scrollHeight) {
+        this.loadMore();
+      }
+      var zhanwei = document.getElementsByClassName("zhanwei")[0];
+      var navbar = document.getElementsByClassName("navbar")[0];
+      //判断页面顶部是否到推荐导航栏
+      if (zhanwei.offsetTop - 44 <= tj_container.scrollTop) {
+        navbar.classList.add("fixed");
+      } else {
+        navbar.classList.remove("fixed");
+      }
+    };
+
+    var navItem = document.getElementsByClassName("navItem"); //获取指示器元素
+    var recommend_container_item = document.getElementsByClassName(
+      "recommend-container-item"
+    ); //获取切换的滑块元素
+    //用循环给所有指示器元素绑定事件点击事件
+    for (let i = 0; i < navItem.length; i++) {
+      navItem[i].onclick = () => {
+        var selected = document.getElementsByClassName("navItem selected")[0];
+        selected.classList.remove("selected"); //删除上一次选中的指示器的样式
+        navItem[i].classList.add("selected"); //添加当前选中的指示器的样式
+        for (var item of recommend_container_item) {
+          item.style.left = `-${i * 100}%`; //点击指示器时滑块的偏移量
+        }
+        this.setHeight(i);
+        this.index=i;
+      };
+    }
+  },
 };
 </script>
 <style scoped>
-.zhanwei{
+.zhanwei {
   height: 40px;
 }
 .navbar {
   display: flex;
   height: 40px;
   align-content: center;
-  padding-left: 5px;
-  background:#fff;
+  padding-left: 10px;
+  background: #fff;
   width: 100%;
 }
-.navbar.fixed{
-  position:fixed;
-  top:40px;
-  z-index:999;
-  padding:8px 5px;
+.navbar.fixed {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  z-index: 999;
+  padding: 0px 5px;
+  padding-left: 30px;
+  box-shadow: 0 5px 10px -5px #aaa;
+  height: 50px;
 }
 .nav {
   display: flex;
@@ -642,7 +650,6 @@ export default {
   border-radius: 10px;
   overflow: hidden;
   margin: 15px 0;
-  vertical-align: middle;
   color: #2c3e50;
 }
 .recommend-item img {
@@ -695,9 +702,9 @@ export default {
 .tj_container {
   justify-content: space-between;
   padding-top: 30px;
-  position:relative;
-  height:100%;
-  width:100%;
+  position: relative;
+  height: 100%;
+  width: 100%;
   overflow: auto;
 }
 
@@ -894,7 +901,7 @@ export default {
   padding: 0 10px;
 }
 .FourPlates > a {
-  width: 21%;
+  width: 45%;
   height: 120px;
   display: block;
   background: #fff;

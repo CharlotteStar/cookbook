@@ -3,11 +3,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const session = require("express-session");
-const userRouter = require("./routes/user.js");
-const tjRouter = require("./routes/tuijian.js");
-const cpRouter = require("./routes/caipu.js");
-const shoucan = require("./routes/shoucan.js");
-const search = require("./routes/search.js");
+
+const userRouter = require("./routes/user.js");  //用户
+const tjRouter = require("./routes/tuijian.js"); //推荐页
+const cpRouter = require("./routes/caipu.js");   //菜谱
+const shoucan = require("./routes/shoucan.js"); //我的收藏
+const search = require("./routes/search.js");   //搜索
+const guanzhu = require("./routes/guanzhu.js");   //我的关注
+const footprint= require("./routes/footprint.js");  //我的足迹
+const pinglun= require("./routes/pinglun.js");  //评论
 
 
 
@@ -18,12 +22,16 @@ var server = express();
 server.listen(9999);
 
 server.use(bodyParser.urlencoded({
-  extended: false
+  extended: false,
+  limit: '50mb',
+  extended: true
 }))
+// 上传文件的限制大小
+server.use(bodyParser.json({ limit: '50mb' }));
 
 //跨域
 server.use(cors({
-  origin:['http://127.0.0.1:8080',"http://localhost:8080"],
+  origin:['http://127.0.0.1:8080',"http://localhost:8080","http://caiputianxia.applinzi.com"],
   credentials: true  //是否验证
 }));
 
@@ -45,6 +53,9 @@ server.use("/tj", tjRouter);
 server.use("/caipu", cpRouter);
 server.use("/shoucan",shoucan)
 server.use("/search", search);
+server.use("/gz", guanzhu);
+server.use("/footprint", footprint);
+server.use("/pinglun", pinglun);
 
 
 //用户菜谱页面加载更多

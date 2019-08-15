@@ -128,6 +128,16 @@ INSERT INTO cp_tj VALUES
 (null,2,109,"烘焙");
 
 
+/*用户评论*/
+CREATE TABLE user_pinglun(
+  pid INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT,
+  cp_id INT,
+  content VARCHAR(256),
+  time BIGINT
+);
+
+
 /*搜索历史记录*/
 CREATE TABLE user_search(
   sid INT PRIMARY KEY AUTO_INCREMENT,
@@ -135,12 +145,26 @@ CREATE TABLE user_search(
   user_id INT
 );
 
+/*我的足迹*/
+CREATE TABLE user_footprint(
+  fid INT PRIMARY KEY AUTO_INCREMENT,
+  fp_user_id INT,
+  cp_id INT,
+  time BIGINT
+);
+
+/*关注*/
+CREATE TABLE user_guanzhu(
+  gid INT PRIMARY KEY AUTO_INCREMENT,
+  gz_user_id INT, #用户的id
+  open_id INT   #当前登录的用户id
+);
 
 /*收藏*/
 CREATE TABLE cp_collect(
   sid INT PRIMARY KEY AUTO_INCREMENT,
-  ct_user_id SMALLINT, #用户的id
-  cp_id VARCHAR(32) #菜铺id
+  ct_user_id INT, #用户的id
+  cp_id INT #菜铺id
 );
 INSERT INTO cp_collect VALUES(NULL,1,1);
 INSERT INTO cp_collect VALUES(NULL,1,2);
@@ -174,8 +198,8 @@ CREATE TABLE cp_user(
 );
 INSERT INTO cp_user VALUES
 (NULL,"美食小编",md5("123456"),13579246810,"13579246810@qq.com","http://127.0.0.1:9999/user_avatar/20120902160411_ik2UH.jpg",50,131,5),
-(NULL,"唐莎",md5("123456"),15324652145,"tangsha@qq.com","http://127.0.0.1:9999/user_avatar/fc86fbe322952f4babdb29857b36fc8.png",60,12,48),
-(NULL,"小珍",md5("123456"),15348235468,"xiaozhen@qq.com","http://127.0.0.1:9999/user_avatar/u=527690908,841994411&fm=26&gp=0.jpg",70,52,68),
+(NULL,"唐莎",md5("123456"),15324652145,"tangsha@qq.com","http://127.0.0.1:9999/user_avatar/u=527690908,841994411&fm=26&gp=0.jpg",60,12,48),
+(NULL,"小珍",md5("123456"),15348235468,"xiaozhen@qq.com","http://127.0.0.1:9999/user_avatar/fc86fbe322952f4babdb29857b36fc8.png",70,52,68),
 (NULL,"宗良",md5("123456"),13478549543,"zongliang@qq.com","http://127.0.0.1:9999/user_avatar/u=1471800268,3373504429&fm=26&gp=0.jpg",58,14,45),
 (NULL,"靓仔",md5("123456"),13729412134,"liangzai@qq.com","http://127.0.0.1:9999/user_avatar/u=2136146216,1955357192&fm=26&gp=0.jpg",20,120,8);
 
