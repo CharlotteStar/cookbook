@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .fanhui{
   position:absolute;
   left:20px;top:50%;

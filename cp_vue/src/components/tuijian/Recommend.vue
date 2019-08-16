@@ -1,5 +1,5 @@
 <template>
-  <div class="tj_container">
+  <div class="tj_container" ref="tj_container">
     <!-- <div class="lunbo">
             轮播组件
     </div>-->
@@ -7,7 +7,7 @@
     <div class="sancan_top">
       <div class="sancan_type">
         <span class="today">今日</span>
-        <ul class="type_list type_0">
+        <ul class="type_list type_0" ref="type_list">
           <li class="type1">早餐</li>
           <li class="type2">午餐</li>
           <li class="type3">下午茶</li>
@@ -21,20 +21,21 @@
           @touchstart="slide_start"
           @touchmove="slide_move"
           @touchend="slide_end"
+          ref="sancan_list"
         >
-          <div class="sancan_slide" v-for="i in 5" :key="i" :data-i="i">
-            <div class="sancan_item">
-              <div class="img_txt">
-                <img class="img" />
-                <div class="txt_title"></div>
-                <div class="txt_content"></div>
+          <div class="sancan_slide" v-for="i in 5" :key="i" :data-i="i" ref="sancan_slide">
+            <div class="sancan_item" ref="sancan_item">
+              <div class="img_txt" ref="sancan_item_img_txt">
+                <img class="img" ref="sancan_item_img"/>
+                <div class="txt_title" ref="sancan_item_title"></div>
+                <div class="txt_content" ref="sancan_item_content"></div>
               </div>
             </div>
-            <div class="sancan_item">
-              <div class="img_txt">
-                <img class="img" />
-                <div class="txt_title"></div>
-                <div class="txt_content"></div>
+            <div class="sancan_item" ref="sancan_item">
+              <div class="img_txt" ref="sancan_item_img_txt">
+                <img class="img" ref="sancan_item_img"/>
+                <div class="txt_title" ref="sancan_item_title"></div>
+                <div class="txt_content" ref="sancan_item_content"></div>
               </div>
             </div>
           </div>
@@ -72,10 +73,10 @@
       </router-link>
     </div>
     <div class="today-recommend">
-      <div class="zhanwei">
-        <div class="navbar">
+      <div class="zhanwei" ref="zhanwei">
+        <div class="navbar" ref="navbar">
           <ul class="nav">
-            <li class="navItem selected">
+            <li class="navItem selected" >
               <span>推荐</span>
             </li>
             <li class="navItem">
@@ -97,7 +98,7 @@
         </div>
       </div>
       <div class="recommend-container">
-        <div class="recommend-list">
+        <div class="recommend-list" ref="recommend_list">
           <div class="recommend-container-item">
             <!--推荐-->
             <div class="recommend-slide">
@@ -385,8 +386,8 @@ export default {
   },
   methods: {
     setHeight: function(i) {
-      var recommend_list = document.getElementsByClassName("recommend-list")[0];
-      var recommend_container_item = document.getElementsByClassName("recommend-container-item");
+      var recommend_list = this.$refs.recommend_list;
+      var recommend_container_item = recommend_list.children;
       recommend_list.style.height = recommend_container_item[i].clientHeight + "px";
     },
     loadMore: function() {
@@ -405,7 +406,7 @@ export default {
       });
     },
     slide_start(e) {
-      var sancan_list = document.getElementsByClassName("sancan_list")[0];
+      var sancan_list = this.$refs.sancan_list;
       var left = window.getComputedStyle(sancan_list, null).left;
       sancan_list.style.transition = "0s";
       this.offset_x = parseInt(left);
@@ -414,7 +415,7 @@ export default {
       this.time = new Date().getTime();
     },
     slide_move(e) {
-      var sancan_list = document.getElementsByClassName("sancan_list")[0];
+      var sancan_list = this.$refs.sancan_list;
       var now_x = e.changedTouches[0].pageX;
 
       this.offset_x += now_x - this.prev_x;
@@ -427,9 +428,9 @@ export default {
       var speed = Math.abs(lc) / (this.time / 1000); //计算出按下后 移动的速度
       this.time = 0;
 
-      var sancan_list = document.getElementsByClassName("sancan_list")[0];
-      var sancan_slide = document.getElementsByClassName("sancan_slide");
-      var type_list = document.getElementsByClassName("type_list")[0];
+      var sancan_list = this.$refs.sancan_list;
+      var sancan_slide = this.$refs.sancan_slide;
+      var type_list = this.$refs.type_list;
       var width = sancan_slide[0].clientWidth;
       sancan_list.style.transition = "0.3s";
 
@@ -463,11 +464,30 @@ export default {
           sancan_list.style.left = `-${4 * width}px`;
         }
       }
-    }
+    },
+    now_tj(){
+      var time = new Date().toLocaleString("chinese", { hour12: false });
+      var now = parseInt(time.split(" ")[1]); //获取当前刷新页面时的时间
+      now >= 21
+        ? this.toggle_type(4)
+        : now >= 17
+        ? this.toggle_type(3)
+        : now >= 14
+        ? this.toggle_type(2)
+        : now >= 12
+        ? this.toggle_type(1)
+        : this.toggle_type(0);
+    },
+    toggle_type(i){
+      var width = this.$refs.sancan_slide[0].clientWidth;
+      var type_list = this.$refs.type_list;
+      var sancan_list = this.$refs.sancan_list;
+      type_list.className = "type_list type_" + i;
+      sancan_list.style.left = `-${i * width}px`;
+      this.i = i;
+    },
   },
   created() {
-    
-
     this.axios.get("tj/qita").then(res => {
       var data = res.data.data;
       for (var i = 0; i < data.length; i++) {
@@ -490,64 +510,42 @@ export default {
 
     this.axios.get("/tj/sancan").then(result => {
       this.list = result.data.data;
-      var sancan_items = document.getElementsByClassName("sancan_item");
+      var sancan_items = this.$refs.sancan_item;
       for (let i = 0; i < this.list.length; i++) {
-        sancan_items[i].getElementsByClassName("img")[0].src = this.list[i].pic;
-        sancan_items[i].getElementsByClassName(
-          "txt_title"
-        )[0].innerHTML = this.list[i].title;
-        sancan_items[i].getElementsByClassName(
-          "txt_content"
-        )[0].innerHTML = this.list[i].benefit;
+        this.$refs.sancan_item_img[i].src = this.list[i].pic;
+        this.$refs.sancan_item_title[i].innerHTML = this.list[i].title;
+        this.$refs.sancan_item_content[i].innerHTML = this.list[i].benefit;
         sancan_items[i].addEventListener("click", () => {
           this.$router.push("/menu01/" + this.list[i].cp_id);
         });
       }
-
-      var type_list = document.getElementsByClassName("type_list")[0];
-      var types = document.querySelectorAll(".type_list>li");
-      var sancan_list = document.getElementsByClassName("sancan_list")[0];
-      for (let i = 0; i < types.length; i++) {
-        types[i].addEventListener("click", fn);
-        function fn() {
-          toggle_type(i);
-        }
-      }
-      setTimeout(function() {
-        var time = new Date().toLocaleString("chinese", { hour12: false });
-        var now = parseInt(time.split(" ")[1]); //获取当前刷新页面时的时间
-        now >= 21
-          ? toggle_type(4)
-          : now >= 17
-          ? toggle_type(3)
-          : now >= 14
-          ? toggle_type(2)
-          : now >= 12
-          ? toggle_type(1)
-          : toggle_type(0);
-      }, 500);
-      var toggle_type = i => {
-        var width = document.getElementsByClassName("sancan_slide")[0].clientWidth;
-        type_list.className = "type_list type_" + i;
-        sancan_list.style.left = `-${i * width}px`;
-        this.i = i;
-      };
+      setTimeout(()=>{
+        this.now_tj();
+      },200)
     });
-
   },
   mounted() {
     //页面加载时加载一次数据;
     this.loadMore();
 
+    var type_list = this.$refs.type_list;
+    var types = this.$refs.type_list.children;
+    var sancan_list = this.$refs.sancan_list;
+    for (let i = 0; i < types.length; i++) {
+      types[i].addEventListener("click",()=> {
+        this.toggle_type(i);
+      });
+    }
+    
     //给页面添加滚动条事件并判断对应条件
-    var tj_container = document.getElementsByClassName("tj_container")[0];
+    var tj_container = this.$refs.tj_container;
     tj_container.onscroll = () => {
       //判断页面是否到底部
       if (tj_container.scrollTop + tj_container.clientHeight == tj_container.scrollHeight) {
         this.loadMore();
       }
-      var zhanwei = document.getElementsByClassName("zhanwei")[0];
-      var navbar = document.getElementsByClassName("navbar")[0];
+      var zhanwei = this.$refs.zhanwei;
+      var navbar = this.$refs.navbar;
       //判断页面顶部是否到推荐导航栏
       if (zhanwei.offsetTop - 44 <= tj_container.scrollTop) {
         navbar.classList.add("fixed");

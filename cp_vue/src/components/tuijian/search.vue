@@ -73,7 +73,7 @@ export default {
       keyword:"",
       cp_data:[],
       searchHistory:[],
-      uid:JSON.parse(sessionStorage.getItem("user"))[0].uid
+      uid:""
     }
   },
   methods:{
@@ -119,19 +119,17 @@ export default {
     }
   },
   created(){
+    var user=sessionStorage.getItem("user")
+    if(user){
+      this.uid=JSON.parse(user)[0].uid;
+    }
     this.loadSearchTop()
     this.loadSearchHistory()
-
-    this.axios.get(
-      '/search/top'
-    ).then(res=>{
-      this.searchTop=res.data;
-    })
   }
 }
 </script>
 
-<style>
+<style scoped>
 .qingkong{
   position:absolute;
   right:30px;;
