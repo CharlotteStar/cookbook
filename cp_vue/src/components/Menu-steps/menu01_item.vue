@@ -37,6 +37,7 @@ export default {
     };
   },
   methods: {
+    //点击加载更多
     loadMore(){
       var uid= this.$route.query.uid;
       var url="/menu01_item";

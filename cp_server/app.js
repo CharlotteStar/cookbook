@@ -17,7 +17,7 @@ const pinglun= require("./routes/pinglun.js");  //评论
 
 const pool = require("./pool.js");
 //创建express对象
-var server = express();
+var server = express();//创建web服务器
 //绑定监听端口
 server.listen(9999);
 

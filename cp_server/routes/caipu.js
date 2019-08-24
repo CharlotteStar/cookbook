@@ -1,8 +1,9 @@
-const express = require("express");
-const pool = require("../pool.js");
-var router = express.Router();
+const express = require("express");//引入服务器
+const pool = require("../pool.js");//引入连接池
+var router = express.Router();//引入路由模块
 
 //获取对应用户的菜谱
+//创建路由器
 router.get("/user_cp", (req, res) => { 
   var user_id = req.query.uid;
   var sql = "SELECT pic,title FROM cp_details WHERE user_id=?";

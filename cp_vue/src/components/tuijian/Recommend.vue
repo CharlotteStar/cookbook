@@ -334,7 +334,7 @@
                   :to="`/menu01/${item.did}`"
                   class="recommend-item"
                   v-for="(item,index) of sushi"
-                  v-if="index%2==1"
+                 
                   :key="index"
                 >
                   <div class="imgDiv">

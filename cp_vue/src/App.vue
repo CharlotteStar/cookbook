@@ -28,6 +28,8 @@
   position: absolute !important;
   height: 100%;
   width: 100%;
+  overflow: scroll;
+  padding-bottom:56px;
 }
 .main {
   width: 100%;
@@ -36,6 +38,7 @@
   background: #f5f5f5;
   box-sizing: border-box;
 }
+
 .mint-cell-wrapper{
   padding:0px 25px !important;
 }
